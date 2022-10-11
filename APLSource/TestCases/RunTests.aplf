@@ -1,0 +1,3 @@
+ RunTests
+ T←⎕NEW Tester2 ⎕THIS
+ T.Run 1

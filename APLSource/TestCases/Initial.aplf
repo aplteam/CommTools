@@ -1,0 +1,4 @@
+ r←Initial
+ C←##.CommTools
+ r←1 C.YesOrNo'Note: all test cases need a user for interactions',(⎕UCS 13),'Would you like to carry the tests anyway?'
+⍝Done
