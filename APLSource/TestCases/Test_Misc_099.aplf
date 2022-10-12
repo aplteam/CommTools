@@ -1,0 +1,9 @@
+ R←Test_Misc_099(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "Version"
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ →T.PassesIf~0 ⎕SE.CommTools.YesOrNo'Please just press <enter>'
+
+ R←T._OK
+⍝Done

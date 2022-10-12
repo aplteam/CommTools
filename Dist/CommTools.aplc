@@ -7,11 +7,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'CommTools' '1.0.0+5' '2020-10-11'
+      r←'CommTools' '1.0.1+7' '2020-10-12'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 1.0.1 from 2021-10-12
+    ⍝   * Bug fix: API decleration was wrong
     ⍝ * 1.0.0 from 2021-10-11
     ⍝   * First release
     ∇
