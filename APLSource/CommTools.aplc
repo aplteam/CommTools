@@ -7,11 +7,13 @@
 
     ∇ r←Version
       :Access Public Shared
-      r←'CommTools' '1.0.1+7' '2020-10-12'
+      r←'CommTools' '1.0.2+7' '2020-11-??'
     ∇
 
     ∇ History
       :Access Public Shared
+    ⍝ * 1.0.2 from 2021-10-??
+    ⍝   * `Select` produced an error message when an item of ⍵ was a scalar
     ⍝ * 1.0.1 from 2021-10-12
     ⍝   * Bug fix: API decleration was wrong
     ⍝ * 1.0.0 from 2021-10-11

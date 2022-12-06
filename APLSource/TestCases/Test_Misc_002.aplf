@@ -2,7 +2,7 @@
 ⍝ Exercise "Select"
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
- options←'This' 'That' 'Something else'
+ options←'This' 'That' 'Something else' 'z' ⍝ One item should be a scalar (was once a bug)
 
  0 0⍴⍞,0/⎕←'This test needs you: when a list of options is presented always enter "1" and then press <enter>'
 
