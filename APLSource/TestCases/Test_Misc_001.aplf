@@ -1,14 +1,11 @@
- R←Test_Misc_001(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "YesOrNo"
+ R←Test_Misc_001(stopFlag batchFlag);⎕TRAP;buff
+⍝ Exercise "Public"
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- →T.PassesIf C.YesOrNo'Please enter "y" and then press <enter"'
- →T.PassesIf ~C.YesOrNo'Please enter "n" and then press <enter"'
- →T.PassesIf C.YesOrNo'Please enter "y";',CR,'Then press <enter"'
- →T.PassesIf ~C.YesOrNo'Please enter "n";',CR,'Then press <enter"'
- →T.PassesIf 1 C.YesOrNo'Please just press <enter"'
- →T.PassesIf ~0C.YesOrNo'Please just press <enter"'
+ buff←C.Public
+ →T.PassesIf 0<≢buff
+ →T.PassesIf 2=|≡buff
 
  R←T._OK
 ⍝Done

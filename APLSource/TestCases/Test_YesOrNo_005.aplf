@@ -1,0 +1,20 @@
+ R←Test_YesOrNo_005(stopFlag batchFlag);⎕TRAP;qdmx
+⍝ Exercise "YesOrNo" with `YesOrNo_Answers` but invalid answers
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.YesOrNo_Answers←1 2⍴'The second question' '@'
+
+ :Trap 11
+     {}C.YesOrNo 1⊃C.YesOrNo_Answers[1;]
+     →T.GoToTidyUp 1
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp'Invalid answer: @'≢qdmx.EM
+ :EndTrap
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

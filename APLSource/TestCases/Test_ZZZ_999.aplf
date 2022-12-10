@@ -2,6 +2,7 @@
 ⍝ The version number of CommTools in the project must match the one in ⎕SE
  ⎕IO←1 ⋄ ⎕ML←1
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+
  R←T._OK
 
  :If ≢/2⊃¨C.Version ⎕SE.CommTools.Version

@@ -1,0 +1,29 @@
+ R←Test_Select_002(stopFlag batchFlag);⎕TRAP;list
+⍝ Exercise "Select" with `Select_Choices`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.Select_Choices←9 2⍴''
+ C.Select_Choices[1;]←'Second' 2
+ C.Select_Choices[2;]←'First' 1
+ C.Select_Choices[3;]←'Third' 5
+ C.Select_Choices[4;]←'Forth' 3
+ C.Select_Choices[5;]←'Fifth' 0
+ C.Select_Choices[8;]←'Sixth' 'q'
+ C.Select_Choices[9;]←'Seventh' 'a'
+
+ list←'=',¨⍕¨⍳10
+
+ →T.GoToTidyUp 2≠'Second'C.Select list
+ →T.GoToTidyUp 1≠'First'C.Select list
+ →T.GoToTidyUp 5≠'Third'C.Select list
+ →T.GoToTidyUp 3≠'Forth'C.Select list
+ →T.GoToTidyUp ⍬≢'Fifth'C.Select list
+ →T.GoToTidyUp ⍬≢'Sixth'C.Select list
+ →T.GoToTidyUp (⍳≢list)≢'Seventh'C.Select list
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

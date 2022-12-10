@@ -3,6 +3,8 @@
      'The package https://github.com/aplteam/MakeHelpers is required in ⎕SE'⎕SIGNAL 6
  :Else
      :If flag
-         ⎕SE.MakeHelpers.CreateTatinPackageFromSingleScript ##.CommTools
+         ##.CommTools.⎕EX'Select_Choices'
+         ##.CommTools.⎕EX'YesOrNo_Answers'
+         ⎕SE.MakeHelpers.CreateTatinPackageFromNamespace ##.CommTools
      :EndIf
  :EndIf

@@ -1,21 +1,13 @@
- R←Test_Misc_002(stopFlag batchFlag);⎕TRAP;options
-⍝ Exercise "Select"
+ R←Test_Misc_002(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "Cleanup"
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
- options←'This' 'That' 'Something else' 'z' ⍝ One item should be a scalar (was once a bug)
 
- 0 0⍴⍞,0/⎕←'This test needs you: when a list of options is presented always enter "1" and then press <enter>'
-
- →T.PassesIf 1=C.Select options
- →T.PassesIf 1='Options with a caption:'C.Select options
-0 0⍴⍞,0/⎕←'When asked for selection select items 1, 2 and 4; press <enter> to continue'
- →T.PassesIf 1 2 4≡'Select 1,2 and 4:'1 C.Select 10⍴options
-0 0⍴⍞,0/⎕←'Next try to enter "q" for quit - should not work; press <enter> to continue'
-{}'Select 1,2 and 4:'1 1C.Select 10⍴options
-0 0⍴⍞,0/⎕←'Next enter "a" (for all); press <enter> to continue'
- →T.PassesIf(⍳10)≡'Next enter "a" (for all):'1C.Select 10⍴options
- 0 0⍴⍞,0/⎕←'Next enter "q" (for quit); press <enter> to continue'
- →T.PassesIf ⍬≡'Enter "q"'C.Select 10⍴options
+ C.YesOrNo_Answers←1 2⍴'foo' 'Y'
+ C.Select_Choices←1 2⍴'foo' 1
+ C.Assert 2=+/2=⊃∘C.⎕NC¨'YesOrNo_Answers' 'Select_Choices'
+ C.Cleanup
+ →T.PassesIf 2=+/0=⊃∘C.⎕NC¨'YesOrNo_Answers' 'Select_Choices'
 
  R←T._OK
 ⍝Done
