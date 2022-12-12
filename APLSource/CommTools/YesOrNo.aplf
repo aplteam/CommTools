@@ -1,4 +1,4 @@
- yesOrNo←{default}YesOrNo question;isOkay;answer;add;dtb;answer2;bool;flag;buff
+ yesOrNo←{default}YesOrNo question;isOkay;answer;add;dtb;answer2;bool;flag;buff;alias
  ⍝ Asks a simple question and allows just "Y" (or "y") or "N" (or "n") as answers.\\
  ⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in between,
  ⍝ or a vector of simple character vectors.\\
@@ -20,8 +20,16 @@
  flag←1
  :If 0<⎕NC'YesOrNo_Answers'
  :AndIf 0<≢YesOrNo_Answers
-     bool←YesOrNo_Answers[;1]≡¨⊂question
-     :If 0<+/bool
+     :If '@'∊question
+         (alias question)←{l←⍵⍳'@' ⋄ (l↑⍵)(l↓⍵)}question
+         flag←0<+/bool←({⍵↑⍨⍵⍳'@'}¨YesOrNo_Answers[;1])≡¨⊂alias
+     :ElseIf ~flag←0<+/bool←YesOrNo_Answers[;1]≡¨⊂question
+     :AndIf ~flag←0<+/bool←question∘{⍵≡(≢⍵)↑⍺}¨YesOrNo_Answers[;1]
+     :AndIf LF∊question
+         buff←{⍵↓⍨+/∧\' '=⍵}⊃¯1↑LF(≠⊆⊢)question
+         flag←0<+/bool←YesOrNo_Answers[;1]≡¨⊂buff
+     :EndIf
+     :If flag
          'Multiple pre-prepared answers qualify?!'Assert 1=+/bool
          answer←2⊃YesOrNo_Answers[bool⍳1;]
          :If 0=≢answer
@@ -30,29 +38,11 @@
              ('Invalid answer: ',answer)Assert answer∊'YyNn'
              yesOrNo←answer∊'Yy'
          :EndIf
-         flag←0
-     :ElseIf 0<+/bool←question∘{⍵≡(≢⍵)↑⍺}¨YesOrNo_Answers[;1]
-         answer←2⊃YesOrNo_Answers[bool⍳1;]
-         :If 0=≢answer
-             yesOrNo←default
-         :Else
-             yesOrNo←answer∊'Yy'
-         :EndIf
-         flag←0
-     :ElseIf LF∊question
-         buff←{⍵↓⍨+/∧\' '=⍵}⊃¯1↑LF(≠⊆⊢)question
-     :AndIf 1=+/bool←YesOrNo_Answers[;1]≡¨⊂buff
-         'Multiple pre-prepared answers qualify?!'Assert 1=+/bool
-         answer←2⊃YesOrNo_Answers[bool⍳1;]
-         :If 0=≢answer
-             'No default was defined'Assert 0<≢yesOrNo←default
-         :Else
-             yesOrNo←answer∊'Yy'
-         :EndIf
-         flag←0
      :EndIf
+ :Else
+     flag←0
  :EndIf
- :If flag
+ :If ~flag
      :If 0=≢default
          add←' (y/n) '
      :Else

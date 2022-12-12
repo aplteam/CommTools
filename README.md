@@ -1,6 +1,6 @@
 # CommTools
 
-Basic communication tools for the session, mainly used for user commands and their APIs.
+Basic communication tools for the session, mainly used for user commands.
 
 Comes with two functions: `YesOrNo` and `Select`.
 
@@ -10,7 +10,7 @@ Comes with two functions: `YesOrNo` and `Select`.
 
 Asks a simple question and allows just "Yes" or "No" as answers.
 
-You may specify a default via the optional left argument which when specified
+You may specify a default via the optional left argument which when passed
 rules what happens when the user just presses <enter>. `default` must be either 1 (yes) or 0 (no).
 
 Example:
@@ -58,13 +58,15 @@ For test cases it is possible to let `YesOrNo` answer any question automatically
 Select one item (q=quit)        
  ```
 
+By passing one or two additional flags via `⍺` one can allow the user to select more than one options, or force he to select a option being able to quit.
+
 ### Interrupting
 
 It is not possible to interrupt `Select` with either a weak or a strong interrupt. However, by entering `∘∘∘` the user can force `Select` to run onto a stop vector that is dynamically set.
 
 ### Auto-selection
 
-For test cases it is possible to let `Select` select an option automatically. For that to work you must specify a global variable inside `CommTools` by the name `Select_choices` with two columns:
+For test cases it is possible to let `Select` select an option automatically. For that to work you must specify a global variable inside `CommTools` by the name `Select_Choices` with two columns:
 
 `[;1]`
 
@@ -72,10 +74,11 @@ For test cases it is possible to let `Select` select an option automatically. Fo
 
 `[;2]`
 
-: either an integer of a vector of integers or an empty vector or a character vector
+: either an integer or a vector of integers or an empty vector or a character vector
 
 * One or more integers are interpreted as user input = index into the options presented
 * An empty vector is the equivalent of entering `q` (for "quit")
-* A character vector may match one of the options, in which case that option is selected.
+* If it's just an `a` (for all) then all options are selected
+* A character vector may match one of the options, in which case that option is selected
 
-  If none matches then the options are restricted to the length of the character vector and the match operation is repeated.
+  If none of the options matches then the options are restricted to the length of the character vector and the match operation is repeated.

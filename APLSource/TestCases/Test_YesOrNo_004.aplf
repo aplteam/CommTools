@@ -1,0 +1,20 @@
+ R←Test_YesOrNo_004(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "YesOrNo" with `YesOrNo_Answers` but no fit
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     →0,R←T._NoBatchTest
+ :EndIf
+
+ 0 0⍴⍞,0/⎕←'This test needs you: when asked a question just press <enter>; to continue press <enter>'
+
+ C.YesOrNo_Answers←1 2⍴'Does-not-fit' 'y'
+
+ →T.GoToTidyUp 1≠1 C.YesOrNo'Are you sure?'
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done
