@@ -23,7 +23,7 @@ Example:
 
 ### Interrupting
 
-It is not possible to interrupt `YesOrNo` with either a weak or a strong interrupt. However, by entering `∘∘∘` the user can force `YesOrNo` to run onto a stop vector that is dynamically set.
+It is not possible to interrupt `YesOrNo` with either a weak or a strong interrupt due to a long-standing bug (Mantis 14535). However, by entering `∘∘∘` the user can force `YesOrNo` to run onto a stop vector that is dynamically set.
 
 ### Auto-answering
 
@@ -36,6 +36,8 @@ For test cases it is possible to let `YesOrNo` answer any question automatically
 `[;2]`
 
 : either "y" or "n" or an empty vector; in case of an empty vector the default (if any) is returned
+
+In order to reset the global variable `YesOrNo_Answers` and also `Select_Choices` you may call `CoomTools.Cleanup`.
  
 ## Select
 
@@ -58,11 +60,11 @@ For test cases it is possible to let `YesOrNo` answer any question automatically
 Select one item (q=quit)        
  ```
 
-By passing one or two additional flags via `⍺` one can allow the user to select more than one options, or force he to select a option being able to quit.
+By passing one or two additional flags via `⍺` one can allow the user to select more than one options, or force her to select a option being able to quit.
 
 ### Interrupting
 
-It is not possible to interrupt `Select` with either a weak or a strong interrupt. However, by entering `∘∘∘` the user can force `Select` to run onto a stop vector that is dynamically set.
+It is not possible to interrupt `Select` with either a weak or a strong interrupt due to a long-standing bug (Mantis 14535). However, by entering `∘∘∘` the user can force `Select` to run onto a stop vector that is dynamically set.
 
 ### Auto-selection
 
@@ -76,9 +78,27 @@ For test cases it is possible to let `Select` select an option automatically. Fo
 
 : either an integer or a vector of integers or an empty vector or a character vector
 
-* One or more integers are interpreted as user input = index into the options presented
+* One or more integers are interpreted as user input ←→ index into the options presented
 * An empty vector is the equivalent of entering `q` (for "quit")
 * If it's just an `a` (for all) then all options are selected
 * A character vector may match one of the options, in which case that option is selected
 
   If none of the options matches then the options are restricted to the length of the character vector and the match operation is repeated.
+
+In order to reset the global variable `YesOrNo_Answers` and also `Select_Choices` you may call `CoomTools.Cleanup`.
+
+
+#### Dynamic captions
+
+Sometimes the caption is constructed dynamically. An example is when a path is included that is bound to change.
+
+In this case you may specify an alias. An alias is separated by an `@` glyph.
+
+For example:
+
+```
+      ⎕SE.CommTools.Select_Choices←1 2⍴'foo@' 2
+      'foo@Please select one option:'⎕SE.CommTools.Select ⍕¨1 2 3
+2
+```
+

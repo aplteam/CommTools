@@ -1,0 +1,14 @@
+ R←Test_Select_007(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "Select" with an alias but without `Select_Choices` (was once a bug)
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     →0,R←T._NoBatchTest
+ :EndIf
+
+ {}'to-be-ignored@Choose the first one:'C.Select⍕¨⍳2
+ :If C.YesOrNo'Was the caption just "Choose the first one" (without "to-be-ignored") ?'
+     R←T._OK
+ :EndIf
+⍝Done
