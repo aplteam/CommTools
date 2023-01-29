@@ -1,14 +1,14 @@
  index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag
 ⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.
-⍝ One is the default.\\
+⍝ Selecting just one is the default.\\
 ⍝ The optional left argument allows you to specify multiple (positional) choices:
-⍝ * `caption` is shown above the choices.
-⍝ * `manyFlag` defaults to 0 (meaning just one item might be selected) or 1, in which case multiple items can be specified.
-⍝ * `mustFlag` forces the user to select at least one  option.\\
+⍝  * `caption` is shown above the choices
+⍝  * `manyFlag` defaults to 0 (meaning just one item might be selected) or 1, in which case multiple items can be selected
+⍝  * `mustFlag` forces the user to select at least one option\\
 ⍝ Notes:
-⍝  * `choices` must not have more than 999 items.\\
-⍝  * By entering "`∘∘∘`" the user may interrupt `Select`: this activates a stop.
-⍝  * If the user aborts by entering "q" (for "quit") `⍬` will be returned.
+⍝  * `choices` must not have more than 999 items\\
+⍝  * By entering "`∘∘∘`" the user may interrupt `Select` by running onto a stop vector, overcoming the bug that ⍞ cannot be interrupted
+⍝  * If the user aborts by entering "q" (for "quit") `⍬` will be returned
  x←{0<⎕NC ⍵:⊆⍎⍵ ⋄ ''}'x'
  (caption manyFlag mustFlag)←x,(⍴,x)↓'' 0 0
  ⎕IO←1 ⋄ ⎕ML←1

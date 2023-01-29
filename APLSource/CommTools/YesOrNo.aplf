@@ -1,6 +1,6 @@
  yesOrNo←{default}YesOrNo question;isOkay;answer;add;dtb;answer2;bool;flag;buff;alias
  ⍝ Asks a simple question and allows just "Y" (or "y") or "N" (or "n") as answers.\\
- ⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in between,
+ ⍝ The question may be a simple character vector, possibly with `⎕UCS 13` in between,
  ⍝ or a vector of simple character vectors.\\
  ⍝ You may specify a default via the optional left argument which when specified
  ⍝ rules what happens when the user just presses <enter>.
