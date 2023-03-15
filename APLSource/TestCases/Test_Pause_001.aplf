@@ -1,0 +1,10 @@
+ R←Test_Pause_001(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "Pause"
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ →T.PassesIf C.Pause'This is the first test with Pause'
+ →T.PassesIf 1 C.Pause'This is the second test with Pause, this time with a left argument←1'
+
+ R←T._OK
+⍝Done

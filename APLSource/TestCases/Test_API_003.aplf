@@ -1,0 +1,14 @@
+ R←Test_API_003(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "Pause" in ⎕SE
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ →T.PassesIf ⎕SE.CommTools.Pause'This is called via the API'
+ ⎕SE.CommTools.NoPause←1
+ →T.GoToTidyUp ⎕SE.CommTools.Pause'Must not show!'
+
+ R←T._OK
+
+∆TidyUp:
+ ⎕SE.CommTools.Cleanup
+⍝Done

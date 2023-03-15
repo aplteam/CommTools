@@ -11,7 +11,7 @@
  path←C.HOME,'/Dist/'
  cfg←M.GetPackageCfg C.HOME
  :If 0=⎕NC'version'
-     version←cfg M.CompileVersionNumberPattern C.HOME
+     version←M.CompileVersionNumberPattern cfg
  :EndIf
  M.RecreateFolder path
  zipFilename←T.BuildPackage C.HOME path version

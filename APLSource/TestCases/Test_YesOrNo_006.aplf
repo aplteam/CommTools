@@ -7,7 +7,7 @@
      →0,R←T._NoBatchTest
  :EndIf
 
- 0 0⍴⍞,0/⎕←'This test needs you: when asked a question just preess <enter>; to continue press <enter>'
+ 0 0⍴⍞,0/⎕←'This test needs you: when asked a question just press <enter>; to continue press <enter>'
 
  C.YesOrNo_Answers←1 2⍴'' 'Y'
  →T.GoToTidyUp 0≠0 C.YesOrNo'Are you sure?'

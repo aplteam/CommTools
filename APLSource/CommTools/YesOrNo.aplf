@@ -1,11 +1,13 @@
  yesOrNo←{default}YesOrNo question;isOkay;answer;add;dtb;answer2;bool;flag;buff;alias
  ⍝ Asks a simple question and allows just "Y" (or "y") or "N" (or "n") as answers.\\
- ⍝ The question may be a simple character vector, possibly with `⎕UCS 13` in between,
+ ⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in between,
  ⍝ or a vector of simple character vectors.\\
  ⍝ You may specify a default via the optional left argument which when specified
  ⍝ rules what happens when the user just presses <enter>.
  ⍝ `default` must be either 1 (yes) or 0 (no).\\
  ⍝ By entering "`∘∘∘`" the user may interrupt `YesOrNo`: this activates a stop.\\
+ ⍝ You can make `YesOrNo` answer the question automatically, refer to the documentation
+ ⍝ with ]ADoc CommTools\\
  ⍝ Note that this function does **not** work as intended when traced!
  isOkay←0
  default←{0<⎕NC ⍵:⍎⍵ ⋄ ''}'default'
@@ -21,9 +23,9 @@
  :If 0<⎕NC'YesOrNo_Answers'
      YesOrNo_Answers←(0<≢¨' '~⍨¨YesOrNo_Answers[;1])⌿YesOrNo_Answers
  :AndIf 0<≢YesOrNo_Answers
-     :If '@'∊question
-         (alias question)←{l←⍵⍳'@' ⋄ (l↑⍵)(l↓⍵)}question
-         flag←0<+/bool←({⍵↑⍨⍵⍳'@'}¨YesOrNo_Answers[;1])≡¨⊂alias
+     :If AliasChar∊question
+         (alias question)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}question
+         flag←0<+/bool←({⍵↑⍨⍵⍳AliasChar}¨YesOrNo_Answers[;1])≡¨⊂alias
      :ElseIf ~flag←0<+/bool←YesOrNo_Answers[;1]≡¨⊂question
      :AndIf ~flag←0<+/bool←question∘{⍵≡(≢⍵)↑⍺}¨YesOrNo_Answers[;1]
      :AndIf LF∊question
