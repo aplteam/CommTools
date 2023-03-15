@@ -11,8 +11,10 @@
  msg←{LF@(⍸⍵=⎕UCS 13)⊣⍵}msg
  flag←1
  :If AliasChar∊msg
-     (alias msg)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}msg
-     flag←~∨/({⍵↑⍨⍵⍳AliasChar}¨⊆NoPause)≡¨⊂alias
+     :If 0<⎕NC'NoPause'
+         (alias msg)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}msg
+         flag←~∨/({⍵↑⍨⍵⍳AliasChar}¨⊆NoPause)≡¨⊂alias
+     :EndIf
  :Else
      :If 0<⎕NC'NoPause'
          :If NoPause≡1
@@ -26,7 +28,7 @@
      :If lineFlag
          ⍞←((⎕PW-1)⍴'─'),LF
      :EndIf
-     input←⍞,0/⍞←({⍵↑⍨¯1+⍵⍳'@'}msg),LF,'In order to continue press <enter> '
+     input←⍞,0/⍞←(({0=≢⍵:⍵ ⋄ ⍵,LF}{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}msg)),'In order to continue press <enter> '
      :If '∘∘∘'≡¯3↑input
          (1+⊃⎕LC)⎕STOP⊃⎕SI
          ∘∘∘ ⍝ Deliberate stop caused by user input

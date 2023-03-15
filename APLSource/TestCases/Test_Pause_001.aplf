@@ -5,6 +5,7 @@
 
  →T.PassesIf C.Pause'This is the first test with Pause'
  →T.PassesIf 1 C.Pause'This is the second test with Pause, this time with a left argument←1'
+ →T.PassesIf 1 C.Pause''
 
  R←T._OK
 ⍝Done
