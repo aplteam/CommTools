@@ -1,0 +1,19 @@
+ R←Test_AskForText_006(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "AskForText" with `AskForText_Answers` but it being empty
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     →0,R←T._NoBatchTest
+ :EndIf
+
+ 0 0⍴⍞,0/⎕←'This test needs you: when asked a question just press <enter>; to continue press <enter>'
+
+ C.AskForText_Answers←1 2⍴'' 1
+ →T.GoToTidyUp 0≠≢({1}C.AskForText)'Enter your name'
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

@@ -1,5 +1,5 @@
  R←Test_YesOrNo_005(stopFlag batchFlag);⎕TRAP;qdmx
-⍝ Exercise "YesOrNo" with `YesOrNo_Answers` but an invalid answers
+⍝ Exercise "YesOrNo" with `YesOrNo_Answers` but an invalid answer
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 

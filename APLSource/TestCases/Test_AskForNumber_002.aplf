@@ -1,0 +1,23 @@
+ R←Test_AskForNumber_002(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "AskForNumber" with `AskForNumber_Answers`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.AskForNumber_Answers←5 2⍴''
+ C.AskForNumber_Answers[1;]←'Number of copies (1)' 2
+ C.AskForNumber_Answers[2;]←'Number of copies (2)' 2
+ C.AskForNumber_Answers[3;]←'Number of copies (3)' '2'
+ C.AskForNumber_Answers[4;]←'1@' 2
+ C.AskForNumber_Answers[5;]←'AnAlias@A comment' 2
+
+ →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[2;]
+ →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[1;]
+ →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[3;]
+ →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[4;]
+ →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[4;]
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

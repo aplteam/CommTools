@@ -1,0 +1,11 @@
+ R←Test_AskForText_001(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "AskForText"
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "Enter lower case character from ASCII" first with "1" (must get rejected), then "a"; to continue press <enter>'
+
+ →T.PassesIf(,'a')≡,({⍵∊⎕C ⎕A:1 ⋄ ⎕←'Enter single lowercase character from the ASCII set' ⋄ 0}C.AskForText)'Enter lower case character from ASCII'
+
+ R←T._OK
+⍝Done

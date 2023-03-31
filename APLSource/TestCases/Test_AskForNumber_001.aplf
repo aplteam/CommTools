@@ -1,0 +1,11 @@
+ R←Test_AskForNumber_001(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "AskForNumber"
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "How many copies" first with 6 (must get rejected), then 5; to continue press <enter>'
+
+ →T.PassesIf 5=({⍵∊1 2 3 4 5:1 ⋄ ⎕←'Between 1 and 5' ⋄ 0}C.AskForNumber)'How many copies (1-5)?'
+
+ R←T._OK
+⍝Done
