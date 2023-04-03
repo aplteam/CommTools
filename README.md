@@ -9,8 +9,8 @@ Comes with these functions and operators:
 * `YesOrNo` for asking questions like "Are you sure?"
 * `Select` for letting the user choose from a set of options
 * `Pause` for printing a message to the session and asking the user to press `<enter>` to continue
-* `AskForNumber` for stuff "Number of copies"
-* `AskForText` for stuff "Enter your name"
+* `AskForNumber` for stuff like "Number of copies"
+* `AskForText` for stuff like "Enter your name"
 
 These functions and operators have three features in common:
 
