@@ -14,7 +14,7 @@
  →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[1;]
  →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[3;]
  →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[4;]
- →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[4;]
+ →T.GoToTidyUp 2≠({1}C.AskForNumber)1⊃C.AskForNumber_Answers[5;]
 
  R←T._OK
 
