@@ -1,18 +1,13 @@
- R←Test_AskForText_004(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForText" with `AskForText_Answers` but no fit
+ R←Test_AskForText_004(stopFlag batchFlag);⎕TRAP;res;q;question
+⍝ Exercise "AskForText" with a question carrying an @ char that is NOT an alias
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :If batchFlag
-     →0,R←T._NoBatchTest
- :EndIf
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "Name" with a "Stan"; to continue press <enter>'
 
- C.AskForText_Answers←1 2⍴'Does-not-fit' 'y'
-
- →T.GoToTidyUp 0≠≢({1}C.AskForText)'Just press <enter>'
+ question←'This is not an @ alias!',LF,'Enter a name'
+ →T.PassesIf'Stan'≡({1}C.AskForText)question
 
  R←T._OK
 
-∆TidyUp:
- C.Cleanup
 ⍝Done

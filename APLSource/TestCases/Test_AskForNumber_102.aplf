@@ -1,0 +1,19 @@
+ R←Test_AskForNumber_102(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "AskForNumber" with `AskForNumber_Answers` but it being empty
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     →0,R←T._NoBatchTest
+ :EndIf
+
+ 0 0⍴⍞,0/⎕←'This test needs you: when asked "Number of copies" enter "1" and press then <enter>; to continue press <enter>'
+
+ C.AskForNumber_Answers←1 2⍴'' 1
+ →T.GoToTidyUp 1≢({1}C.AskForNumber)'Number of copies' ⍝ Should ask as usual, as if C.AskForNumber_Answers is not set at all
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

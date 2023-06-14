@@ -9,7 +9,7 @@
 
  →T.PassesIf 1=C.Select options
  →T.PassesIf 1='Select first option:'C.Select options
- 0 0⍴⍞,0/⎕←'When asked for selection select items 1, 2 and 4; press <enter> to continue'
+ 0 0⍴⍞,0/⎕←'When asked select items 1, 2 and 4; press <enter> to continue'
  →T.PassesIf 1 2 4≡'Select 1,2 and 4:' 1 C.Select 10⍴options
  0 0⍴⍞,0/⎕←'Next try to enter "q" for quit - should not work; then enter 1; press <enter> to continue'
  {}'Select 1,2 and 4:' 1 1 C.Select 10⍴options

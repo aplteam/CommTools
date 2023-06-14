@@ -1,18 +1,13 @@
- R←Test_AskForText_003(stopFlag batchFlag);⎕TRAP;qdmx
-⍝ Exercise "AskForText" and ask user to enter "∘∘∘"
-⍝ This should make AskForText stop
+ R←Test_AskForText_003(stopFlag batchFlag);⎕TRAP;res;q
+⍝ Exercise "AskForText" with a question with LFs in it
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you: when questioned enter "∘∘∘"; to continue press <enter>'
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'enter "APL", then press <enter>; to continue press <enter>'
 
- :Trap 1000
-     {}C.AskForText'Please enter "∘∘∘"'
-     →T.FailsIf 1
- :Else
-     qdmx←⎕DMX
-     →T.PassesIf∨/'∘∘∘ ⍝ Deliberate stop caused by user input'⍷2⊃qdmx.DM
- :EndTrap
+ q←'Your favourite',LF,'programming language'
+ res←({(⊂⍵)∊'APL' 'apl':1 ⋄ ⎕←'Enter "APL"' ⋄ 0}C.AskForText)q
+ →T.PassesIf'APL'≡1 ⎕C res
 
  R←T._OK
 ⍝Done

@@ -1,14 +1,12 @@
- R←Test_AskForNumber_005(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForNumber" with `AskForNumber_Answers` and (different number of) leading blanks in both question and `AskForNumber_Answers`
+ R←Test_AskForNumber_005(stopFlag batchFlag);⎕TRAP;question
+⍝ Exercise "AskForNumber" with a question that carries an "@" but is not an alias
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForNumber_Answers←1 2⍴'  Number of copies' 2
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "How many copies" with a "1"; to continue press <enter>'
 
- →T.GoToTidyUp 2≠({1}C.AskForNumber)' Number of copies'
+ question←'---- Attention @ ---',LF,'How many'
+ →T.PassesIf 1≡({1}C.AskForNumber)question
 
  R←T._OK
-
-∆TidyUp:
- C.Cleanup
 ⍝Done

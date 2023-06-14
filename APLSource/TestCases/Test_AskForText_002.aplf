@@ -1,17 +1,13 @@
- R←Test_AskForText_002(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskAskForText" with `AskForText_Answers`
+ R←Test_AskForText_002(stopFlag batchFlag);⎕TRAP;res;q
+⍝ Exercise "AskForText" with a nested question
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForText_Answers←2 2⍴''
- C.AskForText_Answers[1;]←'Enter your name' 2
- C.AskForText_Answers[2;]←'Enter name of a month' 2
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'enter "APL", then press <enter>; to continue press <enter>'
 
- →T.GoToTidyUp 2≠({1}C.AskForText)1⊃C.AskForText_Answers[2;]
- →T.GoToTidyUp 2≠({1}C.AskForText)1⊃C.AskForText_Answers[1;]
+ q←'Your favourite' 'programming language'
+ res←({(⊂⍵)∊'APL' 'apl':1 ⋄ ⎕←'Enter "APL"' ⋄ 0}C.AskForText)q
+ →T.PassesIf'APL'≡1 ⎕C res
 
  R←T._OK
-
-∆TidyUp:
- C.Cleanup
 ⍝Done

@@ -1,18 +1,16 @@
- R←Test_AskForNumber_004(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForNumber" with `AskForNumber_Answers` but no fit
+ R←Test_AskForNumber_004(stopFlag batchFlag);⎕TRAP;question
+⍝ Exercise "AskForNumber" with a question carrying an @ char that is NOT an alias
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :If batchFlag
-     →0,R←T._NoBatchTest
- :EndIf
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "How many copies" with a "1"; to continue press <enter>'
 
- C.AskForNumber_Answers←1 2⍴'Does-not-fit' 'y'
-
- →T.GoToTidyUp 0≠≢({1}C.AskForNumber)'Just press <enter>'
+ question←'This is not an @ alias!',LF,'How many copies?'
+ →T.GoToTidyUp 1≢({1}C.AskForNumber)question
 
  R←T._OK
 
 ∆TidyUp:
+ C.AliasChar←'@'
  C.Cleanup
 ⍝Done

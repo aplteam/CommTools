@@ -1,0 +1,9 @@
+ R←Test_YesOrNo_007(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "YesOrNo" with a question that carries an "@" sign but is not an alias
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ →T.PassesIf 1 C.YesOrNo'Hello @' 'Please just press <enter"'
+
+ R←T._OK
+⍝Done

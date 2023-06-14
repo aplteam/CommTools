@@ -1,18 +1,16 @@
- R←Test_AskForNumber_003(stopFlag batchFlag);⎕TRAP;qdmx
-⍝ Exercise "AskForNumber" and ask user to enter "∘∘∘"
-⍝ This should make AskForNumber stop
+ R←Test_AskForNumber_003(stopFlag batchFlag);⎕TRAP;q
+⍝ Exercise "AskForNumber" with a question that has the character CommTools.AliasChar in it
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you: when questioned enter "∘∘∘"; to continue press <enter>'
+ 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "How many copies" with a "1"; to continue press <enter>'
 
- :Trap 1000
-     {}C.AskForNumber'Please enter "∘∘∘"'
-     →T.FailsIf 1
- :Else
-     qdmx←⎕DMX
-     →T.PassesIf∨/'∘∘∘ ⍝ Deliberate stop caused by user input'⍷2⊃qdmx.DM
- :EndTrap
+ q←'MyAlias@---------- My Caption ---',LF
+ q,←'First line',LF
+ q,←'Second line',LF
+ q,←'How many copies (1-5)?'
+ →T.PassesIf 1=({⍵∊1 2 3 4 5:1 ⋄ ⎕←'Between 1 and 5' ⋄ 0}C.AskForNumber)q
+ →T.PassesIf 0=CommTools.YesOrNo'Did the question contain "MyAlias@"? (Must not!)'
 
  R←T._OK
 ⍝Done

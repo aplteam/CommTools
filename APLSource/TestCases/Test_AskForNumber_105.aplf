@@ -1,14 +1,14 @@
- R←Test_AskForNumber_002(stopFlag batchFlag);⎕TRAP;q
-⍝ Exercise "AskForNumber" with a complex question that has LF in it
+ R←Test_AskForNumber_105(stopFlag batchFlag);⎕TRAP;q
+⍝ Exercise "AskForNumber" with a question that has the character CommTools.AliasChar in it as well as line feeds
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
  0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "How many copies" with a "1"; to continue press <enter>'
 
- q←'---------- My Caption ---',LF
- q,←'First line',LF
+ q←'---------- My Caption',LF
+ q,←'First line:',LF
  q,←'',LF
- q,←'Second line',LF
+ q,←'Second line:',LF
  q,←'How many copies (1-5)?'
  →T.PassesIf 1=({⍵∊1 2 3 4 5:1 ⋄ ⎕←'Between 1 and 5' ⋄ 0}C.AskForNumber)q
 
