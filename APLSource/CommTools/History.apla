@@ -1,4 +1,6 @@
 (
+ '* 1.6.0 from 2023-08-07'
+ '  * `Select` now support a wildcard character (`*`) for `Select_Choices`'
  '* 1.5.0 from 2023-06-13'
  '  * A question may now contain LF in `AskForNumber`, `AskForText`, `YesOrNo` and `Pause`'
  '  * Documentation improved'

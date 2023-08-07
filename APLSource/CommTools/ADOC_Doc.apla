@@ -222,6 +222,11 @@
  ('1'⋄)
  '``` '
  ''
+ 'In case the list items are not only created dynamically but they are also complex and a table it might be difficult or even '
+ 'impossible to construct a matching line, for example because you don''t know upfront the number of spaces between columns.'
+ ''
+ 'In such a case use the `*` glyph as a wildcard character: it tells `Select` to match only the beginning of a line.'
+ ''
  '#### Specifying a selection'
  '                       '
  'If you need a specific selection to be returned but you don''t know the item number in advance because the list is created '

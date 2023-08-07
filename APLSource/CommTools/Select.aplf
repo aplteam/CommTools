@@ -1,4 +1,4 @@
- index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart
+  index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart
 ⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.
 ⍝ Selecting just one is the default.\\
 ⍝ The optional left argument allows you to specify multiple (positional) choices:
@@ -39,7 +39,9 @@
          :If (⊂index)∊0 ⍬
              index←⍬
          :ElseIf ' '=1↑0⍴∊index ⍝ Text?!
-             :If (,'a')≡,index
+             :If '*'=¯1↑index
+                 index←((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)⍳⊂(¯1↓index)
+             :ElseIf (,'a')≡,index
                  index←⍳≢choices
              :ElseIf (,'q')≡,index
                  index←⍬
