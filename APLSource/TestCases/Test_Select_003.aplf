@@ -1,5 +1,5 @@
  R←Test_Select_003(stopFlag batchFlag);⎕TRAP;qdmx;list
-⍝ Exercise "Select" ans ask user to enter "∘∘∘"
+⍝ Exercise "Select" and ask user to enter "∘∘∘"
 ⍝ This should make `Select` stop
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed

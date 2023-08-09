@@ -1,9 +1,9 @@
- R←Test_Select_002(stopFlag batchFlag);⎕TRAP;list
+ R←Test_Select_002(stopFlag batchFlag);⎕TRAP;list;qdmx
 ⍝ Exercise "Select" with `Select_Choices`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.Select_Choices←10 2⍴''
+ C.Select_Choices←14 2⍴''
  C.Select_Choices[1;]←'Second' 2
  C.Select_Choices[2;]←'First' 1
  C.Select_Choices[3;]←'Third' 5
@@ -14,8 +14,13 @@
  C.Select_Choices[8;]←'This is the eighth' 'a'
  C.Select_Choices[9;]←'1@'(1 2 4)
  C.Select_Choices[10;]←'2@A comment' 3
+ C.Select_Choices[11;]←'3@' 'Does not exist'
+ C.Select_Choices[12;]←'4@' 300
+ C.Select_Choices[13;]←'5@' '998*'
+ C.Select_Choices[14;]←'6@' 'XXX*'
 
  list←'=',¨⍕¨⍳10
+ list,←'998999' '999999'
 
  →T.GoToTidyUp 2≠'Second'C.Select list
  →T.GoToTidyUp 1≠'First'C.Select list
@@ -27,6 +32,28 @@
  →T.GoToTidyUp(⍳≢list)≢'This is the eighth one'C.Select list
  →T.GoToTidyUp 1 2 4≢'1@This is an alias'C.Select list
  →T.GoToTidyUp 3≢'2@This is an alias'C.Select list
+ →T.GoToTidyUp 11≢'5@'C.Select list
+ :Trap 11
+     {}'3@'C.Select list
+     →T.GoToTidyUp 1
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp'Invalid selection'≢qdmx.EM
+ :EndTrap
+ :Trap 11
+     {}'4@'C.Select list
+     →T.GoToTidyUp 1
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp'Invalid selection'≢qdmx.EM
+ :EndTrap
+ :Trap 11
+     {}'6@'C.Select list
+     →T.GoToTidyUp 1
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp'Invalid selection'≢qdmx.EM
+ :EndTrap
 
  R←T._OK
 
