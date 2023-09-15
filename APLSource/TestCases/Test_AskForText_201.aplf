@@ -1,0 +1,12 @@
+ R←Test_AskForText_201(stopFlag batchFlag);⎕TRAP;res
+⍝ Exercise "AskForText" with a default
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.Pause'When asked for a license do not enter anything, just press <enter>'
+
+ res←'MIT'({1}C.AskForText)'Which license?'
+ →T.PassesIf res≡'MIT'
+
+ R←T._OK
+⍝Done
