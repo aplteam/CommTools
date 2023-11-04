@@ -1,4 +1,6 @@
 (
+ '* 1.7.1 from 2023-11-04'
+ '  * Bug fix: `AskForText`was not listed by `Public`'
  '* 1.7.0 from 2023-09-15'
  '  * The `AskForText` function now allows to define a default via `⍺`'
  '* 1.6.1 from 2023-08-09'
