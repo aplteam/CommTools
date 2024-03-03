@@ -12,7 +12,7 @@ Comes with these functions and operators:
 * `AskForNumber` for stuff like "Number of copies"
 * `AskForText` for stuff like "Enter your name"
 
-These functions and operators have three features in common:
+These functions and operators have these features in common:
 
 * They can all be interrupted by entering `∘∘∘`
 * They can be automated by setting certain variables within the `CommTools` namespace
@@ -28,3 +28,4 @@ You may ask for a detailed documentation with
 ```
       ]ADoc #.CommTools
 ```
+
