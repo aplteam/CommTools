@@ -1,5 +1,5 @@
  R←Test_Select_008(stopFlag batchFlag);⎕TRAP;list
-⍝ Exercise "Select" with `Select_Choices` using a wildcard character
+⍝ Exercise "Select" with `Select_Choices` using a wildcard character at the end
 ⍝ The wildcard character was introduced in 1.6.0
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
@@ -7,8 +7,8 @@
  list←'=',¨⍕¨⍳10
  list,¨←(?(≢list)⍴10)⍴¨' '
  list,¨←⍕¨?(≢list)⍴100000
- C.Select_Choices←1 2⍴'Choose the first one:' '=6*'
- →T.GoToTidyUp 6≠'Choose the first one:'C.Select list
+ C.Select_Choices←1 2⍴'Select an item:' '=6*'
+ →T.GoToTidyUp 6≠'Select an item:'C.Select list
 
  R←T._OK
 

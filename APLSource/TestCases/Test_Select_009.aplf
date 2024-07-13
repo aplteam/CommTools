@@ -1,0 +1,16 @@
+ R←Test_Select_009(stopFlag batchFlag);⎕TRAP;list
+⍝ Exercise "Select" with `Select_Choices` using a wildcard character at the beginning
+⍝ The wildcard character was introduced in 1.6.0, with 1.8.0 its usage at the beginning
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ list←⌽'file_'∘,¨⍕¨⍳20
+ list←'/path/2/folder/'∘,¨list
+ C.Select_Choices←1 2⍴'Select a file:' '*_2'
+ →T.GoToTidyUp 19≠'Select a file:'C.Select list
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

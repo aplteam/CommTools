@@ -1,0 +1,16 @@
+ R←Test_Misc_004(stopFlag batchFlag);⎕TRAP;res
+⍝ Exercise all functions with a scalar `?` as input
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ res←C.Select'?'
+ →T.PassesIf∨/'.Select_Choices←'⍷res
+ res←C.YesOrNo'?'
+ →T.PassesIf∨/'.YesOrNo_Answers←'⍷res
+ res←({1}C.AskForText)'?'
+ →T.PassesIf∨/'.AskForText_Answers←'⍷res
+ res←({1}C.AskForNumber)'?'
+ →T.PassesIf∨/'.AskForNumber_Answers←'⍷res
+
+ R←T._OK
+⍝Done
