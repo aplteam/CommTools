@@ -25,7 +25,7 @@ These functions and operators have these features in common:
 * They unify the user experience
 * You may force the user to make a decision or enter data
 * `Select` allows by default to select just one item, and the user may enter a "q" for "quit", but both can be changed via the left argument
-* Both `Select` and `AskForText` allow the definition of a default (returned in case the user presses `<return>` without entering any data)
+* `AskForText` allows the definition of a default (returned in case the user presses `<return>` without entering any data)
 
 `AskForNumber` and `AskForText` are operators that require a check function as left operand. The check function can be used to check the input and reject or accept it.
 
