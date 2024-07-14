@@ -4,18 +4,15 @@
  R←T._Failed
 
  options←'This' 'That' 'Something else' 'z' ⍝ One item should be a scalar (was once a bug)
-
- 0 0⍴⍞,0/⎕←'This test needs you: when a list of options is presented always enter "1" and then press <enter>'
-
+ ∆Info'Info: this test needs you: when a list of options is presented select the first one'
  →T.PassesIf 1=C.Select options
  →T.PassesIf 1='Select first option:'C.Select options
- 0 0⍴⍞,0/⎕←'When asked select items 1, 2 and 4; press <enter> to continue'
  →T.PassesIf 1 2 4≡'Select 1,2 and 4:' 1 C.Select 10⍴options
- 0 0⍴⍞,0/⎕←'Next try to enter "q" for quit - should not work; then enter 1; press <enter> to continue'
- {}'Select 1,2 and 4:' 1 1 C.Select 10⍴options
- 0 0⍴⍞,0/⎕←'Next enter "a" (for all); press <enter> to continue'
+ 0 ∆Info'Info: next try to enter "q" for quit - should not work; then enter 1'
+ {}'Your choice:' 1 1 C.Select 10⍴options
+ 0 ∆Info'Info: next enter "a" (for all)'
  →T.PassesIf(⍳10)≡'Next enter "a" (for all):' 1 C.Select 10⍴options
- 0 0⍴⍞,0/⎕←'Next enter "q" (for quit); press <enter> to continue'
+ 0 ∆Info'Info: next enter "q" (for quit)'
  →T.PassesIf ⍬≡'Enter "q"'C.Select 10⍴options
 
  R←T._OK

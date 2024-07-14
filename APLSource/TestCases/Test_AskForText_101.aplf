@@ -3,10 +3,6 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :If batchFlag
-     →0,R←T._NoBatchTest
- :EndIf
-
  C.AskForText_Answers←1 2⍴'Does-not-fit' 'y'
 
  →T.GoToTidyUp 0≠≢({1}C.AskForText)'Just press <enter>'

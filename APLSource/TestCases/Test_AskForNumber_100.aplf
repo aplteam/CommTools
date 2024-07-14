@@ -3,12 +3,6 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :If batchFlag
-     →0,R←T._NoBatchTest
- :EndIf
-
- C.AskForNumber_Answers←1 2⍴'Does-not-fit' 99
-
  →T.GoToTidyUp 1≢({1}C.AskForNumber)'Enter "1" and press <enter>'
 
  R←T._OK

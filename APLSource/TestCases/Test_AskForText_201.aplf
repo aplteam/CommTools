@@ -3,9 +3,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.Pause'When asked for a license do not enter anything, just press <enter>'
-
- res←'MIT'({1}C.AskForText)'Which license?'
+ res←'MIT'({1}C.AskForText)'Which license (don''t enter anything, just press <enter>)?'
  →T.PassesIf res≡'MIT'
 
  R←T._OK

@@ -3,15 +3,8 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :If batchFlag
-     →0,R←T._NoBatchTest
- :EndIf
-
- 0 0⍴⍞,0/⎕←'This test needs you: when asked a question just press <enter>; to continue press <enter>'
-
  C.YesOrNo_Answers←1 2⍴'Does-not-fit' 'y'
-
- →T.GoToTidyUp 1≠1 C.YesOrNo'Are you sure?'
+ →T.GoToTidyUp 1≠1 C.YesOrNo'Are you sure? (just press <enter>)'
 
  R←T._OK
 

@@ -3,9 +3,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "How many copies" with a "1"; to continue press <enter>'
-
- q←'---------- My Caption',LF
+ q←'---------- My Caption (enter "1")',LF
  q,←'First line:',LF
  q,←'',LF
  q,←'Second line:',LF

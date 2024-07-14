@@ -4,10 +4,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you: enter "∘∘∘" rather than selecting anything; to continue press <enter>'
-
  list←'This' 'That' 'More'
-
  :Trap 1000
      'Enter ∘∘∘'C.Select list
      →T.FailsIf 1

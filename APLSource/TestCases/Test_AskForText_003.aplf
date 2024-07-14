@@ -3,9 +3,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'enter "APL", then press <enter>; to continue press <enter>'
-
- q←'Your favourite',LF,'programming language'
+ q←'Your favourite',LF,'programming language (enter "APL")'
  res←({(⊂⍵)∊'APL' 'apl':1 ⋄ ⎕←'Enter "APL"' ⋄ 0}C.AskForText)q
  →T.PassesIf'APL'≡1 ⎕C res
 

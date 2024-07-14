@@ -3,9 +3,9 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "Enter lower case character from ASCII" first with "1" (must get rejected), then "a"; to continue press <enter>'
+ ∆Info'Info: this test needs you:',(⎕UCS 10),'Answer "Enter lowercase character from ASCII" first with "1" (must get rejected), then "a"'
 
- →T.PassesIf(,'a')≡,({⍵∊⎕C ⎕A:1 ⋄ ⎕←'Enter single lowercase character from the ASCII set' ⋄ 0}C.AskForText)'Enter lower case character from ASCII'
+ →T.PassesIf(,'a')≡,({⍵∊⎕C ⎕A:1 ⋄ ⎕←'Enter single lowercase character from the ASCII set' ⋄ 0}C.AskForText)'Enter lowercase character from ASCII'
 
  R←T._OK
 ⍝Done

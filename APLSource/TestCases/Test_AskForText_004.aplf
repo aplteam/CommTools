@@ -3,9 +3,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "Name" with a "Stan"; to continue press <enter>'
-
- question←'This is not an @ alias!',LF,'Enter a name'
+ question←'This is not an @ alias!',LF,'Enter a name (enter "Stan")'
  →T.PassesIf'Stan'≡({1}C.AskForText)question
 
  R←T._OK

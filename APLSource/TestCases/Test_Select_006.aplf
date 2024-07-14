@@ -3,12 +3,6 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :If batchFlag
-     →0,R←T._NoBatchTest
- :EndIf
-
- 0 0⍴⍞,0/⎕←'This test needs you: when asked to choose an item from a list choose the first one; to continue press <enter>'
-
  C.Select_Choices←1 2⍴'' ''
  list←'=',¨⍕¨⍳10
  →T.GoToTidyUp 1≠'Choose the first one:'C.Select list

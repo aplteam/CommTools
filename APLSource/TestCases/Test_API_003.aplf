@@ -5,7 +5,7 @@
 
  →T.PassesIf ⎕SE.CommTools.Pause'This is called via the API'
  ⎕SE.CommTools.NoPause←1
- →T.GoToTidyUp ⎕SE.CommTools.Pause'Must not show!'
+ →T.GoToTidyUp ⎕SE.CommTools.Pause'If you see this: something is wrong!'
 
  R←T._OK
 

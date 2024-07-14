@@ -3,9 +3,7 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- 0 0⍴⍞,0/⍞←'This test needs you:',(⎕UCS 10),'Answer "How many copies" with a "1"; to continue press <enter>'
-
- question←'This is not an @ alias!',LF,'How many copies?'
+ question←'This is not an @ alias!',LF,'How many copies? (enter "1")'
  →T.GoToTidyUp 1≢({1}C.AskForNumber)question
 
  R←T._OK
