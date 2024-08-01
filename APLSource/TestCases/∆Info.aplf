@@ -1,13 +1,14 @@
  {r}←{separatorFlag}∆Info msg
  separatorFlag←{0<⎕NC ⍵:⍎⍵ ⋄ 1}'separatorFlag'
  :If separatorFlag
-     ⎕←(⎕PW-1){⍺↑'--- ',⍵,⍺⍴'-'}⊃1↓⎕SI
+     ⎕←(⎕PW-1){' '∧.=⊃⍵:⍺⍴'-' ⋄ ⍺↑'--- ',⍵,' ',⍺⍴'-'}⊃1↓⎕SI
  :EndIf
  :If ∨/(⎕UCS 10)∊msg
      msg←(⎕UCS 10)(≠⊆⊢)msg
      (2⊃msg)←'  ',2⊃msg
      msg←(1⊃msg),(⎕UCS 10),2⊃msg
  :ElseIf 2=|≡msg
+     'Right argument, when nested, must have two elements'⎕SIGNAL 11/⍨2≠≢msg
      msg←(1⊃msg),(⎕UCS 10),'  ',{⍵↓⍨+/∧\' '=⍵}2⊃msg
  :EndIf
  ⍞←msg,(⎕UCS 10),'  To continue press <enter>'
