@@ -14,6 +14,7 @@
      :Return
  :EndIf
  enforce←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'enforce'
+ 'Left argument ("enforce numeric input")must be a Boolean'Assert enforce∊0 1
  value←⍬
  success←flag←0
  :If ~(≡question)∊0 1

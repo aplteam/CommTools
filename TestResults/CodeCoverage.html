@@ -127,10 +127,10 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr><th>Executed at</th><th>APLVersion</th><th>Memory (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>2024-07-13 11:47:50</td><td>Windows-64 ⋄ 19.0.49376.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>113</td></tr>
+<tr><td>2024-08-02 09:56:30</td><td>Windows-64 ⋄ 19.0.49376.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>114</td></tr>
 </tbody>
 </table>
-<p>Overall 93% of the testable code is covered.</p>
+<p>Overall 92% of the testable code is covered.</p>
 <p>(Comment lines, empty lines, all <code>:End</code>* lines etc. are ignored)</p>
 <p>7 of the fns/opr are 100% covered.</p>
 <div id="partly-covered" class="keep-together">
@@ -142,9 +142,9 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr class="uncovered"><td><a href="#listing_1" title="Link to listing">#.CommTools.CommTools.Copyright</a></td><td>1</td><td>0</td><td>1</td></tr>
 <tr class="uncovered"><td><a href="#listing_2" title="Link to listing">#.CommTools.CommTools.Help</a></td><td>1</td><td>0</td><td>1</td></tr>
 <tr><td><a href="#listing_3" title="Link to listing">#.CommTools.CommTools.Pause</a></td><td>4←≢21,31-33</td><td>83</td><td>24</td></tr>
-<tr><td><a href="#listing_4" title="Link to listing">#.CommTools.CommTools.AskForNumber</a></td><td>5←≢55-57,61,66</td><td>89</td><td>46</td></tr>
-<tr><td><a href="#listing_5" title="Link to listing">#.CommTools.CommTools.Select</a></td><td>4←≢59-60,62-63</td><td>95</td><td>80</td></tr>
-<tr><td><a href="#listing_6" title="Link to listing">#.CommTools.CommTools.AskForText</a></td><td>51, 71</td><td>96</td><td>48</td></tr>
+<tr><td><a href="#listing_4" title="Link to listing">#.CommTools.CommTools.AskForNumber</a></td><td>5←≢56-58,62,67</td><td>89</td><td>47</td></tr>
+<tr><td><a href="#listing_5" title="Link to listing">#.CommTools.CommTools.AskForText</a></td><td>4←≢52,57-58,74</td><td>92</td><td>51</td></tr>
+<tr><td><a href="#listing_6" title="Link to listing">#.CommTools.CommTools.Select</a></td><td>5←≢59,61-62,64-65</td><td>94</td><td>82</td></tr>
 <tr><td><a href="#listing_7" title="Link to listing">#.CommTools.CommTools.YesOrNo</a></td><td>29, 70, 73</td><td>96</td><td>70</td></tr>
 <tr class="fullyCovered"><td><a href="#listing_8" title="Link to listing">#.CommTools.CommTools.Assert</a></td><td></td><td>100</td><td>0</td></tr>
 <tr class="fullyCovered"><td><a href="#listing_9" title="Link to listing">#.CommTools.CommTools.Cleanup</a></td><td></td><td>100</td><td>5</td></tr>
@@ -319,63 +319,149 @@ $(document).ready(function() {
 <code> [13]      :Return</code>
 <code> [14]  :EndIf</code>
 <code> [15]  enforce←{0&lt;⎕NC ⍵:⍎⍵ ⋄ 0}'enforce'</code>
-<code> [16]  value←⍬</code>
-<code> [17]  success←flag←0</code>
-<code> [18]  :If ~(≡question)∊0 1</code>
-<code> [19]      question←1↓⊃,/LF,¨question</code>
-<code> [20]  :EndIf</code>
-<code> [21]  question←ReplaceCRbyLF question</code>
-<code> [22]  question←{⍵↓⍨+/∧\' '=⍵}question</code>
-<code> [23]  :Repeat</code>
-<code> [24]      firstPart←{⍵↑⍨⍵⍳LF}question</code>
-<code> [25]      :If 0&lt;⎕NC'AskForNumber_Answers'</code>
-<code> [26]          AskForNumber_Answers←(0&lt;≢¨' '~⍨¨AskForNumber_Answers[;1])⌿AskForNumber_Answers</code>
-<code> [27]          AskForNumber_Answers[;1]←{⍵↓⍨+/∧\' '=⍵}¨AskForNumber_Answers[;1]</code>
-<code> [28]      :AndIf 0&lt;≢AskForNumber_Answers</code>
-<code> [29]          :If AliasChar∊firstPart</code>
-<code> [30]              ind←firstPart⍳AliasChar</code>
-<code> [31]          :AndIf ∧/~(LF,' ')∊ind↑question</code>
-<code> [32]              (alias question)←ind{(⍺↑⍵)(⍺↓⍵)}firstPart</code>
-<code> [33]              flag←0&lt;+/bool←({⍵↑⍨⍵⍳AliasChar}¨AskForNumber_Answers[;1])≡¨⊂alias</code>
-<code> [34]          :ElseIf ~flag←0&lt;+/bool←AskForNumber_Answers[;1]≡¨⊂firstPart</code>
-<code> [35]              flag←0&lt;+/bool←firstPart∘{⍵≡(≢⍵)↑⍺}¨AskForNumber_Answers[;1]</code>
-<code> [36]          :EndIf</code>
-<code> [37]          :If flag</code>
-<code> [38]              'Multiple pre-prepared answers qualify?!'Assert 1=+/bool</code>
-<code> [39]              input←⍕2⊃AskForNumber_Answers[bool⍳1;]</code>
-<code> [40]          :EndIf</code>
-<code> [41]      :Else</code>
-<code> [42]          :If (⌊/firstPart⍳' ',LF)&gt;firstPart⍳AliasChar</code>
-<code> [43]              question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question</code>
-<code> [44]          :EndIf</code>
-<code> [45]      :EndIf</code>
-<code> [46]      :If ~flag</code>
-<code> [47]          input←⍞,0/⍞←question,': '</code>
-<code> [48]          :If '∘∘∘'≡¯3↑input</code>
-<code> [49]              (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
-<code> [50]              ∘∘∘ ⍝ Deliberate stop caused by user input</code>
-<code> [51]          :EndIf</code>
-<code> [52]          input←{⍵↑⍨1+-(⌽⍵)⍳':'}input</code>
-<code> [53]      :EndIf</code>
-<code> [54]      :If 0=≢input~' '</code>
-<code class="emphasize">→[55]      :AndIf ~enforce</code>
-<code class="emphasize">→[56]          value←⍬</code>
-<code class="emphasize">→[57]          :Return</code>
-<code> [58]      :Else</code>
-<code> [59]          (valid value)←⎕VFI input</code>
-<code> [60]          :If 1≠≢valid</code>
-<code class="emphasize">→[61]              ⎕←'Please enter precisely one number'</code>
-<code> [62]          :ElseIf valid</code>
-<code> [63]              success←CheckFn value</code>
-<code> [64]              value←⊃value</code>
-<code> [65]          :Else</code>
-<code class="emphasize">→[66]              ⎕←'You did not enter a valid number, please retry!'</code>
-<code> [67]          :EndIf</code>
-<code> [68]      :EndIf</code>
-<code> [69]  :Until success</code>
-<code> [70] ⍝Done</code>
+<code> [16]  'Left argument ("enforce numeric input")must be a Boolean'Assert enforce∊0 1</code>
+<code> [17]  value←⍬</code>
+<code> [18]  success←flag←0</code>
+<code> [19]  :If ~(≡question)∊0 1</code>
+<code> [20]      question←1↓⊃,/LF,¨question</code>
+<code> [21]  :EndIf</code>
+<code> [22]  question←ReplaceCRbyLF question</code>
+<code> [23]  question←{⍵↓⍨+/∧\' '=⍵}question</code>
+<code> [24]  :Repeat</code>
+<code> [25]      firstPart←{⍵↑⍨⍵⍳LF}question</code>
+<code> [26]      :If 0&lt;⎕NC'AskForNumber_Answers'</code>
+<code> [27]          AskForNumber_Answers←(0&lt;≢¨' '~⍨¨AskForNumber_Answers[;1])⌿AskForNumber_Answers</code>
+<code> [28]          AskForNumber_Answers[;1]←{⍵↓⍨+/∧\' '=⍵}¨AskForNumber_Answers[;1]</code>
+<code> [29]      :AndIf 0&lt;≢AskForNumber_Answers</code>
+<code> [30]          :If AliasChar∊firstPart</code>
+<code> [31]              ind←firstPart⍳AliasChar</code>
+<code> [32]          :AndIf ∧/~(LF,' ')∊ind↑question</code>
+<code> [33]              (alias question)←ind{(⍺↑⍵)(⍺↓⍵)}firstPart</code>
+<code> [34]              flag←0&lt;+/bool←({⍵↑⍨⍵⍳AliasChar}¨AskForNumber_Answers[;1])≡¨⊂alias</code>
+<code> [35]          :ElseIf ~flag←0&lt;+/bool←AskForNumber_Answers[;1]≡¨⊂firstPart</code>
+<code> [36]              flag←0&lt;+/bool←firstPart∘{⍵≡(≢⍵)↑⍺}¨AskForNumber_Answers[;1]</code>
+<code> [37]          :EndIf</code>
+<code> [38]          :If flag</code>
+<code> [39]              'Multiple pre-prepared answers qualify?!'Assert 1=+/bool</code>
+<code> [40]              input←⍕2⊃AskForNumber_Answers[bool⍳1;]</code>
+<code> [41]          :EndIf</code>
+<code> [42]      :Else</code>
+<code> [43]          :If (⌊/firstPart⍳' ',LF)&gt;firstPart⍳AliasChar</code>
+<code> [44]              question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question</code>
+<code> [45]          :EndIf</code>
+<code> [46]      :EndIf</code>
+<code> [47]      :If ~flag</code>
+<code> [48]          input←⍞,0/⍞←question,': '</code>
+<code> [49]          :If '∘∘∘'≡¯3↑input</code>
+<code> [50]              (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
+<code> [51]              ∘∘∘ ⍝ Deliberate stop caused by user input</code>
+<code> [52]          :EndIf</code>
+<code> [53]          input←{⍵↑⍨1+-(⌽⍵)⍳':'}input</code>
+<code> [54]      :EndIf</code>
+<code> [55]      :If 0=≢input~' '</code>
+<code class="emphasize">→[56]      :AndIf ~enforce</code>
+<code class="emphasize">→[57]          value←⍬</code>
+<code class="emphasize">→[58]          :Return</code>
+<code> [59]      :Else</code>
+<code> [60]          (valid value)←⎕VFI input</code>
+<code> [61]          :If 1≠≢valid</code>
+<code class="emphasize">→[62]              ⎕←'Please enter precisely one number'</code>
+<code> [63]          :ElseIf valid</code>
+<code> [64]              success←CheckFn value</code>
+<code> [65]              value←⊃value</code>
+<code> [66]          :Else</code>
+<code class="emphasize">→[67]              ⎕←'You did not enter a valid number, please retry!'</code>
+<code> [68]          :EndIf</code>
+<code> [69]      :EndIf</code>
+<code> [70]  :Until success</code>
+<code> [71] ⍝Done</code>
 </div>
-<code class="header" id="listing_5">#.CommTools.CommTools.Select &mdash; 95%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_5">#.CommTools.CommTools.AskForText &mdash; 92%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<div class="code-block"><code>  text←{x}(CheckFn AskForText)question</code>
+<code> [1]  ⍝ Operator asking a question and allowing the user to enter text.\\</code>
+<code> [2]  ⍝ By entering "`∘∘∘`" the user may interrupt `AskForText`: this activates a stop.\\</code>
+<code> [3]  ⍝ `CheckFn` is supposed to be a function that gets the input as `⍵` and must return a Boolean</code>
+<code> [4]  ⍝ with a 1 indicating that the input is okay and 0 that it is not. If you don't need/want</code>
+<code> [5]  ⍝ a check function pass `{1}` as left operand.\\</code>
+<code> [6]  ⍝ If the user refuses to enter anything an empty vector is returned.</code>
+<code> [7]  ⍝ However, you might prevent this from happening by specifying a 1 as `⍺` (`enforce`), meaning</code>
+<code> [8]  ⍝ that the user must enter something in order to continue.</code>
+<code> [9]  ⍝ You can also specify a default as `⍺` by passing a character vector instead of a Boolean.</code>
+<code> [10] ⍝ In case the user does not enter something that default is returned; that's why the Boolean</code>
+<code> [11] ⍝ would not make a difference anyway.\\</code>
+<code> [12] ⍝ In case `question` is a scalar question mark, `AskForText` returns the path to itself and</code>
+<code> [13] ⍝ the name of the global variable that can be used for automation, separated by a dot.</code>
+<code> [14]  :If '?'≡question</code>
+<code> [15]      text←(⍕⎕THIS),'.AskForText_Answers←0 2⍴'' '''</code>
+<code> [16]      :Return</code>
+<code> [17]  :EndIf</code>
+<code> [18]  x←{0&lt;⎕NC ⍵:⍎⍵ ⋄ 0}'x'</code>
+<code> [19]  firstFlag←0</code>
+<code> [20]  :If ' '=1↑0⍴x</code>
+<code> [21]      default←x</code>
+<code> [22]      enforce←0</code>
+<code> [23]  :Else</code>
+<code> [24]      enforce←x</code>
+<code> [25]      default←''</code>
+<code> [26]  :EndIf</code>
+<code> [27]  text←''</code>
+<code> [28]  success←flag←0</code>
+<code> [29]  :If ~(≡question)∊0 1</code>
+<code> [30]      question←1↓⊃,/LF,¨question</code>
+<code> [31]  :EndIf</code>
+<code> [32]  question←ReplaceCRbyLF question</code>
+<code> [33]  question←{⍵↓⍨+/∧\' '=⍵}question</code>
+<code> [34]  :Repeat</code>
+<code> [35]      firstPart←{⍵↑⍨⍵⍳LF}question</code>
+<code> [36]      :If 0&lt;⎕NC'AskForText_Answers'</code>
+<code> [37]          AskForText_Answers←(0&lt;≢¨' '~⍨¨AskForText_Answers[;1])⌿AskForText_Answers</code>
+<code> [38]          AskForText_Answers[;1]←{⍵↓⍨+/∧\' '=⍵}¨AskForText_Answers[;1]</code>
+<code> [39]      :AndIf 0&lt;≢AskForText_Answers</code>
+<code> [40]          :If AliasChar∊question</code>
+<code> [41]              (alias question)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}question</code>
+<code> [42]              flag←0&lt;+/bool←({⍵↑⍨⍵⍳AliasChar}¨AskForText_Answers[;1])≡¨⊂alias</code>
+<code> [43]          :ElseIf ~flag←0&lt;+/bool←AskForText_Answers[;1]≡¨⊂question</code>
+<code> [44]              flag←0&lt;+/bool←question∘{⍵≡(≢⍵)↑⍺}¨AskForText_Answers[;1]</code>
+<code> [45]          :EndIf</code>
+<code> [46]          :If flag</code>
+<code> [47]              'Multiple pre-prepared answers qualify?!'Assert 1=+/bool</code>
+<code> [48]              text←2⊃AskForText_Answers[bool⍳1;]</code>
+<code> [49]          :EndIf</code>
+<code> [50]      :Else</code>
+<code> [51]          :If (⌊/firstPart⍳' ',LF)&gt;firstPart⍳AliasChar</code>
+<code class="emphasize">→[52]              question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question</code>
+<code> [53]          :EndIf</code>
+<code> [54]      :EndIf</code>
+<code> [55]      :If 0&lt;≢default</code>
+<code> [56]      :AndIf firstFlag</code>
+<code class="emphasize">→[57]          question,←' [',default,']'</code>
+<code class="emphasize">→[58]          firstFlag←0</code>
+<code> [59]      :EndIf</code>
+<code> [60]      :If ~flag</code>
+<code> [61]          text←⍞,0/⍞←question,': '</code>
+<code> [62]          :If '∘∘∘'≡¯3↑text</code>
+<code> [63]              (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
+<code> [64]              ∘∘∘ ⍝ Deliberate stop caused by user input</code>
+<code> [65]          :EndIf</code>
+<code> [66]          text←(≢{⍵↑⍨-¯1+(⌽⍵)⍳LF}question,': ')↓text</code>
+<code> [67]          :If 0=≢text</code>
+<code> [68]          :AndIf 0&lt;≢default</code>
+<code> [69]              text←default</code>
+<code> [70]          :EndIf</code>
+<code> [71]      :EndIf</code>
+<code> [72]      :If 0=≢text</code>
+<code> [73]          :If enforce</code>
+<code class="emphasize">→[74]              ⎕←'You must enter something!'</code>
+<code> [75]          :Else</code>
+<code> [76]              :Return</code>
+<code> [77]          :EndIf</code>
+<code> [78]      :Else</code>
+<code> [79]          success←CheckFn text</code>
+<code> [80]      :EndIf</code>
+<code> [81]  :Until success</code>
+<code> [82] ⍝Done</code>
+</div>
+<code class="header" id="listing_6">#.CommTools.CommTools.Select &mdash; 94%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code>   index←{x}Select choices</code>
 <code> [1]   ⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.</code>
 <code> [2]   ⍝ Selecting just one is the default.\\</code>
@@ -425,157 +511,77 @@ $(document).ready(function() {
 <code> [46]               index←⍬</code>
 <code> [47]           :ElseIf ' '=1↑0⍴∊index ⍝ Text?!</code>
 <code> [48]               :If '*'=¯1↑index</code>
-<code> [49]                   index←((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)⍳⊂(¯1↓index)</code>
-<code> [50]                   'Invalid selection'Assert index∊⍳≢choices</code>
-<code> [51]               :ElseIf '*'=⊃index</code>
-<code> [52]                   index←((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)⍳⊂(1↓index)</code>
-<code> [53]                   'Invalid selection'Assert index∊⍳≢choices</code>
-<code> [54]               :ElseIf (,'a')≡,index</code>
-<code> [55]                   index←⍳≢choices</code>
-<code> [56]               :ElseIf (,'q')≡,index</code>
-<code> [57]                   index←⍬</code>
-<code> [58]               :ElseIf 0&lt;≢buff←⍸index∘≡¨choices</code>
-<code class="emphasize">→[59]                   index←buff</code>
-<code class="emphasize">→[60]                   'Invalid selection'Assert index∊⍳≢choices</code>
-<code> [61]               :ElseIf 1=≢index←⍸index∘≡¨(≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices</code>
-<code class="emphasize">→[62]                   index←⊃index</code>
-<code class="emphasize">→[63]                   'Invalid selection'Assert index∊⍳≢choices</code>
-<code> [64]               :Else</code>
-<code> [65]                   'Invalid selection'Assert 0</code>
-<code> [66]               :EndIf</code>
-<code> [67]           :Else</code>
-<code> [68]               'Invalid selection'Assert∧/index∊⍳≢choices</code>
-<code> [69]           :EndIf</code>
-<code> [70]       :EndIf</code>
-<code> [71]   :EndIf</code>
-<code> [72]   :If ~flag</code>
-<code> [73]       flag2←0</code>
-<code> [74]       :Repeat</code>
-<code> [75]           blankFlag←0≠≢caption</code>
-<code> [76]           :If AliasChar∊caption</code>
-<code> [77]               :If (firstPart⍳' ')&gt;firstPart⍳AliasChar</code>
-<code> [78]                   caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption</code>
-<code> [79]               :EndIf</code>
-<code> [80]           :EndIf</code>
-<code> [81]           ⎕←{⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-1</code>
-<code> [82]           ⎕←⍪{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices</code>
-<code> [83]           ⎕←''</code>
-<code> [84]           question←'Select one ',(manyFlag/'or more '),'item',((manyFlag)/'s'),' '</code>
-<code> [85]           question,←((manyFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((manyFlag∧~mustFlag)/', '),(manyFlag/'a=all'),((manyFlag∨~mustFlag)/')'),' :'</code>
-<code> [86]           :If 0&lt;≢answer←⍞,0/⍞←question</code>
-<code> [87]               answer←(⍴question)↓answer</code>
-<code> [88]               :If '∘∘∘'≡¯3↑answer</code>
-<code> [89]                   (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
-<code> [90]                   ∘∘∘ ⍝ Deliberate stop caused by user input</code>
-<code> [91]               :EndIf</code>
-<code> [92]               :If 1=≢answer</code>
-<code> [93]               :AndIf answer∊'Qq',manyFlag/'Aa'</code>
-<code> [94]                   :If answer∊'Qq'</code>
-<code> [95]                       :If 0=mustFlag</code>
-<code> [96]                           index←⍬</code>
-<code> [97]                           flag2←1</code>
-<code> [98]                       :EndIf</code>
-<code> [99]                   :Else</code>
-<code> [100]                      index←⍳≢choices</code>
-<code> [101]                      flag2←1</code>
-<code> [102]                  :EndIf</code>
-<code> [103]              :Else</code>
-<code> [104]                  (bool value)←⎕VFI answer</code>
-<code> [105]                  :If ∧/bool</code>
-<code> [106]                  :AndIf manyFlag∨1=+/bool</code>
-<code> [107]                      value←bool/value</code>
-<code> [108]                  :AndIf ∧/value∊⍳⍴choices</code>
-<code> [109]                      index←value</code>
-<code> [110]                      flag2←0≠≢index</code>
-<code> [111]                  :EndIf</code>
-<code> [112]              :EndIf</code>
-<code> [113]          :EndIf</code>
-<code> [114]      :Until flag2</code>
-<code> [115]      index←{1&lt;≢⍵:⍵ ⋄ ⊃⍵}⍣(⍬≢index)⊣index</code>
-<code> [116]  :EndIf</code>
-<code> [117] ⍝Done</code>
-</div>
-<code class="header" id="listing_6">#.CommTools.CommTools.AskForText &mdash; 96%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
-<div class="code-block"><code>  text←{x}(CheckFn AskForText)question</code>
-<code> [1]  ⍝ Operator asking a question and allowing the user to enter text.\\</code>
-<code> [2]  ⍝ By entering "`∘∘∘`" the user may interrupt `AskForText`: this activates a stop.\\</code>
-<code> [3]  ⍝ `CheckFn` is supposed to be a function that gets the input as `⍵` and must return a Boolean</code>
-<code> [4]  ⍝ with a 1 indicating that the input is okay and 0 that it is not. If you don't need/want</code>
-<code> [5]  ⍝ a check function pass `{1}` as left operand.\\</code>
-<code> [6]  ⍝ If the user refuses to enter anything an empty vector is returned.</code>
-<code> [7]  ⍝ However, you might prevent this from happening by specifying a 1 as `⍺` (`enforce`), meaning</code>
-<code> [8]  ⍝ that the user must enter something in order to continue.</code>
-<code> [9]  ⍝ You can also specify a default as `⍺` by passing a character vector instead of a Boolean.</code>
-<code> [10] ⍝ In case the user does not enter something that default is returned; that's why the Boolean</code>
-<code> [11] ⍝ would not make a difference anyway.\\</code>
-<code> [12] ⍝ In case `question` is a scalar question mark, `AskForText` returns the path to itself and</code>
-<code> [13] ⍝ the name of the global variable that can be used for automation, separated by a dot.</code>
-<code> [14]  :If '?'≡question</code>
-<code> [15]      text←(⍕⎕THIS),'.AskForText_Answers←0 2⍴'' '''</code>
-<code> [16]      :Return</code>
-<code> [17]  :EndIf</code>
-<code> [18]  x←{0&lt;⎕NC ⍵:⍎⍵ ⋄ 0}'x'</code>
-<code> [19]  :If ' '=1↑0⍴x</code>
-<code> [20]      default←x</code>
-<code> [21]      enforce←0</code>
-<code> [22]  :Else</code>
-<code> [23]      enforce←x</code>
-<code> [24]      default←''</code>
-<code> [25]  :EndIf</code>
-<code> [26]  text←''</code>
-<code> [27]  success←flag←0</code>
-<code> [28]  :If ~(≡question)∊0 1</code>
-<code> [29]      question←1↓⊃,/LF,¨question</code>
-<code> [30]  :EndIf</code>
-<code> [31]  question←ReplaceCRbyLF question</code>
-<code> [32]  question←{⍵↓⍨+/∧\' '=⍵}question</code>
-<code> [33]  :Repeat</code>
-<code> [34]      firstPart←{⍵↑⍨⍵⍳LF}question</code>
-<code> [35]      :If 0&lt;⎕NC'AskForText_Answers'</code>
-<code> [36]          AskForText_Answers←(0&lt;≢¨' '~⍨¨AskForText_Answers[;1])⌿AskForText_Answers</code>
-<code> [37]          AskForText_Answers[;1]←{⍵↓⍨+/∧\' '=⍵}¨AskForText_Answers[;1]</code>
-<code> [38]      :AndIf 0&lt;≢AskForText_Answers</code>
-<code> [39]          :If AliasChar∊question</code>
-<code> [40]              (alias question)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}question</code>
-<code> [41]              flag←0&lt;+/bool←({⍵↑⍨⍵⍳AliasChar}¨AskForText_Answers[;1])≡¨⊂alias</code>
-<code> [42]          :ElseIf ~flag←0&lt;+/bool←AskForText_Answers[;1]≡¨⊂question</code>
-<code> [43]              flag←0&lt;+/bool←question∘{⍵≡(≢⍵)↑⍺}¨AskForText_Answers[;1]</code>
-<code> [44]          :EndIf</code>
-<code> [45]          :If flag</code>
-<code> [46]              'Multiple pre-prepared answers qualify?!'Assert 1=+/bool</code>
-<code> [47]              text←2⊃AskForText_Answers[bool⍳1;]</code>
-<code> [48]          :EndIf</code>
-<code> [49]      :Else</code>
-<code> [50]          :If (⌊/firstPart⍳' ',LF)&gt;firstPart⍳AliasChar</code>
-<code class="emphasize">→[51]              question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question</code>
-<code> [52]          :EndIf</code>
-<code> [53]      :EndIf</code>
-<code> [54]      :If 0&lt;≢default</code>
-<code> [55]          question,←' [',default,']'</code>
-<code> [56]      :EndIf</code>
-<code> [57]      :If ~flag</code>
-<code> [58]          text←⍞,0/⍞←question,': '</code>
-<code> [59]          :If '∘∘∘'≡¯3↑text</code>
-<code> [60]              (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
-<code> [61]              ∘∘∘ ⍝ Deliberate stop caused by user input</code>
-<code> [62]          :EndIf</code>
-<code> [63]          text←(≢{⍵↑⍨-¯1+(⌽⍵)⍳LF}question,': ')↓text</code>
-<code> [64]          :If 0=≢text</code>
-<code> [65]          :AndIf 0&lt;≢default</code>
-<code> [66]              text←default</code>
-<code> [67]          :EndIf</code>
-<code> [68]      :EndIf</code>
-<code> [69]      :If 0=≢text</code>
-<code> [70]          :If enforce</code>
-<code class="emphasize">→[71]              ⎕←'You must enter something!'</code>
-<code> [72]          :Else</code>
-<code> [73]              :Return</code>
-<code> [74]          :EndIf</code>
-<code> [75]      :Else</code>
-<code> [76]          success←CheckFn text</code>
-<code> [77]      :EndIf</code>
-<code> [78]  :Until success</code>
-<code> [79] ⍝Done</code>
+<code> [49]                   index←⍸((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)≡¨⊂¯1↓index</code>
+<code> [50]                   index←{1=≢⍵:⊃⍵ ⋄ ⍵}index</code>
+<code> [51]                   'Invalid selection'Assert∧/index∊⍳≢choices</code>
+<code> [52]               :ElseIf '*'=⊃index</code>
+<code> [53]                   index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index</code>
+<code> [54]                   index←{1=≢⍵:⊃⍵ ⋄ ⍵}index</code>
+<code> [55]                   'Invalid selection'Assert∧/index∊⍳≢choices</code>
+<code> [56]               :ElseIf (,'a')≡,index</code>
+<code> [57]                   index←⍳≢choices</code>
+<code> [58]               :ElseIf (,'q')≡,index</code>
+<code class="emphasize">→[59]                   index←⍬</code>
+<code> [60]               :ElseIf 0&lt;≢buff←⍸index∘≡¨choices</code>
+<code class="emphasize">→[61]                   index←buff</code>
+<code class="emphasize">→[62]                   'Invalid selection'Assert index∊⍳≢choices</code>
+<code> [63]               :ElseIf 1=≢index←⍸index∘≡¨(≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices</code>
+<code class="emphasize">→[64]                   index←⊃index</code>
+<code class="emphasize">→[65]                   'Invalid selection'Assert index∊⍳≢choices</code>
+<code> [66]               :Else</code>
+<code> [67]                   'Invalid selection'Assert 0</code>
+<code> [68]               :EndIf</code>
+<code> [69]           :Else</code>
+<code> [70]               'Invalid selection'Assert∧/index∊⍳≢choices</code>
+<code> [71]           :EndIf</code>
+<code> [72]       :EndIf</code>
+<code> [73]   :EndIf</code>
+<code> [74]   :If ~flag</code>
+<code> [75]       flag2←0</code>
+<code> [76]       :Repeat</code>
+<code> [77]           blankFlag←0≠≢caption</code>
+<code> [78]           :If AliasChar∊caption</code>
+<code> [79]               :If (firstPart⍳' ')&gt;firstPart⍳AliasChar</code>
+<code> [80]                   caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption</code>
+<code> [81]               :EndIf</code>
+<code> [82]           :EndIf</code>
+<code> [83]           ⎕←{⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-1</code>
+<code> [84]           ⎕←⍪{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices</code>
+<code> [85]           ⎕←''</code>
+<code> [86]           question←'Select one ',(manyFlag/'or more '),'item',((manyFlag)/'s'),' '</code>
+<code> [87]           question,←((manyFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((manyFlag∧~mustFlag)/', '),(manyFlag/'a=all'),((manyFlag∨~mustFlag)/')'),' :'</code>
+<code> [88]           :If 0&lt;≢answer←⍞,0/⍞←question</code>
+<code> [89]               answer←(⍴question)↓answer</code>
+<code> [90]               :If '∘∘∘'≡¯3↑answer</code>
+<code> [91]                   (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
+<code> [92]                   ∘∘∘ ⍝ Deliberate stop caused by user input</code>
+<code> [93]               :EndIf</code>
+<code> [94]               :If 1=≢answer</code>
+<code> [95]               :AndIf answer∊'Qq',manyFlag/'Aa'</code>
+<code> [96]                   :If answer∊'Qq'</code>
+<code> [97]                       :If 0=mustFlag</code>
+<code> [98]                           index←⍬</code>
+<code> [99]                           flag2←1</code>
+<code> [100]                      :EndIf</code>
+<code> [101]                  :Else</code>
+<code> [102]                      index←⍳≢choices</code>
+<code> [103]                      flag2←1</code>
+<code> [104]                  :EndIf</code>
+<code> [105]              :Else</code>
+<code> [106]                  (bool value)←⎕VFI answer</code>
+<code> [107]                  :If ∧/bool</code>
+<code> [108]                  :AndIf manyFlag∨1=+/bool</code>
+<code> [109]                      value←bool/value</code>
+<code> [110]                  :AndIf ∧/value∊⍳⍴choices</code>
+<code> [111]                      index←value</code>
+<code> [112]                      flag2←0≠≢index</code>
+<code> [113]                  :EndIf</code>
+<code> [114]              :EndIf</code>
+<code> [115]          :EndIf</code>
+<code> [116]      :Until flag2</code>
+<code> [117]      index←{1&lt;≢⍵:⍵ ⋄ ⊃⍵}⍣(⍬≢index)⊣index</code>
+<code> [118]  :EndIf</code>
+<code> [119] ⍝Done</code>
 </div>
 <code class="header" id="listing_7">#.CommTools.CommTools.YesOrNo &mdash; 96%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code>   yesOrNo←{default}YesOrNo question</code>
@@ -722,7 +728,7 @@ $(document).ready(function() {
 <code class="header" id="listing_14">#.CommTools.CommTools.Version &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←Version</code>
 <code> [1] ⍝ See also `History`</code>
-<code> [2]  r←'CommTools' '1.8.0' '2024-07-13'</code>
+<code> [2]  r←'CommTools' '1.8.1' '2024-08-02'</code>
 </div>
 <div id="footer">
 <hr>

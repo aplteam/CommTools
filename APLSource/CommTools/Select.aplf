@@ -47,11 +47,13 @@
              index←⍬
          :ElseIf ' '=1↑0⍴∊index ⍝ Text?!
              :If '*'=¯1↑index
-                 index←((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)⍳⊂(¯1↓index)
-                 'Invalid selection'Assert index∊⍳≢choices
+                 index←⍸((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)≡¨⊂¯1↓index
+                 index←{1=≢⍵:⊃⍵ ⋄ ⍵}index
+                 'Invalid selection'Assert∧/index∊⍳≢choices
              :ElseIf '*'=⊃index
-                 index←((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)⍳⊂(1↓index)
-                 'Invalid selection'Assert index∊⍳≢choices
+                 index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index
+                 index←{1=≢⍵:⊃⍵ ⋄ ⍵}index
+                 'Invalid selection'Assert∧/index∊⍳≢choices
              :ElseIf (,'a')≡,index
                  index←⍳≢choices
              :ElseIf (,'q')≡,index
