@@ -13,7 +13,7 @@
 ⍝ In case `question` is a scalar question mark, `AskForText` returns the path to itself and
 ⍝ the name of the global variable that can be used for automation, separated by a dot.
  :If '?'≡question
-     text←(⍕⎕THIS),'.AskForText_Answers←0 2⍴'' '''
+     text←(⍕⎕THIS),'.AskForText_Answers←1 2⍴'' ''  '' '''
      :Return
  :EndIf
  x←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'x'

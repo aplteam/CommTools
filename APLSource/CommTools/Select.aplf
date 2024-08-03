@@ -15,7 +15,7 @@
 ⍝  * In case `choices` is a scalar question mark, `Select` returns the path to itself and the name of
 ⍝    the global variable that can be used for automation, separated by a dot.
  :If '?'≡choices
-     index←(⍕⎕THIS),'.Select_Choices←0 2⍴'' '''
+     index←(⍕⎕THIS),'.Select_Choices←1 2⍴'' ''  '' '''
      :Return
  :EndIf
  x←{0<⎕NC ⍵:⊆⍎⍵ ⋄ ''}'x'
