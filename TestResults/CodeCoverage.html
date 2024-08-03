@@ -127,12 +127,12 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr><th>Executed at</th><th>APLVersion</th><th>Memory (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>2024-08-02 09:56:30</td><td>Windows-64 ⋄ 19.0.49376.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>114</td></tr>
+<tr><td>2024-08-03 10:52:04</td><td>Windows-64 ⋄ 19.0.49376.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>114</td></tr>
 </tbody>
 </table>
-<p>Overall 92% of the testable code is covered.</p>
+<p>Overall 94% of the testable code is covered.</p>
 <p>(Comment lines, empty lines, all <code>:End</code>* lines etc. are ignored)</p>
-<p>7 of the fns/opr are 100% covered.</p>
+<p>8 of the fns/opr are 100% covered.</p>
 <div id="partly-covered" class="keep-together">
 <table id="percent">
 <thead>
@@ -144,14 +144,14 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr><td><a href="#listing_3" title="Link to listing">#.CommTools.CommTools.Pause</a></td><td>4←≢21,31-33</td><td>83</td><td>24</td></tr>
 <tr><td><a href="#listing_4" title="Link to listing">#.CommTools.CommTools.AskForNumber</a></td><td>5←≢56-58,62,67</td><td>89</td><td>47</td></tr>
 <tr><td><a href="#listing_5" title="Link to listing">#.CommTools.CommTools.AskForText</a></td><td>4←≢52,57-58,74</td><td>92</td><td>51</td></tr>
-<tr><td><a href="#listing_6" title="Link to listing">#.CommTools.CommTools.Select</a></td><td>5←≢59,61-62,64-65</td><td>94</td><td>82</td></tr>
-<tr><td><a href="#listing_7" title="Link to listing">#.CommTools.CommTools.YesOrNo</a></td><td>29, 70, 73</td><td>96</td><td>70</td></tr>
-<tr class="fullyCovered"><td><a href="#listing_8" title="Link to listing">#.CommTools.CommTools.Assert</a></td><td></td><td>100</td><td>0</td></tr>
-<tr class="fullyCovered"><td><a href="#listing_9" title="Link to listing">#.CommTools.CommTools.Cleanup</a></td><td></td><td>100</td><td>5</td></tr>
-<tr class="fullyCovered"><td><a href="#listing_10" title="Link to listing">#.CommTools.CommTools.ErrNo</a></td><td></td><td>100</td><td>1</td></tr>
-<tr class="fullyCovered"><td><a href="#listing_11" title="Link to listing">#.CommTools.CommTools.LF</a></td><td></td><td>100</td><td>1</td></tr>
-<tr class="fullyCovered"><td><a href="#listing_12" title="Link to listing">#.CommTools.CommTools.Public</a></td><td></td><td>100</td><td>8</td></tr>
-<tr class="fullyCovered"><td><a href="#listing_13" title="Link to listing">#.CommTools.CommTools.ReplaceCRbyLF</a></td><td></td><td>100</td><td>0</td></tr>
+<tr><td><a href="#listing_6" title="Link to listing">#.CommTools.CommTools.YesOrNo</a></td><td>29, 70, 73</td><td>96</td><td>70</td></tr>
+<tr class="fullyCovered"><td><a href="#listing_7" title="Link to listing">#.CommTools.CommTools.Assert</a></td><td></td><td>100</td><td>0</td></tr>
+<tr class="fullyCovered"><td><a href="#listing_8" title="Link to listing">#.CommTools.CommTools.Cleanup</a></td><td></td><td>100</td><td>5</td></tr>
+<tr class="fullyCovered"><td><a href="#listing_9" title="Link to listing">#.CommTools.CommTools.ErrNo</a></td><td></td><td>100</td><td>1</td></tr>
+<tr class="fullyCovered"><td><a href="#listing_10" title="Link to listing">#.CommTools.CommTools.LF</a></td><td></td><td>100</td><td>1</td></tr>
+<tr class="fullyCovered"><td><a href="#listing_11" title="Link to listing">#.CommTools.CommTools.Public</a></td><td></td><td>100</td><td>8</td></tr>
+<tr class="fullyCovered"><td><a href="#listing_12" title="Link to listing">#.CommTools.CommTools.ReplaceCRbyLF</a></td><td></td><td>100</td><td>0</td></tr>
+<tr class="fullyCovered"><td><a href="#listing_13" title="Link to listing">#.CommTools.CommTools.Select</a></td><td></td><td>100</td><td>82</td></tr>
 <tr class="fullyCovered"><td><a href="#listing_14" title="Link to listing">#.CommTools.CommTools.Version</a></td><td></td><td>100</td><td>1</td></tr>
 </tbody>
 </table>
@@ -177,7 +177,7 @@ $(document).ready(function() {
         },      
         buttons: [
         {
-            text: "Partly covered (5)",
+            text: "Partly covered (4)",
             titleAttr: "50%",
             className: "active",
             action: function ( e, dt, node, config ) {
@@ -205,7 +205,7 @@ $(document).ready(function() {
             }
         },
         {
-            text: "Fully covered (7)",
+            text: "Fully covered (8)",
             titleAttr: "100%",
             className: "active",
             action: function ( e, dt, node, config ) {
@@ -315,7 +315,7 @@ $(document).ready(function() {
 <code> [9]  ⍝ In case `question` is a scalar question mark, `AskForNumber` returns the path to itself and</code>
 <code> [10] ⍝ the name of the global variable that can be used for automation, separated by a dot.</code>
 <code> [11]  :If '?'≡question</code>
-<code> [12]      value←(⍕⎕THIS),'.AskForNumber_Answers←0 2⍴'' '''</code>
+<code> [12]      value←(⍕⎕THIS),'.AskForNumber_Answers←1 2⍴'' ''  '' '''</code>
 <code> [13]      :Return</code>
 <code> [14]  :EndIf</code>
 <code> [15]  enforce←{0&lt;⎕NC ⍵:⍎⍵ ⋄ 0}'enforce'</code>
@@ -392,7 +392,7 @@ $(document).ready(function() {
 <code> [12] ⍝ In case `question` is a scalar question mark, `AskForText` returns the path to itself and</code>
 <code> [13] ⍝ the name of the global variable that can be used for automation, separated by a dot.</code>
 <code> [14]  :If '?'≡question</code>
-<code> [15]      text←(⍕⎕THIS),'.AskForText_Answers←0 2⍴'' '''</code>
+<code> [15]      text←(⍕⎕THIS),'.AskForText_Answers←1 2⍴'' ''  '' '''</code>
 <code> [16]      :Return</code>
 <code> [17]  :EndIf</code>
 <code> [18]  x←{0&lt;⎕NC ⍵:⍎⍵ ⋄ 0}'x'</code>
@@ -461,129 +461,7 @@ $(document).ready(function() {
 <code> [81]  :Until success</code>
 <code> [82] ⍝Done</code>
 </div>
-<code class="header" id="listing_6">#.CommTools.CommTools.Select &mdash; 94%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
-<div class="code-block"><code>   index←{x}Select choices</code>
-<code> [1]   ⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.</code>
-<code> [2]   ⍝ Selecting just one is the default.\\</code>
-<code> [3]   ⍝ The optional left argument allows you to specify multiple (positional) choices:</code>
-<code> [4]   ⍝  * `caption` is shown above the choices; must be a simple character vector</code>
-<code> [5]   ⍝  * `manyFlag` defaults to 0 (= just 1 item might be selected) or 1 (allow selecting multiple items)</code>
-<code> [6]   ⍝  * `mustFlag` forces the user to select at least one option, disallowing to quit without making a decision\\</code>
-<code> [7]   ⍝ Notes:</code>
-<code> [8]   ⍝  * `choices` must not have more than 999 items\\</code>
-<code> [9]   ⍝  * By entering "`∘∘∘`" the user may interrupt `Select` by running onto a stop vector, overcoming</code>
-<code> [10]  ⍝    the Dyalog bug that ⍞ cannot be interrupted</code>
-<code> [11]  ⍝  * You may use the wildcard character "*" either at the beginning or the end of a selection string assigned</code>
-<code> [12]  ⍝    to the `Select_Choices` variable</code>
-<code> [13]  ⍝  * If the user aborts by entering "q" (for "quit") `⍬` will be returned</code>
-<code> [14]  ⍝  * In case `choices` is a scalar question mark, `Select` returns the path to itself and the name of</code>
-<code> [15]  ⍝    the global variable that can be used for automation, separated by a dot.</code>
-<code> [16]   :If '?'≡choices</code>
-<code> [17]       index←(⍕⎕THIS),'.Select_Choices←0 2⍴'' '''</code>
-<code> [18]       :Return</code>
-<code> [19]   :EndIf</code>
-<code> [20]   x←{0&lt;⎕NC ⍵:⊆⍎⍵ ⋄ ''}'x'</code>
-<code> [21]   (caption manyFlag mustFlag)←x,(⍴,x)↓'' 0 0</code>
-<code> [22]   '"caption" must be a simple character vector'Assert 1=≡caption←,caption</code>
-<code> [23]   '"caption" must not contain line feeds (⎕UCS 10)'Assert~LF∊caption</code>
-<code> [24]   '"caption" must not contain carriage returns (⎕UCS 13)'Assert~(⎕UCS 13)∊caption</code>
-<code> [25]   ⎕IO←1 ⋄ ⎕ML←1</code>
-<code> [26]   'Invalid right argument; must be a vector of text vectors.'⎕SIGNAL ErrNo/⍨2≠|≡choices</code>
-<code> [27]   'Right argument has more than 999 items'⎕SIGNAL ErrNo/⍨999&lt;≢choices</code>
-<code> [28]   flag←0</code>
-<code> [29]   firstPart←{⍵↑⍨⍵⍳LF}caption</code>
-<code> [30]   :If 0&lt;⎕NC'Select_Choices'</code>
-<code> [31]       Select_Choices←(0&lt;≢¨Select_Choices[;1])⌿Select_Choices</code>
-<code> [32]   :AndIf 0&lt;≢Select_Choices</code>
-<code> [33]       :If AliasChar∊caption</code>
-<code> [34]           (alias caption)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}caption</code>
-<code> [35]           flag←0&lt;+/bool←({⍵↑⍨(,⍵)⍳AliasChar}¨Select_Choices[;1])≡¨⊂alias</code>
-<code> [36]       :Else</code>
-<code> [37]           :If 0=+/bool←Select_Choices[;1]≡¨⊂caption</code>
-<code> [38]               bool←caption∘{⍵≡⍺↑⍨≢⍵}¨Select_Choices[;1]</code>
-<code> [39]           :EndIf</code>
-<code> [40]           flag←0&lt;+/bool</code>
-<code> [41]       :EndIf</code>
-<code> [42]       :If flag</code>
-<code> [43]           'Multiple choices qualify?!'Assert 1=+/bool</code>
-<code> [44]           index←2⊃Select_Choices[bool⍳1;]</code>
-<code> [45]           :If (⊂index)∊0 ⍬</code>
-<code> [46]               index←⍬</code>
-<code> [47]           :ElseIf ' '=1↑0⍴∊index ⍝ Text?!</code>
-<code> [48]               :If '*'=¯1↑index</code>
-<code> [49]                   index←⍸((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)≡¨⊂¯1↓index</code>
-<code> [50]                   index←{1=≢⍵:⊃⍵ ⋄ ⍵}index</code>
-<code> [51]                   'Invalid selection'Assert∧/index∊⍳≢choices</code>
-<code> [52]               :ElseIf '*'=⊃index</code>
-<code> [53]                   index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index</code>
-<code> [54]                   index←{1=≢⍵:⊃⍵ ⋄ ⍵}index</code>
-<code> [55]                   'Invalid selection'Assert∧/index∊⍳≢choices</code>
-<code> [56]               :ElseIf (,'a')≡,index</code>
-<code> [57]                   index←⍳≢choices</code>
-<code> [58]               :ElseIf (,'q')≡,index</code>
-<code class="emphasize">→[59]                   index←⍬</code>
-<code> [60]               :ElseIf 0&lt;≢buff←⍸index∘≡¨choices</code>
-<code class="emphasize">→[61]                   index←buff</code>
-<code class="emphasize">→[62]                   'Invalid selection'Assert index∊⍳≢choices</code>
-<code> [63]               :ElseIf 1=≢index←⍸index∘≡¨(≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices</code>
-<code class="emphasize">→[64]                   index←⊃index</code>
-<code class="emphasize">→[65]                   'Invalid selection'Assert index∊⍳≢choices</code>
-<code> [66]               :Else</code>
-<code> [67]                   'Invalid selection'Assert 0</code>
-<code> [68]               :EndIf</code>
-<code> [69]           :Else</code>
-<code> [70]               'Invalid selection'Assert∧/index∊⍳≢choices</code>
-<code> [71]           :EndIf</code>
-<code> [72]       :EndIf</code>
-<code> [73]   :EndIf</code>
-<code> [74]   :If ~flag</code>
-<code> [75]       flag2←0</code>
-<code> [76]       :Repeat</code>
-<code> [77]           blankFlag←0≠≢caption</code>
-<code> [78]           :If AliasChar∊caption</code>
-<code> [79]               :If (firstPart⍳' ')&gt;firstPart⍳AliasChar</code>
-<code> [80]                   caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption</code>
-<code> [81]               :EndIf</code>
-<code> [82]           :EndIf</code>
-<code> [83]           ⎕←{⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-1</code>
-<code> [84]           ⎕←⍪{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices</code>
-<code> [85]           ⎕←''</code>
-<code> [86]           question←'Select one ',(manyFlag/'or more '),'item',((manyFlag)/'s'),' '</code>
-<code> [87]           question,←((manyFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((manyFlag∧~mustFlag)/', '),(manyFlag/'a=all'),((manyFlag∨~mustFlag)/')'),' :'</code>
-<code> [88]           :If 0&lt;≢answer←⍞,0/⍞←question</code>
-<code> [89]               answer←(⍴question)↓answer</code>
-<code> [90]               :If '∘∘∘'≡¯3↑answer</code>
-<code> [91]                   (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
-<code> [92]                   ∘∘∘ ⍝ Deliberate stop caused by user input</code>
-<code> [93]               :EndIf</code>
-<code> [94]               :If 1=≢answer</code>
-<code> [95]               :AndIf answer∊'Qq',manyFlag/'Aa'</code>
-<code> [96]                   :If answer∊'Qq'</code>
-<code> [97]                       :If 0=mustFlag</code>
-<code> [98]                           index←⍬</code>
-<code> [99]                           flag2←1</code>
-<code> [100]                      :EndIf</code>
-<code> [101]                  :Else</code>
-<code> [102]                      index←⍳≢choices</code>
-<code> [103]                      flag2←1</code>
-<code> [104]                  :EndIf</code>
-<code> [105]              :Else</code>
-<code> [106]                  (bool value)←⎕VFI answer</code>
-<code> [107]                  :If ∧/bool</code>
-<code> [108]                  :AndIf manyFlag∨1=+/bool</code>
-<code> [109]                      value←bool/value</code>
-<code> [110]                  :AndIf ∧/value∊⍳⍴choices</code>
-<code> [111]                      index←value</code>
-<code> [112]                      flag2←0≠≢index</code>
-<code> [113]                  :EndIf</code>
-<code> [114]              :EndIf</code>
-<code> [115]          :EndIf</code>
-<code> [116]      :Until flag2</code>
-<code> [117]      index←{1&lt;≢⍵:⍵ ⋄ ⊃⍵}⍣(⍬≢index)⊣index</code>
-<code> [118]  :EndIf</code>
-<code> [119] ⍝Done</code>
-</div>
-<code class="header" id="listing_7">#.CommTools.CommTools.YesOrNo &mdash; 96%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_6">#.CommTools.CommTools.YesOrNo &mdash; 96%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code>   yesOrNo←{default}YesOrNo question</code>
 <code> [1]   ⍝ Asks a simple question and allows just "Y" (or "y") or "N" (or "n") as answers.\\</code>
 <code> [2]   ⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in between,</code>
@@ -692,10 +570,10 @@ $(document).ready(function() {
 <code> [105]  :EndIf</code>
 <code> [106] ⍝Done</code>
 </div>
-<code class="header" id="listing_8">#.CommTools.CommTools.Assert &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_7">#.CommTools.CommTools.Assert &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> Assert←{⍺←'' ⋄ (,1)≡,⍵:r←1 ⋄ ⎕ML←1 ⋄ ⍺ ⎕SIGNAL 1↓(⊃∊⍵),11}</code>
 </div>
-<code class="header" id="listing_9">#.CommTools.CommTools.Cleanup &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_8">#.CommTools.CommTools.Cleanup &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> Cleanup</code>
 <code> [1]  ⎕EX'Select_Choices'</code>
 <code> [2]  ⎕EX'YesOrNo_Answers'</code>
@@ -703,15 +581,15 @@ $(document).ready(function() {
 <code> [4]  ⎕EX'AskForNumber_Answers'</code>
 <code> [5]  ⎕EX'AskForText_Answers'</code>
 </div>
-<code class="header" id="listing_10">#.CommTools.CommTools.ErrNo &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_9">#.CommTools.CommTools.ErrNo &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←ErrNo</code>
 <code> [1]  r←811</code>
 </div>
-<code class="header" id="listing_11">#.CommTools.CommTools.LF &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_10">#.CommTools.CommTools.LF &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←LF</code>
 <code> [1]  r←⎕UCS 10</code>
 </div>
-<code class="header" id="listing_12">#.CommTools.CommTools.Public &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_11">#.CommTools.CommTools.Public &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←Public</code>
 <code> [1]  r←''</code>
 <code> [2]  r,←⊂'AskForText'</code>
@@ -722,13 +600,135 @@ $(document).ready(function() {
 <code> [7]  r,←⊂'Cleanup'</code>
 <code> [8]  r,←⊂'Help'</code>
 </div>
-<code class="header" id="listing_13">#.CommTools.CommTools.ReplaceCRbyLF &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_12">#.CommTools.CommTools.ReplaceCRbyLF &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> ReplaceCRbyLF←{LF@(⍸⍵=⎕UCS 13)⊣⍵}</code>
+</div>
+<code class="header" id="listing_13">#.CommTools.CommTools.Select &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<div class="code-block"><code>   index←{x}Select choices</code>
+<code> [1]   ⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.</code>
+<code> [2]   ⍝ Selecting just one is the default.\\</code>
+<code> [3]   ⍝ The optional left argument allows you to specify multiple (positional) choices:</code>
+<code> [4]   ⍝  * `caption` is shown above the choices; must be a simple character vector</code>
+<code> [5]   ⍝  * `manyFlag` defaults to 0 (= just 1 item might be selected) or 1 (allow selecting multiple items)</code>
+<code> [6]   ⍝  * `mustFlag` forces the user to select at least one option, disallowing to quit without making a decision\\</code>
+<code> [7]   ⍝ Notes:</code>
+<code> [8]   ⍝  * `choices` must not have more than 999 items\\</code>
+<code> [9]   ⍝  * By entering "`∘∘∘`" the user may interrupt `Select` by running onto a stop vector, overcoming</code>
+<code> [10]  ⍝    the Dyalog bug that ⍞ cannot be interrupted</code>
+<code> [11]  ⍝  * You may use the wildcard character "*" either at the beginning or the end of a selection string assigned</code>
+<code> [12]  ⍝    to the `Select_Choices` variable</code>
+<code> [13]  ⍝  * If the user aborts by entering "q" (for "quit") `⍬` will be returned</code>
+<code> [14]  ⍝  * In case `choices` is a scalar question mark, `Select` returns the path to itself and the name of</code>
+<code> [15]  ⍝    the global variable that can be used for automation, separated by a dot.</code>
+<code> [16]   :If '?'≡choices</code>
+<code> [17]       index←(⍕⎕THIS),'.Select_Choices←1 2⍴'' ''  '' '''</code>
+<code> [18]       :Return</code>
+<code> [19]   :EndIf</code>
+<code> [20]   x←{0&lt;⎕NC ⍵:⊆⍎⍵ ⋄ ''}'x'</code>
+<code> [21]   (caption manyFlag mustFlag)←x,(⍴,x)↓'' 0 0</code>
+<code> [22]   '"caption" must be a simple character vector'Assert 1=≡caption←,caption</code>
+<code> [23]   '"caption" must not contain line feeds (⎕UCS 10)'Assert~LF∊caption</code>
+<code> [24]   '"caption" must not contain carriage returns (⎕UCS 13)'Assert~(⎕UCS 13)∊caption</code>
+<code> [25]   ⎕IO←1 ⋄ ⎕ML←1</code>
+<code> [26]   'Invalid right argument; must be a vector of text vectors.'⎕SIGNAL ErrNo/⍨2≠|≡choices</code>
+<code> [27]   'Right argument has more than 999 items'⎕SIGNAL ErrNo/⍨999&lt;≢choices</code>
+<code> [28]   flag←0</code>
+<code> [29]   firstPart←{⍵↑⍨⍵⍳LF}caption</code>
+<code> [30]   :If 0&lt;⎕NC'Select_Choices'</code>
+<code> [31]       Select_Choices←(0&lt;≢¨Select_Choices[;1])⌿Select_Choices</code>
+<code> [32]   :AndIf 0&lt;≢Select_Choices</code>
+<code> [33]       :If AliasChar∊caption</code>
+<code> [34]           (alias caption)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}caption</code>
+<code> [35]           flag←0&lt;+/bool←({⍵↑⍨(,⍵)⍳AliasChar}¨Select_Choices[;1])≡¨⊂alias</code>
+<code> [36]       :Else</code>
+<code> [37]           :If 0=+/bool←Select_Choices[;1]≡¨⊂caption</code>
+<code> [38]               bool←caption∘{⍵≡⍺↑⍨≢⍵}¨Select_Choices[;1]</code>
+<code> [39]           :EndIf</code>
+<code> [40]           flag←0&lt;+/bool</code>
+<code> [41]       :EndIf</code>
+<code> [42]       :If flag</code>
+<code> [43]           'Multiple choices qualify?!'Assert 1=+/bool</code>
+<code> [44]           index←2⊃Select_Choices[bool⍳1;]</code>
+<code> [45]           :If (⊂index)∊0 ⍬</code>
+<code> [46]               index←⍬</code>
+<code> [47]           :ElseIf ' '=1↑0⍴∊index ⍝ Text?!</code>
+<code> [48]               :If '*'=¯1↑index</code>
+<code> [49]                   index←⍸((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)≡¨⊂¯1↓index</code>
+<code> [50]                   index←{1=≢⍵:⊃⍵ ⋄ ⍵}index</code>
+<code> [51]                   'Invalid selection'Assert(0&lt;≢index)∧∧/index∊⍳≢choices</code>
+<code> [52]               :ElseIf '*'=⊃index</code>
+<code> [53]                   index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index</code>
+<code> [54]                   index←{1=≢⍵:⊃⍵ ⋄ ⍵}index</code>
+<code> [55]                   'Invalid selection'Assert(0&lt;≢index)∧∧/index∊⍳≢choices</code>
+<code> [56]               :ElseIf (,'a')≡,index</code>
+<code> [57]                   index←⍳≢choices</code>
+<code> [58]               :ElseIf (,'q')≡,index</code>
+<code> [59]                   index←⍬</code>
+<code> [60]               :ElseIf 0&lt;≢buff←⍸index∘≡¨choices</code>
+<code> [61]                   index←buff</code>
+<code> [62]                   'Invalid selection'Assert index∊⍳≢choices</code>
+<code> [63]               :ElseIf 1=≢index←⍸index∘≡¨(≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices</code>
+<code> [64]                   index←⊃index</code>
+<code> [65]                   'Invalid selection'Assert index∊⍳≢choices</code>
+<code> [66]               :Else</code>
+<code> [67]                   'Invalid selection'Assert 0</code>
+<code> [68]               :EndIf</code>
+<code> [69]           :Else</code>
+<code> [70]               'Invalid selection'Assert∧/index∊⍳≢choices</code>
+<code> [71]           :EndIf</code>
+<code> [72]       :EndIf</code>
+<code> [73]   :EndIf</code>
+<code> [74]   :If ~flag</code>
+<code> [75]       flag2←0</code>
+<code> [76]       :Repeat</code>
+<code> [77]           blankFlag←0≠≢caption</code>
+<code> [78]           :If AliasChar∊caption</code>
+<code> [79]               :If (firstPart⍳' ')&gt;firstPart⍳AliasChar</code>
+<code> [80]                   caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption</code>
+<code> [81]               :EndIf</code>
+<code> [82]           :EndIf</code>
+<code> [83]           ⎕←{⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-1</code>
+<code> [84]           ⎕←⍪{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices</code>
+<code> [85]           ⎕←''</code>
+<code> [86]           question←'Select one ',(manyFlag/'or more '),'item',((manyFlag)/'s'),' '</code>
+<code> [87]           question,←((manyFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((manyFlag∧~mustFlag)/', '),(manyFlag/'a=all'),((manyFlag∨~mustFlag)/')'),' :'</code>
+<code> [88]           :If 0&lt;≢answer←⍞,0/⍞←question</code>
+<code> [89]               answer←(⍴question)↓answer</code>
+<code> [90]               :If '∘∘∘'≡¯3↑answer</code>
+<code> [91]                   (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
+<code> [92]                   ∘∘∘ ⍝ Deliberate stop caused by user input</code>
+<code> [93]               :EndIf</code>
+<code> [94]               :If 1=≢answer</code>
+<code> [95]               :AndIf answer∊'Qq',manyFlag/'Aa'</code>
+<code> [96]                   :If answer∊'Qq'</code>
+<code> [97]                       :If 0=mustFlag</code>
+<code> [98]                           index←⍬</code>
+<code> [99]                           flag2←1</code>
+<code> [100]                      :EndIf</code>
+<code> [101]                  :Else</code>
+<code> [102]                      index←⍳≢choices</code>
+<code> [103]                      flag2←1</code>
+<code> [104]                  :EndIf</code>
+<code> [105]              :Else</code>
+<code> [106]                  (bool value)←⎕VFI answer</code>
+<code> [107]                  :If ∧/bool</code>
+<code> [108]                  :AndIf manyFlag∨1=+/bool</code>
+<code> [109]                      value←bool/value</code>
+<code> [110]                  :AndIf ∧/value∊⍳⍴choices</code>
+<code> [111]                      index←value</code>
+<code> [112]                      flag2←0≠≢index</code>
+<code> [113]                  :EndIf</code>
+<code> [114]              :EndIf</code>
+<code> [115]          :EndIf</code>
+<code> [116]      :Until flag2</code>
+<code> [117]      index←{1&lt;≢⍵:⍵ ⋄ ⊃⍵}⍣(⍬≢index)⊣index</code>
+<code> [118]  :EndIf</code>
+<code> [119] ⍝Done</code>
 </div>
 <code class="header" id="listing_14">#.CommTools.CommTools.Version &mdash; 100%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←Version</code>
 <code> [1] ⍝ See also `History`</code>
-<code> [2]  r←'CommTools' '1.8.1' '2024-08-02'</code>
+<code> [2]  r←'CommTools' '1.8.1' '2024-08-03'</code>
 </div>
 <div id="footer">
 <hr>

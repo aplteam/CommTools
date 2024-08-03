@@ -3,21 +3,23 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.Select_Choices←14 2⍴''
- C.Select_Choices[1;]←'Second' 2
- C.Select_Choices[2;]←'First' 1
- C.Select_Choices[3;]←'Third' 5
- C.Select_Choices[4;]←'Forth'(3 7)
- C.Select_Choices[5;]←'Fifth' 0
- C.Select_Choices[6;]←'Sixth' 'q'
- C.Select_Choices[7;]←'Seventh' 'a'
- C.Select_Choices[8;]←'This is the eighth' 'a'
- C.Select_Choices[9;]←'1@'(1 2 4)
- C.Select_Choices[10;]←'2@A comment' 3
- C.Select_Choices[11;]←'3@' 'Does not exist'
- C.Select_Choices[12;]←'4@' 300
- C.Select_Choices[13;]←'5@' '998*'
- C.Select_Choices[14;]←'6@' 'XXX*'
+ C.Select_Choices←0 2⍴''
+ C.Select_Choices⍪←'Second' 2
+ C.Select_Choices⍪←'First' 1
+ C.Select_Choices⍪←'Third' 5
+ C.Select_Choices⍪←'Forth'(3 7)
+ C.Select_Choices⍪←'Fifth' 0
+ C.Select_Choices⍪←'Sixth' 'q'
+ C.Select_Choices⍪←'Seventh' 'a'
+ C.Select_Choices⍪←'This is the eighth' 'a'
+ C.Select_Choices⍪←'1@'(1 2 4)
+ C.Select_Choices⍪←'2@A comment' 3
+ C.Select_Choices⍪←'3@' 'Does not exist'
+ C.Select_Choices⍪←'4@' 300
+ C.Select_Choices⍪←'5@' '998*'
+ C.Select_Choices⍪←'6@' 'Unknown*'
+ C.Select_Choices⍪←'7@' '*Unknown'
+
 
  list←'=',¨⍕¨⍳10
  list,←'998999' '999999'
@@ -49,6 +51,13 @@
  :EndTrap
  :Trap 11
      {}'6@'C.Select list
+     →T.GoToTidyUp 1
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp'Invalid selection'≢qdmx.EM
+ :EndTrap
+ :Trap 11
+     {}'7@'C.Select list
      →T.GoToTidyUp 1
  :Else
      qdmx←⎕DMX
