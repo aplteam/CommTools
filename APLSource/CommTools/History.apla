@@ -1,4 +1,7 @@
 (
+ '* 1.8.2 from 2024-09-06'
+ '  * Bug fixes'
+ '    * `Select` got a check wrong (exotic)'
  '* 1.8.1 from 2024-08-03'
  '  * The "?"-syntax (automation variable) has been improved'
  '  * Bug fixes'

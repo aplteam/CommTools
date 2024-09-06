@@ -49,11 +49,11 @@
              :If '*'=¯1↑index
                  index←⍸((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)≡¨⊂¯1↓index
                  index←{1=≢⍵:⊃⍵ ⋄ ⍵}index
-                 'Invalid selection'Assert(0<≢index)∧∧/index∊⍳≢choices
+                 'Invalid selection'Assert(mustFlag{(0=≢⍵)∧~mustFlag}index)∨0<+/index∊⍳≢choices
              :ElseIf '*'=⊃index
                  index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index
                  index←{1=≢⍵:⊃⍵ ⋄ ⍵}index
-                 'Invalid selection'Assert(0<≢index)∧∧/index∊⍳≢choices
+                 'Invalid selection'Assert(mustFlag{(0=≢⍵)∧~mustFlag}index)∨0<+/index∊⍳≢choices
              :ElseIf (,'a')≡,index
                  index←⍳≢choices
              :ElseIf (,'q')≡,index
