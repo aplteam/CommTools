@@ -9,6 +9,7 @@
  C.Select_Choices←1 2⍴'Select a file:' '*_2'
  ind←'Select a file:'C.Select list
  →T.GoToTidyUp 19≠ind
+ →T.GoToTidyUp ⍬≢⍴ind
 
  list,←⊂'foo/boo/zoo/goo_2'
  ind←'Select a file:'C.Select list

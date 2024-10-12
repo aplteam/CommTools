@@ -50,7 +50,7 @@
      →T.GoToTidyUp'Invalid selection'≢qdmx.EM
  :EndTrap
  :Trap 11
-     {}'6@'C.Select list
+     {}'6@' C.Select list
      →T.GoToTidyUp 1
  :Else
      qdmx←⎕DMX
