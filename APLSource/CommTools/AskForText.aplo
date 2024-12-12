@@ -59,7 +59,7 @@
          firstFlag←0
      :EndIf
      :If ~flag
-         text←⍞,0/⍞←question,': '
+         text←⍞,0/⍞←question,((':'≠¯1↑question)/':'),' '
          text←{⍵↑⍨2+-(⌽⍵)⍳':'}text
          :If '∘∘∘'≡¯3↑text
              (1+⊃⎕LC)⎕STOP⊃⎕SI

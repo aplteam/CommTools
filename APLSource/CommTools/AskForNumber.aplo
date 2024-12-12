@@ -46,7 +46,7 @@
          :EndIf
      :EndIf
      :If ~flag
-         input←⍞,0/⍞←question,': '
+         input←⍞,0/⍞←question,((':'≠¯1↑question)/':'),' '
          :If '∘∘∘'≡¯3↑input
              (1+⊃⎕LC)⎕STOP⊃⎕SI
              ∘∘∘ ⍝ Deliberate stop caused by user input
