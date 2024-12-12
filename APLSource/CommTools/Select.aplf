@@ -87,7 +87,7 @@
          question←'Select one ',(manyFlag/'or more '),'item',((manyFlag)/'s'),' '
          question,←((manyFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((manyFlag∧~mustFlag)/', '),(manyFlag/'a=all'),((manyFlag∨~mustFlag)/')'),' :'
          :If 0<≢answer←⍞,0/⍞←question
-             answer←(⍴question)↓answer
+             ⎕←answer←{⍵↑⍨-¯1+(⌽⍵)⍳':'}answer
              :If '∘∘∘'≡¯3↑answer
                  (1+⊃⎕LC)⎕STOP⊃⎕SI
                  ∘∘∘ ⍝ Deliberate stop caused by user input

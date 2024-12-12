@@ -1,4 +1,7 @@
 (
+ '* 1.8.3 from 2024-12-12'
+ '  * Bug fixes: `YesOrNo`, `Select` and `AskForText` now all act correctly even when the width of the session  '
+ '    is too narrow for displaying the question in a single line of the session'
  '* 1.8.2 from 2024-10-12'
  '  * Bug fix: `Select` got two checks wrong'
  '* 1.8.1 from 2024-08-03'

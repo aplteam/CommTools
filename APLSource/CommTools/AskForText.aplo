@@ -60,11 +60,11 @@
      :EndIf
      :If ~flag
          text←⍞,0/⍞←question,': '
+         text←{⍵↑⍨2+-(⌽⍵)⍳':'}text
          :If '∘∘∘'≡¯3↑text
              (1+⊃⎕LC)⎕STOP⊃⎕SI
              ∘∘∘ ⍝ Deliberate stop caused by user input
          :EndIf
-         text←(≢{⍵↑⍨-¯1+(⌽⍵)⍳LF}question,': ')↓text
          :If 0=≢text
          :AndIf 0<≢default
              text←default

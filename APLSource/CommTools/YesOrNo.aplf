@@ -87,6 +87,7 @@
              answer2←dtb answer
          :OrIf answer2≡((-≢answer2)↑LF{~⍺∊⍵:⍵ ⋄ ' ',dtb ⍺{⌽⍵↑⍨1+⍵⍳⍺}⌽⍵}question)  ⍝ ... press ...
          :OrIf answer≡{1↓⊃¯1↑(⍵=LF)⊂⍵}LF,question                                 ⍝ ... <enter>?
+         :OrIf answer≡⎕PW↓question
              :If 0≠≢default
                  yesOrNo←default
                  isOkay←1
