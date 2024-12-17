@@ -1,9 +1,9 @@
  R←Test_AskForText_102(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForText" with `AskForText_Answers` and (different number of) leading blanks in both question and `AskForText_Answers`
+⍝ Exercise "AskForText" with automation and (different number of) leading blanks in both question and `∆Automation`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForText_Answers←1 2⍴'  Your name' 'Chris'
+ C.AddAutomation 'AskForText' 'Your name' 'Chris'
 
  →T.GoToTidyUp'Chris'≢({1}C.AskForText)' Your name'
 

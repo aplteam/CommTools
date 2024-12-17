@@ -1,14 +1,13 @@
  R←Test_AskForText_100(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskAskForText" with `AskForText_Answers`
+⍝ Exercise "AskAskForText" with automation
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForText_Answers←2 2⍴''
- C.AskForText_Answers[1;]←'Enter your name' 2
- C.AskForText_Answers[2;]←'Enter name of a month' 2
+ C.AddAutomation'AskForText' 'Enter your name' 2
+ C.AddAutomation'AskForText' 'Enter name of a month' 2
 
- →T.GoToTidyUp 2≠({1}C.AskForText)1⊃C.AskForText_Answers[2;]
- →T.GoToTidyUp 2≠({1}C.AskForText)1⊃C.AskForText_Answers[1;]
+ →T.GoToTidyUp 2≠({1}C.AskForText)2⊃C.∆Automation[2;]
+ →T.GoToTidyUp 2≠({1}C.AskForText)2⊃C.∆Automation[1;]
 
  R←T._OK
 

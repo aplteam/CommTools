@@ -1,11 +1,11 @@
  R←Test_Select_004(stopFlag batchFlag);⎕TRAP;list;qdmx
-⍝ Exercise "Select" with `Select_Choices` but invalid selections
+⍝ Exercise "Select" with automation but invalid selections
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
  list←⍕¨1 2 3
 
- C.Select_Choices←1 2⍴'Herbert' 20
+ C.AddAutomation'Select' 'Herbert' 20
  :Trap 11
      {}'Herbert'C.Select list
      →T.GoToTidyUp 0
@@ -14,7 +14,8 @@
      →T.GoToTidyUp'Invalid selection'≢qdmx.EM
  :EndTrap
 
- C.Select_Choices←1 2⍴'Herbert' 'Does-not-exist'
+ C.Cleanup
+ C.AddAutomation'Select' 'Herbert' 'Does-not-exist'
  :Trap 11
      {}'Herbert'C.Select list
      →T.GoToTidyUp 0

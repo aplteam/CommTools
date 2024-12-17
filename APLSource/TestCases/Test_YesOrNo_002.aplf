@@ -1,27 +1,26 @@
  R←Test_YesOrNo_002(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "YesOrNo" with `YesOrNo_Answers`
+⍝ Exercise "YesOrNo" with automation
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.YesOrNo_Answers←9 2⍴''
- C.YesOrNo_Answers[1;]←'The second question' 'y'
- C.YesOrNo_Answers[2;]←'The first question' 'y'
- C.YesOrNo_Answers[3;]←'The third question' 'n'
- C.YesOrNo_Answers[4;]←'The forth question' ''
- C.YesOrNo_Answers[5;]←'The fifth' 'Y'
- C.YesOrNo_Answers[6;]←'today?' 'y'
- C.YesOrNo_Answers[7;]←'1@' 'n'
- C.YesOrNo_Answers[8;]←'2@' 'y'
- C.YesOrNo_Answers[9;]←'AnAlias@A comment' ''
+ C.AddAutomation'YesOrNo' 'The second question' 'y'
+ C.AddAutomation'YesOrNo' 'The first question' 'y'
+ C.AddAutomation'YesOrNo' 'The third question' 'n'
+ C.AddAutomation'YesOrNo' 'The forth question' ''
+ C.AddAutomation'YesOrNo' 'The fifth' 'Y'
+ C.AddAutomation'YesOrNo' 'today?' 'y'
+ C.AddAutomation'YesOrNo' '1@' 'n'
+ C.AddAutomation'YesOrNo' '2@' 'y'
+ C.AddAutomation'YesOrNo' 'AnAlias@A comment' ''
 
- →T.GoToTidyUp 1≠C.YesOrNo 1⊃C.YesOrNo_Answers[2;]
- →T.GoToTidyUp 1≠C.YesOrNo 1⊃C.YesOrNo_Answers[1;]
- →T.GoToTidyUp 0≠C.YesOrNo 1⊃C.YesOrNo_Answers[3;]
- →T.GoToTidyUp 1≠1 C.YesOrNo 1⊃C.YesOrNo_Answers[4;]
- →T.GoToTidyUp 0≠0 C.YesOrNo 1⊃C.YesOrNo_Answers[4;]
- →T.GoToTidyUp 1≠0 C.YesOrNo(1⊃C.YesOrNo_Answers[5;]),' question'
+ →T.GoToTidyUp 1≠C.YesOrNo 2⊃C.∆Automation[2;]
+ →T.GoToTidyUp 1≠C.YesOrNo 2⊃C.∆Automation[1;]
+ →T.GoToTidyUp 0≠C.YesOrNo 2⊃C.∆Automation[3;]
+ →T.GoToTidyUp 1≠1 C.YesOrNo 2⊃C.∆Automation[4;]
+ →T.GoToTidyUp 0≠0 C.YesOrNo 2⊃C.∆Automation[4;]
+ →T.GoToTidyUp 1≠0 C.YesOrNo(2⊃C.∆Automation[5;])
  →T.GoToTidyUp 1≠0 C.YesOrNo'The' 'sixth' 'question' 'of' 'today?'
- →T.GoToTidyUp 0≠C.YesOrNo'1@',1⊃C.YesOrNo_Answers[3;]
+ →T.GoToTidyUp 0≠C.YesOrNo'1@',2⊃C.∆Automation[3;]
  →T.GoToTidyUp 1≠0 C.YesOrNo'2@The' 'sixth' 'question' 'of' 'today?'
  →T.GoToTidyUp 1≠1 C.YesOrNo'AnAlias@Sure?'
 

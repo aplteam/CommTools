@@ -1,5 +1,5 @@
  R←Test_Select_007(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "Select" with an alias but without `Select_Choices` (was once a bug)
+⍝ Exercise "Select" with an alias but without automation (was once a bug)
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 

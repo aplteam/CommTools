@@ -1,9 +1,9 @@
  R←Test_YesOrNo_004(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "YesOrNo" with `YesOrNo_Answers` but no fit
+⍝ Exercise "YesOrNo" with automation but no fit
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.YesOrNo_Answers←1 2⍴'Does-not-fit' 'y'
+ C.AddAutomation'YesOrNo' 'Does-not-fit' 'y'
  →T.GoToTidyUp 1≠1 C.YesOrNo'Are you sure? (just press <enter>)'
 
  R←T._OK

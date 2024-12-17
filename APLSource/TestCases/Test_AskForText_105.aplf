@@ -1,19 +1,17 @@
  R←Test_AskForText_105(stopFlag batchFlag);⎕TRAP;q
-⍝ Exercise "AskForText" with `AskForText_Answers` with aliases as identifiers
+⍝ Exercise "AskForText" with automation with aliases as identifiers
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForText_Answers←3 2⍴''
- C.AskForText_Answers[1;]←'1@Your name (1)' 'answer1'
- C.AskForText_Answers[2;]←'second@Your @ ful name (2)' 'answer2'
- C.AskForText_Answers[3;]←'third@A comment' 'answer3'
+ C.AddAutomation'AskForText' '1@Your name (1)' 'answer1'
+ C.AddAutomation'AskForText' 'second@Your @ ful name (2)' 'answer2'
+ C.AddAutomation'AskForText' 'third@A comment' 'answer3'
 
-
- q←1⊃C.AskForText_Answers[2;]
+ q←2⊃C.∆Automation[2;]
  →T.GoToTidyUp'answer2'≢({1}C.AskForText)q
- q←(1⊃C.AskForText_Answers[1;]),LF,'More'
+ q←(2⊃C.∆Automation[1;]),LF,'More'
  →T.GoToTidyUp'answer1'≢({1}C.AskForText)q
- q←(1⊃C.AskForText_Answers[3;])'More'
+ q←(2⊃C.∆Automation[3;])'More'
  →T.GoToTidyUp'answer3'≢({1}C.AskForText)q
 
  R←T._OK

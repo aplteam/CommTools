@@ -1,5 +1,5 @@
  R←Test_AskForNumber_100(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForNumber" with `AskForNumber_Answers` but no fit
+⍝ Exercise "AskForNumber" with automation but no fit
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 

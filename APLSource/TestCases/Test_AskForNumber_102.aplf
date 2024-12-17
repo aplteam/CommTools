@@ -1,10 +1,15 @@
- R←Test_AskForNumber_102(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForNumber" with `AskForNumber_Answers` but it being empty
+ R←Test_AskForNumber_102(stopFlag batchFlag);⎕TRAP;qdmx
+⍝ Exercise "AskForNumber" with automation but an empty ID
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForNumber_Answers←1 2⍴'' 1
- →T.GoToTidyUp 1≢({1}C.AskForNumber)'Number of copies (enter "1")' ⍝ Should ask as usual, as if C.AskForNumber_Answers is not set at all
+ :Trap 11
+     C.AddAutomation'AskForNumber' '' 1
+     →∆TidyUp 1
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp'ID must not be empty'≢qdmx.EM
+ :EndTrap
 
  R←T._OK
 

@@ -1,26 +1,25 @@
  R←Test_AskForNumber_104(stopFlag batchFlag);⎕TRAP;question
-⍝ Exercise "AskForNumber" with `AskForNumber_Answers` with aliases
+⍝ Exercise "AskForNumber" with automation with aliases
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForNumber_Answers←5 2⍴''
- C.AskForNumber_Answers[1;]←'MyAlias1@' 1
- C.AskForNumber_Answers[2;]←'2@' 2
- C.AskForNumber_Answers[3;]←'MyAlias3@A comment regarding the @ char' 3 ⍝ Only the first @ should be taken into account
- C.AskForNumber_Answers[4;]←'MyAlias4⌹' 4   ⍝ A different separator: ⌹
- C.AskForNumber_Answers[5;]←'MyAlias5@' 5   ⍝
+ C.AddAutomation'AskForNumber' 'MyAlias1@' 1
+ C.AddAutomation'AskForNumber' '2@' 2
+ C.AddAutomation'AskForNumber' 'MyAlias3@A comment regarding the @ char' 3 ⍝ Only the first @ should be taken into account
+ C.AddAutomation'AskForNumber' 'MyAlias4⌹' 4   ⍝ A different separator: ⌹
+ C.AddAutomation'AskForNumber' 'MyAlias5@' 5   ⍝
 
- question←(1⊃C.AskForNumber_Answers[1;]),'How many:'
+ question←(2⊃C.∆Automation[1;]),'How many:'
  →T.GoToTidyUp 1≢({1}C.AskForNumber)question
- question←(1⊃C.AskForNumber_Answers[2;]),'How many:'
+ question←(2⊃C.∆Automation[2;]),'How many:'
  →T.GoToTidyUp 2≢({1}C.AskForNumber)question
- question←(1⊃C.AskForNumber_Answers[3;]),'How many:'
+ question←(2⊃C.∆Automation[3;]),'How many:'
  →T.GoToTidyUp 3≢({1}C.AskForNumber)question
- question←(1⊃C.AskForNumber_Answers[4;]),'How many:'
+ question←(2⊃C.∆Automation[4;]),'How many:'
  C.AliasChar←'⌹'
  →T.GoToTidyUp 4≢({1}C.AskForNumber)question
  C.AliasChar←'@'
- question←(1⊃C.AskForNumber_Answers[5;]),'---- Attention ---',LF,'This @ More',LF,'How many:'
+ question←(2⊃C.∆Automation[5;]),'---- Attention ---',LF,'This @ More',LF,'How many:'
  →T.GoToTidyUp 5≢({1}C.AskForNumber)question
 
  R←T._OK

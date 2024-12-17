@@ -1,9 +1,9 @@
  R←Test_AskForText_101(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForText" with `AskForText_Answers` but no fit
+⍝ Exercise "AskForText" with automation but no fit
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForText_Answers←1 2⍴'Does-not-fit' 'y'
+ C.AddAutomation'AskForText' 'Does-not-fit' 'y'
 
  →T.GoToTidyUp 0≠≢({1}C.AskForText)'Just press <enter>'
 

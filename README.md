@@ -2,7 +2,7 @@
 
 Basic communication tools using Quad (`⎕`) and Quote-Quad (`⍞`) for input and output.
 
-This package is particularly useful for test cases and user commands.
+This package is particularly useful for user commands and test cases.
 
 
 
@@ -36,4 +36,5 @@ You may ask for detailed documentation with
 ```
       ]ADoc #.CommTools
 ```
+
 

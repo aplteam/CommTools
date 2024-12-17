@@ -3,11 +3,9 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.YesOrNo_Answers←1 2⍴'foo' 'Y'
- C.Select_Choices←1 2⍴'foo' 1
- C.Assert 2=+/2=⊃∘C.⎕NC¨'YesOrNo_Answers' 'Select_Choices'
+ C.AddAutomation'YesOrNo' 'foo' 'Y'
  C.Cleanup
- →T.PassesIf 2=+/0=⊃∘C.⎕NC¨'YesOrNo_Answers' 'Select_Choices'
+ →T.PassesIf 0=C.⎕NC'∆Automation'
 
  R←T._OK
 ⍝Done

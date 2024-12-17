@@ -1,16 +1,13 @@
  R←Test_AskForNumber_103(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForNumber" with `AskForNumber_Answers` with captions as identifiers
+⍝ Exercise "AskForNumber" with automation with captions as identifiers
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForNumber_Answers←3 2⍴''
- C.AskForNumber_Answers[1;]←'Number of copies (1)' 1
- C.AskForNumber_Answers[2;]←'Number of copies (2)' 2
- C.AskForNumber_Answers[3;]←'Number of copies (3)' '3'
+ C.AddAutomation'AskForNumber' 'Number of copies (1)' 1
+ C.AddAutomation'AskForNumber' 'Number of copies (2)' 2
 
- →T.GoToTidyUp 2≢({1}C.AskForNumber)1⊃C.AskForNumber_Answers[2;]
- →T.GoToTidyUp 1≢({1}C.AskForNumber)1⊃C.AskForNumber_Answers[1;]
- →T.GoToTidyUp 3≢({1}C.AskForNumber)1⊃C.AskForNumber_Answers[3;]
+ →T.GoToTidyUp 2≢({1}C.AskForNumber)⊃C.∆Automation[2;2]
+ →T.GoToTidyUp 1≢({1}C.AskForNumber)⊃C.∆Automation[1;2]
 
  R←T._OK
 

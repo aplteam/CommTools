@@ -1,9 +1,9 @@
  R←Test_AskForNumber_101(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "AskForNumber" with `AskForNumber_Answers` and (different number of) leading blanks in both question and `AskForNumber_Answers`
+⍝ Exercise "AskForNumber" with automation and (different number of) leading blanks in both question and `∆Automation`
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.AskForNumber_Answers←1 2⍴'  Number of copies' 2
+ C.AddAutomation'AskForNumber' 'Number of copies' 2
 
  →T.GoToTidyUp 2≠({1}C.AskForNumber)' Number of copies'
 

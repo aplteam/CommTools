@@ -3,9 +3,9 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- q←'MyAlias@---------- My Caption --- (Select first item)',LF
- q,←'First line',LF
- q,←'Second line',LF
+ q←'MyAlias@---------- My Caption --- (enter a "1")',LF
+ q,←'This',LF
+ q,←'That',LF
  q,←'How many copies (1-5)?'
  →T.PassesIf 1=({⍵∊1 2 3 4 5:1 ⋄ ⎕←'Between 1 and 5' ⋄ 0}C.AskForNumber)q
  →T.PassesIf 0=CommTools.YesOrNo'Did the question contain "MyAlias@"? (Must not!)'

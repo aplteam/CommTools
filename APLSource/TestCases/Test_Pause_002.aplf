@@ -1,18 +1,33 @@
  R←Test_Pause_002(stopFlag batchFlag);⎕TRAP
-⍝ Exercise "Pause" with `NoPause`
+⍝ Exercise "Pause" with automation
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.NoPause←1
+ C.AddAutomation'Pause' '*' ''
  →T.GoToTidyUp 0≠C.Pause'Should not stop -1-'
- C.NoPause←'Should not stop -2-'
  →T.GoToTidyUp 0≠C.Pause'Should not stop -2-'
- C.NoPause←'TST3@'
+ C.Cleanup
+ C.AddAutomation'Pause' 'Should not stop -2-' ''
+ →T.GoToTidyUp 0≠C.Pause'Should not stop -2-'
+ C.Cleanup
+ C.AddAutomation'Pause' 'TST3@' ''
  →T.GoToTidyUp 0≠C.Pause'TST3@Should not stop -3-'
- C.NoPause←'TST3@' 'TST4@'
+ →T.GoToTidyUp 0≠C.Pause'TST3@Should not stop -3-'
+ C.Cleanup
+ C.AddAutomation'Pause' 'TST3@' ''
+ C.AddAutomation'Pause' 'TST4@' ''
  →T.GoToTidyUp 0≠C.Pause'TST4@Should not stop -4-'
- C.NoPause←'TST3@' 'TST4@' 'Should not stop -4-'
- →T.GoToTidyUp 0≠C.Pause'Should not stop -4-'
+ C.Cleanup
+ C.AddAutomation'Pause' 'TST3@' ''
+ C.AddAutomation'Pause' 'TST4@' ''
+ C.AddAutomation'Pause' 'Should not stop' ''
+ →T.GoToTidyUp 0≠C.Pause'TST3@This'
+ →T.GoToTidyUp 0≠C.Pause'TST3@That'
+ →T.GoToTidyUp 0≠C.Pause'Should not stop'
+ →T.GoToTidyUp 0≠C.Pause'TST3@More'
+ →T.GoToTidyUp 0≠C.Pause'TST4@Even more'
+ →T.GoToTidyUp 0≠C.Pause'TST4@Last one'
+ →T.GoToTidyUp 3 2 1≢C.∆Automation[;4]
 
  R←T._OK
 

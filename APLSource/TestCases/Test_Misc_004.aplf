@@ -1,16 +1,42 @@
- R←Test_Misc_004(stopFlag batchFlag);⎕TRAP;res
-⍝ Exercise all functions with a scalar `?` as input
+ R←Test_Misc_004(stopFlag batchFlag);⎕TRAP;buff;qdmx
+⍝ Exercise "ListAutomation"
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- res←C.Select'?'
- →T.PassesIf∨/'.Select_Choices←'⍷res
- res←C.YesOrNo'?'
- →T.PassesIf∨/'.YesOrNo_Answers←'⍷res
- res←({1}C.AskForText)'?'
- →T.PassesIf∨/'.AskForText_Answers←'⍷res
- res←({1}C.AskForNumber)'?'
- →T.PassesIf∨/'.AskForNumber_Answers←'⍷res
+ buff←1 C.ListAutomation''
+ →T.GoToTidyUp 0 4≢⍴buff
+ buff←C.ListAutomation''
+ →T.GoToTidyUp buff≢'∆Automation does not exist'
+ C.AddAutomation'AskForNumber' 'Number of copies (1)' 1
+ C.AddAutomation'AskForNumber' 'Number of copies (2)' 2
+ C.AddAutomation'YesOrNo' 'Sure?' 'y'
+ C.AddAutomation'Pause' '*' 'y'
+ buff←C.ListAutomation''
+ →T.GoToTidyUp 6 4≢⍴buff
+ buff←1 C.ListAutomation''
+ →T.GoToTidyUp 4 4≢⍴buff
+ buff←C.ListAutomation'AskForNumber'
+ →T.GoToTidyUp 4 4≢⍴buff
+ buff←1 C.ListAutomation'YesOrNo' 'AskForNumber'
+ →T.GoToTidyUp 3 4≢⍴buff
+ buff←C.ListAutomation'Select'
+ →T.GoToTidyUp buff≢'No data found for Select'
+ buff←1 C.ListAutomation'Select'
+ →T.GoToTidyUp 0 4≢⍴buff
+ buff←1 C.ListAutomation'Select' 'Pause'
+ →T.GoToTidyUp 1 4≢⍴buff
+ buff←C.ListAutomation'Select' 'AskForText'
+ →T.GoToTidyUp buff≢'No data found for Select, AskForText'
+
+ :Trap 11
+     {}C.ListAutomation'does-not-exist'
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp qdmx.EM≢'Invalid type'
+ :EndTrap
 
  R←T._OK
+
+∆TidyUp:
+ C.Cleanup
 ⍝Done

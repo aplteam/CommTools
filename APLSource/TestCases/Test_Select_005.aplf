@@ -1,9 +1,9 @@
  R←Test_Select_005(stopFlag batchFlag);⎕TRAP;list
-⍝ Exercise "Select" with `Select_Choices` but without a fit
+⍝ Exercise "Select" with automation but without a fit
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- C.Select_Choices←1 2⍴'Does-not-fit' 2
+ C.AddAutomation'Select' 'Does-not-fit' 2
  list←'=',¨⍕¨⍳10
  →T.GoToTidyUp 1≠'Choose the first one:'C.Select list
 
