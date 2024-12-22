@@ -1,11 +1,11 @@
 (
- '* 2.0.0 from 2024-12-21'
+ '* 2.0.0 from 2024-12-22'
  '  * BREAKING CHANGES: '
  '    * You cannot specify part of a question/message/caption anymore, neither with nor without LF.'
  '      With version 2.0 you should use an alias if you have LF in your question/message/caption or if something '
  '      dynamic is part of it. (You can still use the wildcard character with `Select` for automation)'
  '    * Automation has been redesigned. There is now only one variable in charge for automation: `∆Automation`'
- '  * Helpers added for manipulating `∆Automation` and gaining information abou automation: `AddAutomation`,'
+ '  * Helpers added for manipulating `∆Automation` and gaining information about automation: `AddAutomation`,'
  '    `ListAutomation` and `FindAutomationIndex`'
  '  * Testing can be done more thoroughly now thanks to the introduction of a counter on `∆Automation`'
  '  * `Version` now uses the Tatin config as source'
