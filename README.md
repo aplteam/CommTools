@@ -8,7 +8,7 @@ This package is particularly useful for user commands and test cases.
 
 ## Overview
 
-Comes with these functions and operators: 
+`CommTools` comes with these functions and operators: 
 
 * `YesOrNo 'Are you sure?'`
 * `'Select the file you want to process' Select 'This.txt' 'That.txt' 'More.txt'`
@@ -19,7 +19,7 @@ Comes with these functions and operators:
 These functions and operators have these features in common:
 
 * They can all be interrupted by entering `∘∘∘`
-* They can be automated by setting certain variables within the `CommTools` namespace
+* They can be automated by creating a variable `∆Automation` within the `CommTools` namespace
 
   This allows you to automate tests that would otherwise require a human to interact with.
 * They unify the user experience
