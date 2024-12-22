@@ -1,5 +1,5 @@
 (
- '* 2.0.0 from 2024-12-20'
+ '* 2.0.0 from 2024-12-21'
  '  * BREAKING CHANGES: '
  '    * You cannot specify part of a question/message/caption anymore, neither with nor without LF.'
  '      With version 2.0 you should use an alias if you have LF in your question/message/caption or if something '
@@ -8,6 +8,7 @@
  '  * Helpers added for manipulating `∆Automation` and gaining information abou automation: `AddAutomation`,'
  '    `ListAutomation` and `FindAutomationIndex`'
  '  * Testing can be done more thoroughly now thanks to the introduction of a counter on `∆Automation`'
+ '  * `Version` now uses the Tatin config as source'
  '  * Bug fixes: `YesOrNo`, `Select` and `AskForText` now all act correctly even when the width of the session  '
  '    is too narrow to display the question in a single line'
  '* 1.8.2 from 2024-10-12'
