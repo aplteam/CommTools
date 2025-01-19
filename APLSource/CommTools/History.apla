@@ -1,4 +1,7 @@
 (
+ '* 2.0.1 from 2025-01-19'
+ '  * Bug fixes'
+ '    * The `Select` functions printed the user input to the session'
  '* 2.0.0 from 2024-12-22'
  '  * BREAKING CHANGES: '
  '    * You cannot specify part of a question/message/caption anymore, neither with nor without LF.'

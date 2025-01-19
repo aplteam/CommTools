@@ -127,7 +127,7 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr><th>Executed at</th><th>APLVersion</th><th>Memory (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>2024-12-22 16:55:00</td><td>Windows-64 ⋄ 20.0.50525.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>113</td></tr>
+<tr><td>2025-01-01 08:25:42</td><td>Windows-64 ⋄ 19.0.50236.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>49</td></tr>
 </tbody>
 </table>
 <p>Overall 84% of the testable code is covered.</p>
@@ -297,7 +297,7 @@ $(document).ready(function() {
 </div>
 <code class="header" id="listing_6">#.CommTools.CommTools.TatinVars.ID &mdash; 0%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←ID</code>
-<code class="emphasize">→[1]  r←'aplteam-CommTools-2.0.0+88'</code>
+<code class="emphasize">→[1]  r←'aplteam-CommTools-2.0.0+90'</code>
 </div>
 <code class="header" id="listing_7">#.CommTools.CommTools.TatinVars.URI &mdash; 0%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←URI</code>
@@ -326,7 +326,7 @@ $(document).ready(function() {
 <code class="emphasize">→[19]   source: "APLSource/CommTools",</code>
 <code class="emphasize">→[20]   tags: "communication-tools,yes-or-no,select-tool",</code>
 <code class="emphasize">→[21]   userCommandScript: "",</code>
-<code class="emphasize">→[22]   version: "2.0.0+88",</code>
+<code class="emphasize">→[22]   version: "2.0.0+90",</code>
 <code> [23] }'</code>
 </div>
 <code class="header" id="listing_9">#.CommTools.CommTools.AddAutomation &mdash; 75%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
@@ -580,7 +580,7 @@ $(document).ready(function() {
 <code> [79]           question←'Select one ',(manyFlag/'or more '),'item',((manyFlag)/'s'),' '</code>
 <code> [80]           question,←((manyFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((manyFlag∧~mustFlag)/', '),(manyFlag/'a=all'),((manyFlag∨~mustFlag)/')'),' :'</code>
 <code> [81]           :If 0&lt;≢answer←⍞,0/⍞←question</code>
-<code> [82]               ⎕←answer←{⍵↑⍨-¯1+(⌽⍵)⍳':'}answer</code>
+<code> [82]               answer←{⍵↑⍨-¯1+(⌽⍵)⍳':'}answer</code>
 <code> [83]               :If '∘∘∘'≡¯3↑answer</code>
 <code> [84]                   (1+⊃⎕LC)⎕STOP⊃⎕SI</code>
 <code> [85]                   ∘∘∘ ⍝ Deliberate stop caused by user input</code>
