@@ -166,7 +166,7 @@
  ''
  '```'
  '   CommTools.AddAutomation ''Select'' ''My caption'' ''Second'''
- '   ⎕←''My caption'' CommTools.Select l'
+ '   ⍞←''My caption'' CommTools.Select l'
  '2     '
  '```'
  ''
@@ -227,7 +227,7 @@
  '```'
  'CheckFn←{'
  '   ⍵∊1 2 3 4 5:1 '
- '   ⎕←''Please enter a number between 1 and 5'' '
+ '   ⍞←''Please enter a number between 1 and 5'' '
  '   0'
  ('}'⋄)
  '(CheckFn CommTools.AskForNumber) ''Number of copies to print:'''
@@ -252,7 +252,7 @@
  '```'
  'CheckFn←{'
  '   (⊂⍵)∊↓12 3⍴''janfebmaraprmaijunjulaugsepoctnovdec'':1 '
- '   ⎕←''Please enter just three lowercase characters identifying a month'' '
+ '   ⍞←''Please enter just three lowercase characters identifying a month'' '
  '   0'
  ('}'⋄)
  '(CheckFn CommTools.AskForText) ''Enter a month (just three characters)'''

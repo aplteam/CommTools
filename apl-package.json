@@ -1,6 +1,7 @@
 {
   api: "",
   assets: "",
+  checkLICENSEfile: 1,
   description: "Communication tools for interactions in the session: YesOrNo and Select",
   documentation: "",
   files: "",
@@ -19,5 +20,5 @@
   source: "APLSource/CommTools",
   tags: "communication-tools,yes-or-no,select-tool",
   userCommandScript: "",
-  version: "2.0.1+92",
+  version: "2.0.2-beta-1+93",
 }
