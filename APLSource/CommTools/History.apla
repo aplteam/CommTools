@@ -1,5 +1,6 @@
 (
  '* 2.0.2 from 2025-02-05'
+ '  * Help polished'
  '  * Bug fixes'
  '    * `Select` used ⎕ for output to the session. In 20.0 this is causing confusion when array notation is on '
  '      for output. It should use ⍞.  '

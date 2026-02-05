@@ -127,7 +127,7 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr><th>Executed at</th><th>APLVersion</th><th>Memory (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>2025-01-01 08:25:42</td><td>Windows-64 ⋄ 19.0.50236.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>49</td></tr>
+<tr><td>2026-02-05 19:22:34</td><td>Windows-64 ⋄ 20.0.53037.0 ⋄ W ⋄ Development ⋄ Unicode</td><td>112</td></tr>
 </tbody>
 </table>
 <p>Overall 84% of the testable code is covered.</p>
@@ -146,7 +146,7 @@ ul li, ol li {margin: 8pt 3pt;}
 <tr class="uncovered"><td><a href="#listing_5" title="Link to listing">#.CommTools.CommTools.TatinVars.HOME</a></td><td>9←≢2-10</td><td>0</td><td>9</td></tr>
 <tr class="uncovered"><td><a href="#listing_6" title="Link to listing">#.CommTools.CommTools.TatinVars.ID</a></td><td>1</td><td>0</td><td>1</td></tr>
 <tr class="uncovered"><td><a href="#listing_7" title="Link to listing">#.CommTools.CommTools.TatinVars.URI</a></td><td>1</td><td>0</td><td>1</td></tr>
-<tr><td><a href="#listing_8" title="Link to listing">#.CommTools.CommTools.TatinVars.CONFIG</a></td><td>21←≢2-22</td><td>5</td><td>22</td></tr>
+<tr><td><a href="#listing_8" title="Link to listing">#.CommTools.CommTools.TatinVars.CONFIG</a></td><td>22←≢2-23</td><td>4</td><td>23</td></tr>
 <tr><td><a href="#listing_9" title="Link to listing">#.CommTools.CommTools.AddAutomation</a></td><td>5←≢26-30</td><td>75</td><td>20</td></tr>
 <tr><td><a href="#listing_10" title="Link to listing">#.CommTools.CommTools.Version</a></td><td>6</td><td>80</td><td>5</td></tr>
 <tr><td><a href="#listing_11" title="Link to listing">#.CommTools.CommTools.AskForNumber</a></td><td>5←≢52-54,58,63</td><td>89</td><td>45</td></tr>
@@ -285,7 +285,7 @@ $(document).ready(function() {
 <div class="code-block"><code>  r←HOME</code>
 <code> [1]  ⍝ Returns folder package was loaded from or current directory or an empty vector if both are not valid</code>
 <code class="emphasize">→[2]   ⎕IO←1 ⋄ ⎕ML←1</code>
-<code class="emphasize">→[3]   r←'C:/T/Projects/APLTree/CommTools'   ⍝ Original source</code>
+<code class="emphasize">→[3]   r←'C:\T\Projects\APLTree\CommTools'   ⍝ Original source</code>
 <code class="emphasize">→[4]   :If ~⎕NEXISTS r</code>
 <code class="emphasize">→[5]       (dir name extension)←⎕NPARTS r</code>
 <code class="emphasize">→[6]       r←(⊃1 ⎕NPARTS''),(2⊃⎕NPARTS ¯1↓dir),'/',name,extension ⍝ Try current dir</code>
@@ -297,37 +297,38 @@ $(document).ready(function() {
 </div>
 <code class="header" id="listing_6">#.CommTools.CommTools.TatinVars.ID &mdash; 0%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←ID</code>
-<code class="emphasize">→[1]  r←'aplteam-CommTools-2.0.0+90'</code>
+<code class="emphasize">→[1]  r←'aplteam-CommTools-2.0.2-beta-2+94'</code>
 </div>
 <code class="header" id="listing_7">#.CommTools.CommTools.TatinVars.URI &mdash; 0%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code> r←URI</code>
 <code class="emphasize">→[1]  r←''</code>
 </div>
-<code class="header" id="listing_8">#.CommTools.CommTools.TatinVars.CONFIG &mdash; 5%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
+<code class="header" id="listing_8">#.CommTools.CommTools.TatinVars.CONFIG &mdash; 4%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code>  r←CONFIG</code>
 <code> [1]   r←'{</code>
 <code class="emphasize">→[2]    api: "",</code>
 <code class="emphasize">→[3]    assets: "",</code>
-<code class="emphasize">→[4]    description: "Communication tools for interactions in the session: YesOrNo and Select",</code>
-<code class="emphasize">→[5]    documentation: "",</code>
-<code class="emphasize">→[6]    files: "",</code>
-<code class="emphasize">→[7]    group: "aplteam",</code>
-<code class="emphasize">→[8]    io: 1,</code>
-<code class="emphasize">→[9]    license: "MIT",</code>
-<code class="emphasize">→[10]   lx: "",</code>
-<code class="emphasize">→[11]   maintainer: "kai@aplteam.com",</code>
-<code class="emphasize">→[12]   minimumAplVersion: "18.0",</code>
-<code class="emphasize">→[13]   ml: 1,</code>
-<code class="emphasize">→[14]   name: "CommTools",</code>
-<code class="emphasize">→[15]   os_lin: 1,</code>
-<code class="emphasize">→[16]   os_mac: 1,</code>
-<code class="emphasize">→[17]   os_win: 1,</code>
-<code class="emphasize">→[18]   project_url: "https://github.com/aplteam/CommTools",</code>
-<code class="emphasize">→[19]   source: "APLSource/CommTools",</code>
-<code class="emphasize">→[20]   tags: "communication-tools,yes-or-no,select-tool",</code>
-<code class="emphasize">→[21]   userCommandScript: "",</code>
-<code class="emphasize">→[22]   version: "2.0.0+90",</code>
-<code> [23] }'</code>
+<code class="emphasize">→[4]    checkLICENSEfile: 1,</code>
+<code class="emphasize">→[5]    description: "Communication tools for interactions in the session: YesOrNo and Select",</code>
+<code class="emphasize">→[6]    documentation: "",</code>
+<code class="emphasize">→[7]    files: "",</code>
+<code class="emphasize">→[8]    group: "aplteam",</code>
+<code class="emphasize">→[9]    io: 1,</code>
+<code class="emphasize">→[10]   license: "MIT",</code>
+<code class="emphasize">→[11]   lx: "",</code>
+<code class="emphasize">→[12]   maintainer: "kai@aplteam.com",</code>
+<code class="emphasize">→[13]   minimumAplVersion: "18.0",</code>
+<code class="emphasize">→[14]   ml: 1,</code>
+<code class="emphasize">→[15]   name: "CommTools",</code>
+<code class="emphasize">→[16]   os_lin: 1,</code>
+<code class="emphasize">→[17]   os_mac: 1,</code>
+<code class="emphasize">→[18]   os_win: 1,</code>
+<code class="emphasize">→[19]   project_url: "https://github.com/aplteam/CommTools",</code>
+<code class="emphasize">→[20]   source: "APLSource/CommTools",</code>
+<code class="emphasize">→[21]   tags: "communication-tools,yes-or-no,select-tool",</code>
+<code class="emphasize">→[22]   userCommandScript: "",</code>
+<code class="emphasize">→[23]   version: "2.0.2-beta-2+94",</code>
+<code> [24] }'</code>
 </div>
 <code class="header" id="listing_9">#.CommTools.CommTools.AddAutomation &mdash; 75%<a class="float-right no-print no-underline top-links" href="#top" title="Go to the top of the document">&#8607;</a><a  class="float-right no-print no-underline top-links" href="#partly-covered" title="Go to the beginning of 'Partly-covered'">↑</a></code>
 <div class="code-block"><code>  {r}←{overwrite}AddAutomation(type id value)</code>
@@ -435,12 +436,12 @@ $(document).ready(function() {
 <code> [55]      :Else</code>
 <code> [56]          (valid value)←⎕VFI input</code>
 <code> [57]          :If 1≠≢valid</code>
-<code class="emphasize">→[58]              ⎕←'Please enter precisely one number'</code>
+<code class="emphasize">→[58]              ⍞←'Please enter precisely one number'</code>
 <code> [59]          :ElseIf valid</code>
 <code> [60]              success←CheckFn value</code>
 <code> [61]              value←⊃value</code>
 <code> [62]          :Else</code>
-<code class="emphasize">→[63]              ⎕←'You did not enter a valid number, please retry!'</code>
+<code class="emphasize">→[63]              ⍞←'You did not enter a valid number, please retry!'</code>
 <code> [64]          :EndIf</code>
 <code> [65]      :EndIf</code>
 <code> [66]  :Until success</code>
@@ -574,9 +575,9 @@ $(document).ready(function() {
 <code> [73]                   caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption</code>
 <code> [74]               :EndIf</code>
 <code> [75]           :EndIf</code>
-<code> [76]           ⎕←{⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-1</code>
-<code> [77]           ⎕←⍪{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices</code>
-<code> [78]           ⎕←''</code>
+<code> [76]           ⍞←({⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-2),⎕UCS 13</code>
+<code> [77]           ⍞←⍕↑{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices</code>
+<code> [78]           ⍞←2⍴⎕UCS 13</code>
 <code> [79]           question←'Select one ',(manyFlag/'or more '),'item',((manyFlag)/'s'),' '</code>
 <code> [80]           question,←((manyFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((manyFlag∧~mustFlag)/', '),(manyFlag/'a=all'),((manyFlag∨~mustFlag)/')'),' :'</code>
 <code> [81]           :If 0&lt;≢answer←⍞,0/⍞←question</code>
@@ -686,7 +687,7 @@ $(document).ready(function() {
 <code> [70]      :EndIf</code>
 <code> [71]      :If 0=≢text</code>
 <code> [72]          :If enforce</code>
-<code class="emphasize">→[73]              ⎕←'You must enter something!'</code>
+<code class="emphasize">→[73]              ⍞←'You must enter something!'</code>
 <code> [74]          :Else</code>
 <code> [75]              :Return</code>
 <code> [76]          :EndIf</code>
@@ -898,7 +899,7 @@ $(document).ready(function() {
 </div>
 <div id="footer">
 <hr>
-<p>Created by "CodeCoverage" version 0.10.7+52 from 2024-06-05</p>
+<p>Created by "CodeCoverage" version 0.12.0+77</p>
 </div>
 
 </body>
