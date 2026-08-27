@@ -1,5 +1,7 @@
 # Release notes
 
+This document covers breaking changes only. For more details on releases call `]Adoc CommTools`
+
 ## Version 2.0.0
 
 With version 2.0.0 two breaking changes were introduced:
@@ -24,3 +26,5 @@ Now there is just one global variable doing the automation: `∆Automation`. It'
 4. Counter (how many times was this line triggered)
 
 Note that there are now two Helpers available for creating/modifying this variable: `AddAutomation` and `ListAutomation`.
+
+
