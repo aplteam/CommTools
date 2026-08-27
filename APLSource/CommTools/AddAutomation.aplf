@@ -2,10 +2,12 @@
 ⍝ Use this to add a line to `∆Automation` or, if it does not yet exist, create `∆Automation`.
 ⍝ If `id` is already defined for `type`, the user is questioned whether she really wants to overwrite
 ⍝ the already existing definition. If she answers "No" no action is taken.\\
-⍝ You can enforce an update by passing a 1 as ⍺ (overwrite).
-⍝ `type` must be one of `YesOrNo`, `Select`, `Pause`, AskForText` or `AskForNumber.
-⍝ If it's not, an error is thrown.\\
-⍝ Returns 0 for "no action", 1 for "updated" and 2 for "added".
+⍝ You can enforce an update by passing a 1 as `⍺` (`overwrite`).
+⍝ `type` must be one of `YesOrNo`, `Select`, `Pause`, `AskForText` or `AskForNumber`.
+⍝ If it's not, an error is thrown. `id` must not be empty.\\
+⍝ `value` is checked for two of the types: for `AskForNumber` it must be numeric, and for `YesOrNo`
+⍝ it must be empty or one of "Y", "y", "N" and "n".\\
+⍝ Returns a shy result: 0 for "no action", 1 for "updated" (which resets the counter) and 2 for "added".
  overwrite←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'overwrite'
  r←0
  :If 0=⎕NC'∆Automation'

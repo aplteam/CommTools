@@ -1,4 +1,5 @@
  r←Public
+⍝ Returns the names that make up the public interface of `CommTools`.
  r←''
  r,←⊂'AskForText'
  r,←⊂'AskForNumber'

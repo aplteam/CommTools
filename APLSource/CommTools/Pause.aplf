@@ -1,12 +1,14 @@
  {flag}←{lineFlag}Pause msg;input;alias;ind;bool;NoPause
- ⍝ Prints `msg` to the session and tells the user that she must press <enter> if she wants to continue.
+ ⍝ Prints `msg` to the session and tells the user that she must press `<enter>` if she wants to continue.
+ ⍝ `msg` may be a simple character vector or a vector of them; `⎕UCS 13` is converted into `⎕UCS 10`.\\
  ⍝ By entering "`∘∘∘`" the user may interrupt `Pause`: this activates a stop.\\
  ⍝ The optional left argument `lineFlag` defaults to 0. If it's 1 then a line is printed. The length
  ⍝ is defined by `⎕PW-1`.\\
- ⍝ You can prevent `Pause` from displaying the message and requiring the user to press <enter>,
- ⍝ refer to the documentation with ]ADoc CommTools, catchword "Automation"\\
- ⍝ The function will return 1 in case it did present the message and stopped, and 0 otherwise (when
- ⍝ automation prevented that).
+ ⍝ You can prevent `Pause` from displaying the message and requiring the user to press `<enter>`,
+ ⍝ refer to the documentation with ]ADoc CommTools, catchword "Automation". Use "*" as ID in order
+ ⍝ to suppress every call to `Pause`.\\
+ ⍝ The function returns a shy result: 1 in case it did present the message and stopped, and 0
+ ⍝ otherwise (when automation prevented that).
  lineFlag←{0=⎕NC ⍵:0 ⋄ ⍎⍵}'lineFlag'
  msg←⊃LF{⍺,⍺⍺,⍵}/⊆msg
  msg←ReplaceCRbyLF msg

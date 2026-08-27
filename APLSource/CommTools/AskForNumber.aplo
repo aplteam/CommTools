@@ -1,12 +1,15 @@
  value←{enforce}(CheckFn AskForNumber)question;flag;input;valid;alias;bool;buff;success;firstPart;ind;AskForNumber_Answers
 ⍝ Operator asking a question and allowing the user to enter a number.\\
+⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in it, or a vector of
+⍝ simple character vectors. `⎕UCS 13` is converted into `⎕UCS 10`.\\
+⍝ Leading spaces are removed, and a colon is appended unless the question ends with one already.\\
 ⍝ By entering "`∘∘∘`" the user may interrupt `AskForNumber`: this activates a stop.\\
 ⍝ `CheckFn` is supposed to be a function that gets the input as `⍵` and must return a Boolean
 ⍝ with a 1 indicating that the input is okay and 0 that it is not. If you don't need/want
 ⍝ a check function pass `{1}` as left operand.\\
 ⍝ If the user refuses to enter a number an empty vector is returned.
 ⍝ However, you might prevent this from happening by specifying a 1 as `⍺` (`enforce`), meaning that
-⍝ the user must enter a number in order to continue.\\
+⍝ the user must enter a number in order to continue. `enforce` must be a Boolean.\\
  enforce←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'enforce'
  'Left argument ("enforce numeric input")must be a Boolean'Assert enforce∊0 1
  value←⍬

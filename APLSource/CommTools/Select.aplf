@@ -1,15 +1,20 @@
  index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;nums;valid
 ⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.
 ⍝ Selecting just one is the default.\\
+⍝ `choices` must be a vector of character vectors; leading spaces in them are removed.\\
 ⍝ The optional left argument allows you to specify multiple (positional) choices:
 ⍝  * `caption` is shown above the choices; must be a simple character vector
 ⍝  * `manyFlag` defaults to 0 (= just 1 item might be selected) or 1 (allow selecting multiple items)
 ⍝  * `mustFlag` forces the user to select at least one option, disallowing to quit without making a decision\\
+⍝ Returns a scalar in case a single item was selected, a vector in case more than one item was
+⍝ selected, and `⍬` in case the user quit without selecting anything.\\
 ⍝ Notes:
 ⍝  * `choices` must not have more than 999 items\\
+⍝  * With `manyFlag` the user may also enter an "a" for "all", or `a~{n}` for "all but n", with n
+⍝    being one or more item numbers. Under `mustFlag` `a~{n}` must not exclude every single item.\\
 ⍝  * By entering "`∘∘∘`" the user may interrupt `Select` by running onto a stop vector, overcoming
 ⍝    the Dyalog bug that ⍞ cannot be interrupted
-⍝  * You can automate `Select`, refer to the documentation with ]ADoc CommTools, catch "Automation"\\
+⍝  * You can automate `Select`, refer to the documentation with ]ADoc CommTools, catchword "Automation"\\
 ⍝  * If the user aborts by entering "q" (for "quit") `⍬` will be returned
  x←{0<⎕NC ⍵:⊆⍎⍵ ⋄ ''}'x'
  (caption manyFlag mustFlag)←x,(≢x)↓'' 0 0
