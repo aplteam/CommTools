@@ -1,6 +1,9 @@
 (
  '* 2.1.0 from 2026-08-27'
  '  * `Select` now supports "a~{n}" as "all but {n}"'
+ '  * Bug fix'
+ '    * `Select` returned a one-element vector rather than a scalar when a single item was'
+ '      selected by automation'
  '* 2.0.2 from 2025-02-05'
  '  * Help polished'
  '  * Bug fixes'

@@ -1,4 +1,4 @@
- index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;nums;valid
+ index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex
 ⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.
 ⍝ Selecting just one is the default.\\
 ⍝ `choices` must be a vector of character vectors; leading spaces in them are removed.\\
@@ -44,23 +44,18 @@
          :If (⊂index)∊0 ⍬
              index←⍬
          :ElseIf ' '=1↑0⍴∊index ⍝ Text?!
+             (keyword newIndex)←choices ParseSelectKeyword index
              :If '*'=¯1↑index
                  index←⍸((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)≡¨⊂¯1↓index
-                 index←{1=≢⍵:⊃⍵ ⋄ ⍵}index
                  'Invalid selection'Assert(mustFlag{(0<≢⍵)≠⍺}index)∨∨/index∊⍳≢choices
              :ElseIf '*'=⊃index
                  index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index
-                 index←{1=≢⍵:⊃⍵ ⋄ ⍵}index
                  'Invalid selection'Assert(mustFlag{(0<≢⍵)≠⍺}index)∨∨/index∊⍳≢choices
-             :ElseIf (,'a')≡,index
-                 index←⍳≢choices
-             :ElseIf ('a~')≡2↑index  ⍝ All but ...
-                 (valid nums)←⎕VFI 2↓index
-                 'Invalid "without"'Assert∧/valid
-                 index←(⍳≢choices)~nums
-                 'Invalid selection'Assert mustFlag≤0<≢index
-             :ElseIf (,'q')≡,index
-                 index←⍬
+             :ElseIf 0<≢keyword
+                 index←newIndex
+                 :If 'a~'≡keyword
+                     'Invalid selection'Assert mustFlag≤0<≢index ⍝ Must not exclude every item
+                 :EndIf
              :ElseIf 0<≢buff←⍸index∘≡¨choices
                  index←buff
                  'Invalid selection'Assert index∊⍳≢choices
@@ -95,23 +90,21 @@
                  (1+⊃⎕LC)⎕STOP⊃⎕SI
                  ∘∘∘ ⍝ Deliberate stop caused by user input
              :EndIf
-             :If 1=≢answer
-             :AndIf answer∊'Qq',manyFlag/'Aa'
-                 :If answer∊'Qq'
-                     :If 0=mustFlag
-                         index←⍬
-                         flag2←1
-                     :EndIf
-                 :Else
-                     index←⍳≢choices
+             (keyword newIndex)←choices ParseSelectKeyword ⎕C answer
+             :If (,'q')≡keyword
+                 :If 0=mustFlag
+                     index←⍬
                      flag2←1
                  :EndIf
-             :ElseIf manyFlag
-             :AndIf 'a~'≡2↑answer
-                 (valid nums)←⎕VFI 2↓answer
-                 :If ∧/valid
-                     index←(⍳≢choices)~nums
-                     flag2←0≠≢index
+             :ElseIf (,'a')≡keyword
+                 :If manyFlag
+                     index←newIndex
+                     flag2←1
+                 :EndIf
+             :ElseIf 'a~'≡keyword
+                 :If manyFlag
+                     index←newIndex
+                     flag2←0≠≢index ⍝ Must not exclude every item
                  :EndIf
              :Else
                  (bool value)←⎕VFI answer
@@ -125,6 +118,6 @@
              :EndIf
          :EndIf
      :Until flag2
-     index←{1<≢⍵:⍵ ⋄ ⊃⍵}⍣(⍬≢index)⊣index
  :EndIf
+ index←{1<≢⍵:⍵ ⋄ ⊃⍵}⍣(⍬≢index)⊣index
 ⍝Done
