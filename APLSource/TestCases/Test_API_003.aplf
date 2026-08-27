@@ -3,12 +3,12 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- →T.PassesIf ⎕SE.CommTools.Pause'This is called via the API'
- ⎕SE.CommTools.AddAutomation 'Pause' 'If you see this: something is wrong!' 1
- →T.GoToTidyUp ⎕SE.CommTools.Pause'If you see this: something is wrong!'
+ →T.PassesIf ∆Ref2CommTools.Pause'This is called via the API'
+ ∆Ref2CommTools.AddAutomation'Pause' 'If you see this: something is wrong!' 1
+ →T.GoToTidyUp ∆Ref2CommTools.Pause'If you see this: something is wrong!'
 
  R←T._OK
 
 ∆TidyUp:
- ⎕SE.CommTools.Cleanup
+ ∆Ref2CommTools.Cleanup
 ⍝Done
