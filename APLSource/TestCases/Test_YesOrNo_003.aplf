@@ -4,6 +4,10 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
  :Trap 1000
      {}C.YesOrNo'Please enter "∘∘∘"'
      →T.FailsIf 1

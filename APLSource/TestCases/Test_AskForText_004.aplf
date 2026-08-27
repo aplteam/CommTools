@@ -3,6 +3,10 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
  question←'This is not an @ alias!',LF,'Enter a name (enter "Stan")'
  →T.PassesIf'Stan'≡({1}C.AskForText)question
 

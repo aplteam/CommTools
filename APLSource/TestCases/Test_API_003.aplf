@@ -3,6 +3,10 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
  →T.PassesIf ∆Ref2CommTools.Pause'This is called via the API'
  ∆Ref2CommTools.AddAutomation'Pause' 'If you see this: something is wrong!' 1
  →T.GoToTidyUp ∆Ref2CommTools.Pause'If you see this: something is wrong!'

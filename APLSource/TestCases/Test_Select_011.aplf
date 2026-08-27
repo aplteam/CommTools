@@ -1,0 +1,33 @@
+ R←Test_Select_011(stopFlag batchFlag);⎕TRAP;⎕IO;⎕ML;list
+⍝ Exercise "ParseSelectKeyword", the keyword parser shared by both branches of `Select`.
+⍝ Needs neither a user nor automation.
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ ⎕IO←1 ⋄ ⎕ML←1
+ R←T._Failed
+
+ list←'One' 'Two' 'Three' 'Four' 'Five'
+
+ ⍝ The three keywords:
+ →T.PassesIf((,'q') ⍬)≡list C.ParseSelectKeyword'q'
+ →T.PassesIf((,'a') (1 2 3 4 5))≡list C.ParseSelectKeyword'a'
+ →T.PassesIf('a~' (1 3 5))≡list C.ParseSelectKeyword'a~2 4'
+
+ ⍝ "All but" with nothing or with non-existing items amounts to "all":
+ →T.PassesIf('a~' (1 2 3 4 5))≡list C.ParseSelectKeyword'a~'
+ →T.PassesIf('a~' (1 2 3 4 5))≡list C.ParseSelectKeyword'a~99'
+
+ ⍝ "All but" may exclude every item; it's up to the caller to reject that:
+ →T.PassesIf('a~' ⍬)≡list C.ParseSelectKeyword'a~1 2 3 4 5'
+
+ ⍝ Anything else is not a keyword, and that includes invalid numbers after "a~":
+ →T.PassesIf('' ⍬)≡list C.ParseSelectKeyword'a~x'
+ →T.PassesIf('' ⍬)≡list C.ParseSelectKeyword'Two'
+ →T.PassesIf('' ⍬)≡list C.ParseSelectKeyword'2'
+ →T.PassesIf('' ⍬)≡list C.ParseSelectKeyword'*ee'
+ →T.PassesIf('' ⍬)≡list C.ParseSelectKeyword''
+
+ ⍝ The parser is case sensitive: folding the user's input is the caller's business:
+ →T.PassesIf('' ⍬)≡list C.ParseSelectKeyword'Q'
+
+ R←T._OK
+⍝Done

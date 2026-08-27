@@ -3,6 +3,10 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
  question←'---- Attention @ ---',LF,'How many (enter "1")'
  →T.PassesIf 1≡({1}C.AskForNumber)question
 

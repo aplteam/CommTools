@@ -3,6 +3,10 @@
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
  ∆Info'Info: this test needs you:',(⎕UCS 10),'Answer "Enter lowercase character from ASCII" first with "1" (must get rejected), then "a"'
 
  →T.PassesIf(,'a')≡,({⍵∊⎕C ⎕A:1 ⋄ ⎕←'Enter single lowercase character from the ASCII set' ⋄ 0}C.AskForText)'Enter lowercase character from ASCII'
