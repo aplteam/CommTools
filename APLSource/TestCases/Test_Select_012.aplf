@@ -1,0 +1,24 @@
+ R←Test_Select_012(stopFlag batchFlag);⎕TRAP;list
+⍝ Exercise "Select" with two integers (min max) rather than a Boolean as `manyFlag`.
+⍝ This needs a user; the checks that don't are carried out by "Test_Select_006".
+⍝ The syntax was introduced in 2.1.0
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
+ list←'One' 'Two' 'Three' 'Four' 'Five'
+
+ ∆Info'Info: this test needs you: next enter "3" and then "3 3" - both must be rejected - and finally "2 4"'
+ →T.PassesIf 2 4≡('Select exactly two:'(2 2))C.Select list
+
+ 0 ∆Info'Info: next enter "a" and then "q" - both must be rejected - and finally "1 5"'
+ →T.PassesIf 1 5≡('Select exactly two:'(2 2)1)C.Select list
+
+ 0 ∆Info'Info: next enter "1 2 3 4" - must be rejected - and finally "1 2 3"'
+ →T.PassesIf 1 2 3≡('Select two or three:'(2 3))C.Select list
+
+ R←T._OK
+⍝Done

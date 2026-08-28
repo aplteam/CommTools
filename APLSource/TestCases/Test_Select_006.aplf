@@ -1,0 +1,41 @@
+ R←Test_Select_006(stopFlag batchFlag);⎕TRAP;⎕IO;⎕ML;list;qdmx;value
+⍝ Exercise "Select" with two integers (min max) rather than a Boolean as `manyFlag`.
+⍝ Only the checks carried out on the left argument and automation are exercised here:
+⍝ the selection itself needs a user, see "Test_Select_012".
+⍝ The syntax was introduced in 2.1.0
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ ⎕IO←1 ⋄ ⎕ML←1
+ R←T._Failed
+
+ list←'One' 'Two' 'Three' 'Four' 'Five'
+
+ ⍝ Invalid specifications of "manyFlag":
+ :For value :In (0 2)(3 2)(2 6)(2 2.5)(,2)('x')
+     :Trap 11
+         {}('Select two:'value)C.Select list
+         →T.GoToTidyUp 1
+     :Else
+         qdmx←⎕DMX
+         →T.GoToTidyUp 11≠qdmx.EN
+     :EndTrap
+ :EndFor
+
+ ⍝ Valid ones; note that automation is restricted by neither "manyFlag" nor (min max):
+ C.AddAutomation'Select' 'Select two:'(2 4)
+ →T.GoToTidyUp 2 4≢('Select two:'(2 2))C.Select list
+ →T.GoToTidyUp 2 4≢('Select two:'(2 2)1)C.Select list
+
+ 1 C.AddAutomation'Select' 'Select two:'(1 2 3)
+ →T.GoToTidyUp 1 2 3≢('Select two:'(2 2))C.Select list
+
+ 1 C.AddAutomation'Select' 'Select two:'(4 4 1)  ⍝ Duplicates are removed
+ →T.GoToTidyUp 4 1≢('Select two:'(2 2))C.Select list
+
+ 1 C.AddAutomation'Select' 'Select two:' 5
+ →T.GoToTidyUp 5≢('Select two:'(1 5))C.Select list
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

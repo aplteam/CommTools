@@ -1,6 +1,9 @@
 (
- '* 2.1.0 from 2026-08-27'
+ '* 2.1.0 from 2026-08-28'
  '  * `Select` now supports "a~{n}" as "all but {n}"'
+ '  * `Select` offers a new option - min-max: '
+ '    ''Caption'' (2 3) Select list'
+ '    is treated as "select a minimum of 2 and a maximum of 3 items. Naturally, (2 2) is most useful.'
  '  * Bug fix'
  '    * `Select` returned a one-element vector rather than a scalar when a single item was'
  '      selected by automation'
