@@ -7,7 +7,7 @@
      R←T._NoBatchTest ⋄ →0
  :EndIf
 
- →T.PassesIf 1 C.YesOrNo'Hello @' 'Please just press <enter"'
+ →T.PassesIf 1 C.YesOrNo'Hello @ I am not an alias!' 'Please just press <enter"'
 
  R←T._OK
 ⍝Done
