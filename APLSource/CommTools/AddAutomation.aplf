@@ -20,7 +20,7 @@
  :Case 'AskForNumber'
      'Return value: invalid data type'Assert(,0)≡1↑0⍴⊂value
  :Case 'YesOrNo'
-     'Invald return value; must be one of: "YyNn"'Assert(0=≢value)∨(⊂value)∊'YyNn'
+     'Invalid return value; must be one of: "YyNn"'Assert(0=≢value)∨(⊂value)∊'YyNn'
  :EndSelect
  :If ⍬≡ind←FindAutomationIndex type id
      ∆Automation⍪←type id value 0
