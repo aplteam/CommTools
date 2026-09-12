@@ -7,14 +7,14 @@
      R←T._NoBatchTest ⋄ →0
  :EndIf
 
- →T.PassesIf C.YesOrNo'Please enter "y" and then press <enter"'
- →T.PassesIf~C.YesOrNo'Please enter "n" and then press <enter"'
- →T.PassesIf C.YesOrNo'Please enter "y";',LF,'Then press <enter"'
- →T.PassesIf~C.YesOrNo'Please enter "n";',LF,'Then press <enter"'
- →T.PassesIf C.YesOrNo'Please enter "y"' 'Then press <enter"'
- →T.PassesIf~C.YesOrNo'Please enter "n"' 'Then press <enter"'
- →T.PassesIf 1 C.YesOrNo'Please just press <enter"'
- →T.PassesIf~0 C.YesOrNo'Please just press <enter"'
+ →T.PassesIf C.YesOrNo'(Please enter "y" and then press <enter") Sure'
+ →T.PassesIf~C.YesOrNo'(Please enter "n" and then press <enter") Sure'
+ →T.PassesIf C.YesOrNo'(Please enter "y";',LF,'Then press <enter") Sure'
+ →T.PassesIf~C.YesOrNo'(Please enter "n";',LF,'Then press <enter") Sure'
+ →T.PassesIf C.YesOrNo'(Please enter "y"' 'Then press <enter") Sure?'
+ →T.PassesIf~C.YesOrNo'(Please enter "n"' 'Then press <enter") Sure?'
+ →T.PassesIf 1 C.YesOrNo'(Please just press <enter") Sure'
+ →T.PassesIf~0 C.YesOrNo'(Please just press <enter") Sure'
 
  R←T._OK
 ⍝Done
