@@ -1,6 +1,6 @@
- index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag
-⍝ Presents `choices` as a numbered list and allows the user to select either exactly one or multiple ones.
-⍝ Selecting just one is the default.\\
+  index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag
+⍝ Presents `choices` as a numbered list & allows the user to select exactly one or multiple ones or none.
+⍝ Selecting exactly one or none is the default.\\
 ⍝ `choices` must be a vector of character vectors; leading spaces in them are removed.\\
 ⍝ The optional left argument allows you to specify multiple (positional) choices:
 ⍝  * `caption` is shown above the choices; must be a simple character vector
@@ -8,9 +8,9 @@
 ⍝    Rather than a Boolean it may also be two integers `(min max)`: the user must then select at least
 ⍝    `min` and at most `max` items, so `(2 2)` means "exactly two". Both must be integers between 1 and
 ⍝    the number of choices, and `min` must not be greater than `max`.
-⍝  * `mustFlag` forces the user to select at least one option, disallowing to quit without making a decision\\
+⍝  * `mustFlag` forces the user to select at least one item, disallowing to quit without making a decision\\
 ⍝ Returns a scalar in case a single item was selected, a vector in case more than one item was
-⍝ selected, and `⍬` in case the user quit without selecting anything.\\
+⍝ selected, `⍬` in case the user did not enter anything and ¯1 if the user entered "q" for "quit".\\
 ⍝ Notes:
 ⍝  * `choices` must not have more than 999 items\\
 ⍝  * Duplicates entered by the user are removed before the number of selected items is checked\\
@@ -121,7 +121,7 @@
              (keyword newIndex)←choices ParseSelectKeyword ⎕C answer
              :If (,'q')≡keyword
                  :If 0=mustFlag
-                     index←⍬
+                     index←¯1
                      flag2←1
                  :EndIf
              :ElseIf (,'a')≡keyword
@@ -135,6 +135,9 @@
                      flag2←0≠≢index ⍝ Must not exclude every item
                  :EndIf
              :Else
+                 :If (0=≢answer)∧~mustFlag
+                     index←⍬ ⋄ →0
+                 :EndIf
                  (bool value)←⎕VFI answer
                  :If ∧/bool
                      value←∪bool/value ⍝ The user might have entered an item twice
