@@ -17,7 +17,9 @@
  0 ∆Info'Info: next enter "a" (for all)'
  →T.PassesIf(⍳10)≡'Next enter "a" (for all):' 1 C.Select 10⍴options
  0 ∆Info'Info: next enter "q" (for quit)'
- →T.PassesIf ⍬≡'Enter "q"'C.Select 10⍴options
+ →T.PassesIf ¯1≡'Enter "q"'C.Select 10⍴options
+  0 ∆Info'Info: next enter "a~3 4" (for all but 3 & 4)'
+ →T.PassesIf(3 4~⍨⍳10)≡'Next enter "a~3 4"(for all but 3 & 4):' 1 C.Select 10⍴options
 
  R←T._OK
 ⍝Done
