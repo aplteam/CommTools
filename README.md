@@ -30,7 +30,7 @@ in any Dyalog version from 18.0 onwards, on all platforms.
 | Call                                        | Asks the user to         | Returns                                |
 |:--------------------------------------------|:-------------------------|:---------------------------------------|
 | `YesOrNo 'Are you sure?'`                   | answer yes or no         | 1 or 0                                 |
-| `'Which file?' Select list`                 | select from a list       | item number(s), or `⍬` for "quit"      |
+| `'Which file?' Select list`                 | select from a list       | item number(s), `⍬` for none, ¯1 for "quit"  |
 | `(CheckFn AskForText) 'Enter your name'`    | enter a character vector | the text entered, or a default         |
 | `(CheckFn AskForNumber) 'How many copies?'` | enter a number           | the number                             |
 | `Pause 'Make sure you are connected'`       | press `<enter>`          | shy 1, or 0 when automation skipped it |
