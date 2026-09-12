@@ -20,5 +20,5 @@
   source: "APLSource/CommTools",
   tags: "communication-tools,yes-or-no,select-tool",
   userCommandScript: "",
-  version: "2.1.0+105",
+  version: "3.0.0+106",
 }
