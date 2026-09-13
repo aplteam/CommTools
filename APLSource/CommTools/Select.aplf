@@ -1,4 +1,4 @@
-  index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag
+ index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag
 ⍝ Presents `choices` as a numbered list & allows the user to select exactly one or multiple ones or none.
 ⍝ Selecting exactly one or none is the default.\\
 ⍝ `choices` must be a vector of character vectors; leading spaces in them are removed.\\
@@ -70,6 +70,8 @@
              :ElseIf '*'=⊃index
                  index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index
                  'Invalid selection'Assert(mustFlag{(0<≢⍵)≠⍺}index)∨∨/index∊⍳≢choices
+             :ElseIf (,'q')≡,index
+                 index←¯1
              :ElseIf 0<≢keyword
                  index←newIndex
                  :If 'a~'≡keyword

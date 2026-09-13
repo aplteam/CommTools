@@ -1,4 +1,6 @@
 (
+ '* 3.0.1 from 2026-09-13'
+ '  * Bug fix: the new Select-syntax (entering "q" results in ¯1) could not be automated.'
  '* 3.0.0 from 2026-09-12'
  '  * Breaking change: `Select` now returns ¯1 if the user enters "q" for quit. ⍬ is now only returned'
  '    when the user did not enter anything (=did not make a selection).'

@@ -27,7 +27,7 @@
  →T.GoToTidyUp 5≠'Third'C.Select list
  →T.GoToTidyUp 3 7≢'Forth'C.Select list
  →T.GoToTidyUp ⍬≢'Fifth'C.Select list
- →T.GoToTidyUp ⍬≢'Sixth'C.Select list
+ →T.GoToTidyUp ¯1≢'Sixth'C.Select list
  →T.GoToTidyUp(⍳≢list)≢'Seventh'C.Select list
  →T.GoToTidyUp(⍳≢list)≢'This is the eighth one'C.Select list
  →T.GoToTidyUp 1 2 4≢'1@This is an alias'C.Select list
