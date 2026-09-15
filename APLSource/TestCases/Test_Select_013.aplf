@@ -1,0 +1,35 @@
+ R←Test_Select_013(stopFlag batchFlag);⎕TRAP;⎕IO;⎕ML;list;qdmx;value
+⍝ Exercise "Select" with `quitFlag` as fourth positional parameter.
+⍝ Only the checks carried out on the left argument and automation are exercised here:
+⍝ the selection itself needs a user, see "Test_Select_014".
+⍝ The parameter was introduced in 3.1.0
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ ⎕IO←1 ⋄ ⎕ML←1
+ R←T._Failed
+
+ list←'One' 'Two' 'Three'
+
+ ⍝ Invalid specifications of "quitFlag":
+ :For value :In 2(,1)'x'(0 1)
+     :Trap 11
+         {}('Select one:' 0 1 value)C.Select list
+         →T.GoToTidyUp 1
+     :Else
+         qdmx←⎕DMX
+         →T.GoToTidyUp'"quitFlag" must be a Boolean'≢qdmx.EM
+     :EndTrap
+ :EndFor
+
+ ⍝ Automation is not restricted by "quitFlag": "q" always returns ¯1:
+ C.AddAutomation'Select' 'Select one:' 'q'
+ →T.GoToTidyUp ¯1≢('Select one:' 0 1 1)C.Select list
+ →T.GoToTidyUp ¯1≢('Select one:' 0 1 0)C.Select list
+ →T.GoToTidyUp ¯1≢('Select one:' 0 0 0)C.Select list
+ →T.GoToTidyUp ¯1≢('Select one:' 0 1)C.Select list
+ →T.GoToTidyUp 4≠C.∆Automation[1;4]
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

@@ -1,0 +1,26 @@
+ R←Test_Select_014(stopFlag batchFlag);⎕TRAP;list
+⍝ Exercise "Select" with `quitFlag` as fourth positional parameter.
+⍝ This needs a user; the checks that don't are carried out by "Test_Select_013".
+⍝ The parameter was introduced in 3.1.0
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
+ list←'One' 'Two' 'Three'
+
+ ∆Info'Info: this test needs you: next just press <enter> - must be rejected - and then enter "q"'
+ →T.PassesIf ¯1≡('Select or quit:' 0 1 1)C.Select list
+ →T.PassesIf C.YesOrNo'Did the prompt offer "q=quit"?'
+
+ 0 ∆Info'Info: next enter "q" - must be rejected - and then "2"'
+ →T.PassesIf 2≡('Select, no quitting:' 1 1 0)C.Select list
+
+ 0 ∆Info'Info: next enter "q" - must be rejected - and then just press <enter>'
+ →T.PassesIf ⍬≡('Select nothing, no quitting:' 0 0 0)C.Select list
+ →T.PassesIf~C.YesOrNo'Did the prompt offer "q=quit"?'
+
+ R←T._OK
+⍝Done

@@ -1,4 +1,4 @@
- index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag
+ index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag;quitFlag
 ⍝ Presents `choices` as a numbered list & allows the user to select exactly one or multiple ones or none.
 ⍝ Selecting exactly one or none is the default.\\
 ⍝ `choices` must be a vector of character vectors; leading spaces in them are removed.\\
@@ -8,7 +8,10 @@
 ⍝    Rather than a Boolean it may also be two integers `(min max)`: the user must then select at least
 ⍝    `min` and at most `max` items, so `(2 2)` means "exactly two". Both must be integers between 1 and
 ⍝    the number of choices, and `min` must not be greater than `max`.
-⍝  * `mustFlag` forces the user to select at least one item, disallowing to quit without making a decision\\
+⍝  * `mustFlag` forces the user to select at least one item: pressing `<enter>` without a selection is rejected
+⍝  * `quitFlag` decides whether the user may enter "q" (for "quit"), which returns ¯1. It defaults to
+⍝    `~mustFlag`, so pass a 1 together with `mustFlag←1` in order to enforce a selection but still allow
+⍝    the user to quit\\
 ⍝ Returns a scalar in case a single item was selected, a vector in case more than one item was
 ⍝ selected, `⍬` in case the user did not enter anything and ¯1 if the user entered "q" for "quit".\\
 ⍝ Notes:
@@ -17,15 +20,15 @@
 ⍝  * With `manyFlag←1` the user may also enter an "a" for "all", or `a~{n}` for "all but n", with n
 ⍝    being one or more item numbers. Under `mustFlag` `a~{n}` must not exclude every single item.
 ⍝    With `manyFlag←(min max)` these two keywords are not on offer.\\
-⍝  * `mustFlag` keeps its meaning with `(min max)`: it decides whether the user may quit without
-⍝    selecting anything at all\\
+⍝  * `mustFlag` and `quitFlag` keep their meaning with `(min max)`\\
 ⍝  * By entering "`∘∘∘`" the user may interrupt `Select` by running onto a stop vector, overcoming
 ⍝    the Dyalog bug that ⍞ cannot be interrupted
 ⍝  * You can automate `Select`, refer to the documentation with ]ADoc CommTools, catchword "Automation".
-⍝    Note that automation is restricted by neither `manyFlag` nor `(min max)`\\
-⍝  * If the user aborts by entering "q" (for "quit") `⍬` will be returned
+⍝    Note that automation is restricted by none of `manyFlag`, `(min max)` and `quitFlag`
  x←{0<⎕NC ⍵:⊆⍎⍵ ⋄ ''}'x'
- (caption manyFlag mustFlag)←x,(≢x)↓'' 0 0
+ (caption manyFlag mustFlag quitFlag)←x,(≢x)↓'' 0 0 ⍬
+ quitFlag←{⍬≡⍵:~mustFlag ⋄ ⍵}quitFlag
+ '"quitFlag" must be a Boolean'Assert(⊂quitFlag)∊0 1
  '"caption" must be a simple character vector'Assert 1=≡caption←,caption
  '"caption" must not contain line feeds (⎕UCS 10)'Assert~LF∊caption
  '"caption" must not contain carriage returns (⎕UCS 13)'Assert~(⎕UCS 13)∊caption
@@ -103,7 +106,7 @@
      :Else
          question←'Select one ',(allFlag/'or more '),'item',allFlag/'s'
      :EndIf
-     question,←' ',((allFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((allFlag∧~mustFlag)/', '),(allFlag/'a=all, a~n=all but n'),((allFlag∨~mustFlag)/')'),' :'
+     question,←' ',((allFlag∨quitFlag)/'('),(quitFlag/'q=quit'),((allFlag∧quitFlag)/', '),(allFlag/'a=all, a~n=all but n'),((allFlag∨quitFlag)/')'),' :'
      blankFlag←0≠≢caption
      :If AliasChar∊caption
          :If (firstPart⍳' ')>firstPart⍳AliasChar
@@ -123,7 +126,7 @@
              :EndIf
              (keyword newIndex)←choices ParseSelectKeyword ⎕C answer
              :If (,'q')≡keyword
-                 :If 0=mustFlag
+                 :If quitFlag
                      index←¯1
                      flag2←1
                  :EndIf

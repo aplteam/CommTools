@@ -1,11 +1,11 @@
 # Release notes
 
-This document covers breaking changes only. For more details on releases call `]Adoc CommTools`
-
-
 ## Version 3.1.0
 
 * `SetOnWait` and `UnsetOnWait` added: `SetOnWait` establishes a function that is called whenever a `CommTools` function is about to wait for input from the user, typically for notifying the user
+* `Select` accepts a fourth positional parameter `quitFlag`: it decides whether the user may enter "q"
+    (for quit), independently of `mustFlag`. A selection can therefore be enforced while the user may
+    still quit. `quitFlag` defaults to `~mustFlag`, which is the behaviour so far.
 * Bug fixes
   * `FindAutomationIndex`, and therefore `AddAutomation`, threw a RANK ERROR when `∆Automation` held 
     a one-character ID, such as th  `*` of `Pause`, and the ID in question was an alias

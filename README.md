@@ -54,7 +54,8 @@ added when you did not provide one.
   makes user commands testable.
 * **You decide how much you insist.** Force a decision, or offer a default that
   `<enter>` accepts. `Select` takes just one item by default; ask for several, for all, or
-  for a particular number of them, say exactly two, by passing `(2 2)`.
+  for a particular number of them, say exactly two, by passing `(2 2)`. You can also insist
+  on a selection and still let the user quit.
 * **It can tell you that it is waiting.** A long-running user command that finally asks a
   question does not have to sit there unnoticed. [See below](#knowing-when-the-session-waits).
 

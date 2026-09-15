@@ -7,7 +7,7 @@
 ⍝ `keyword` is the keyword that was recognized, and `index` the item numbers it stands for.\\
 ⍝ In case `answer` is not one of these keywords, or the numbers after "a~" are invalid, an empty
 ⍝ `keyword` is returned; it's then up to the caller to decide what to do.\\
-⍝ Note that this function checks neither `manyFlag` nor `mustFlag`: that's the caller's business,
+⍝ Note that this function checks none of `manyFlag`, `mustFlag` and `quitFlag`: that's the caller's business,
 ⍝ because the user and `∆Automation` are not treated the same in that respect.
  keyword←''
  index←⍬

@@ -19,7 +19,6 @@ html{-webkit-text-size-adjust:100%;}body{margin:0;}main{display:block;}h1{margin
 <h1 data-id="Release-notes">Release notes</h1>
 </a>
 </div>
-<p>This document covers breaking changes only. For more details on releases call <code>]Adoc CommTools</code></p>
 <div class="h_tag">
 <a href="#version-310" id="version-310" class="autoheader_anchor">
 <h2 data-id="Version-310">Version 3.1.0</h2>
@@ -27,6 +26,7 @@ html{-webkit-text-size-adjust:100%;}body{margin:0;}main{display:block;}h1{margin
 </div>
 <ul>
 <li><code>SetOnWait</code> and <code>UnsetOnWait</code> added: <code>SetOnWait</code> establishes a function that is called whenever a <code>CommTools</code> function is about to wait for input from the user, typically for notifying the user</li>
+<li><code>Select</code> accepts a fourth positional parameter <code>quitFlag</code>: it decides whether the user may enter “q” (for quit), independently of <code>mustFlag</code>. A selection can therefore be enforced while the user may still quit. <code>quitFlag</code> defaults to <code>~mustFlag</code>, which is the behaviour so far.</li>
 <li>Bug fixes
 <ul>
 <li><code>FindAutomationIndex</code>, and therefore <code>AddAutomation</code>, threw a RANK ERROR when <code>∆Automation</code> held a one-character ID, such as th  <code>*</code> of <code>Pause</code>, and the ID in question was an alias</li>
