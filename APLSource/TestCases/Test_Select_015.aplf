@@ -1,0 +1,35 @@
+ R←Test_Select_015(stopFlag batchFlag);⎕TRAP;⎕IO;⎕ML;list;text
+⍝ Exercise "ParseSelectNumbers", the parser for the item numbers and ranges like "3-6" a user enters,
+⍝ as well as ranges after "a~". Needs neither a user nor automation.
+⍝ Ranges were introduced in 3.1.0
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ ⎕IO←1 ⋄ ⎕ML←1
+ R←T._Failed
+
+ ⍝ Single numbers and ranges, separated by blanks and/or commas:
+ →T.PassesIf(1(3 4 5 6))≡20 C.ParseSelectNumbers'3-6'
+ →T.PassesIf(1(1 2 5 10 11 12 13 17))≡20 C.ParseSelectNumbers'1 2 5 10-13 17'
+ →T.PassesIf(1(1 2 5))≡20 C.ParseSelectNumbers'1,2 5'
+ →T.PassesIf(1(1 2 3 4))≡20 C.ParseSelectNumbers'1, 2,,3-4'
+ →T.PassesIf(1(10 11 12 1))≡20 C.ParseSelectNumbers'10-12 1'   ⍝ Entry order is kept
+ →T.PassesIf(1(1 2 3 2))≡20 C.ParseSelectNumbers'1-3 2'        ⍝ Duplicates are the caller's business
+ →T.PassesIf(1 ⍬)≡20 C.ParseSelectNumbers''
+
+ ⍝ A range is expanded no further than one beyond the number of choices:
+ →T.PassesIf(1(8 9 10 11))≡10 C.ParseSelectNumbers'8-5000'
+ →T.PassesIf(1(,11))≡10 C.ParseSelectNumbers'5000-6000'
+
+ ⍝ Invalid: blanks within a range, n2 not greater than n1, and anything else that is not a number:
+ :For text :In '1 -2' '1- 2' '1 - 2' '5-5' '6-3' '3-6-9' '-3' '3-' '0-3' '1.5-3' 'x-3' '3-x' 'a' '2 x'
+     →T.PassesIf(0 ⍬)≡20 C.ParseSelectNumbers text
+ :EndFor
+
+ ⍝ Ranges after "a~":
+ list←'One' 'Two' 'Three' 'Four' 'Five'
+ →T.PassesIf('a~'(1 5))≡list C.ParseSelectKeyword'a~2-4'
+ →T.PassesIf('a~'(2 4 5))≡list C.ParseSelectKeyword'a~1,3'
+ →T.PassesIf('a~'(1 2))≡list C.ParseSelectKeyword'a~3-99'
+ →T.PassesIf('' ⍬)≡list C.ParseSelectKeyword'a~2 - 4'
+
+ R←T._OK
+⍝Done

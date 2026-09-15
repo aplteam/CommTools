@@ -3,7 +3,8 @@
 ⍝ the user or comes from `∆Automation`:
 ⍝  * "q" (for "quit") stands for `⍬`
 ⍝  * "a" (for "all") stands for all item numbers
-⍝  * `a~{n}` (for "all but n") stands for all item numbers but n\\
+⍝  * `a~{n}` (for "all but n") stands for all item numbers but n, where n may consist of numbers as well
+⍝    as ranges like `3-6`, see `ParseSelectNumbers`\\
 ⍝ `keyword` is the keyword that was recognized, and `index` the item numbers it stands for.\\
 ⍝ In case `answer` is not one of these keywords, or the numbers after "a~" are invalid, an empty
 ⍝ `keyword` is returned; it's then up to the caller to decide what to do.\\
@@ -17,8 +18,8 @@
      keyword←,'a'
      index←⍳≢choices
  :ElseIf 'a~'≡2↑answer
-     (valid nums)←⎕VFI 2↓answer
-     :If ∧/valid
+     (valid nums)←(≢choices)ParseSelectNumbers 2↓answer
+     :If valid
          keyword←'a~'
          index←(⍳≢choices)~nums
      :EndIf

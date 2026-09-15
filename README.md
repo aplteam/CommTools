@@ -40,6 +40,10 @@ gets what the user entered and returns 1 to accept it or 0 to ask again. Both re
 empty vector when the user just presses `<enter>`; pass a 1 as left argument to insist on
 an answer, or give `AskForText` a character vector as left argument to define a default.
 
+When `Select` allows several items, the user may enter ranges like `3-6` next to single
+numbers, `a` for all items, or `a~` followed by numbers and ranges for all but those, as in
+`a~10-40`.
+
 Invalid input is rejected and the question repeated, so you never have to check the result
 for garbage. Leading spaces in your prompts are removed, and a question mark or a colon is
 added when you did not provide one.

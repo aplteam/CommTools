@@ -1,4 +1,4 @@
- index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag;quitFlag
+ index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag;quitFlag;options
 ⍝ Presents `choices` as a numbered list & allows the user to select exactly one or multiple ones or none.
 ⍝ Selecting exactly one or none is the default.\\
 ⍝ `choices` must be a vector of character vectors; leading spaces in them are removed.\\
@@ -20,6 +20,10 @@
 ⍝  * With `manyFlag←1` the user may also enter an "a" for "all", or `a~{n}` for "all but n", with n
 ⍝    being one or more item numbers. Under `mustFlag` `a~{n}` must not exclude every single item.
 ⍝    With `manyFlag←(min max)` these two keywords are not on offer.\\
+⍝  * When more than one item may be selected, the user may also enter ranges like `3-6` for `3 4 5 6`,
+⍝    mixed with single numbers as in `1 2 5 10-13 17`; commas are treated like blanks. A range must not
+⍝    contain blanks, and its second number must be greater than the first one. Ranges may also follow
+⍝    `a~`, as in `a~10-40`. In automation a value like `'3-6'` is matched against the choices, though.\\
 ⍝  * `mustFlag` and `quitFlag` keep their meaning with `(min max)`\\
 ⍝  * By entering "`∘∘∘`" the user may interrupt `Select` by running onto a stop vector, overcoming
 ⍝    the Dyalog bug that ⍞ cannot be interrupted
@@ -106,7 +110,8 @@
      :Else
          question←'Select one ',(allFlag/'or more '),'item',allFlag/'s'
      :EndIf
-     question,←' ',((allFlag∨quitFlag)/'('),(quitFlag/'q=quit'),((allFlag∧quitFlag)/', '),(allFlag/'a=all, a~n=all but n'),((allFlag∨quitFlag)/')'),' :'
+     options←(quitFlag/⊂'q=quit'),(allFlag/'a=all' 'a~n=all but n'),(1<maxSel)/⊂'n1-n2=range'
+     question,←' ',({0=≢⍵:'' ⋄ '(',(⊃{⍺,', ',⍵}/⍵),')'}options),' :'
      blankFlag←0≠≢caption
      :If AliasChar∊caption
          :If (firstPart⍳' ')>firstPart⍳AliasChar
@@ -144,9 +149,9 @@
                  :If (0=≢answer)∧~mustFlag
                      index←⍬ ⋄ →0
                  :EndIf
-                 (bool value)←⎕VFI answer
-                 :If ∧/bool
-                     value←∪bool/value ⍝ The user might have entered an item twice
+                 (bool value)←(≢choices)ParseSelectNumbers answer
+                 :If bool
+                     value←∪value ⍝ The user might have entered an item twice
                      :If ∧/value∊⍳≢choices
                      :AndIf minSel≤≢value
                      :AndIf maxSel≥≢value
