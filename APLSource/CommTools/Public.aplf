@@ -11,3 +11,5 @@
  r,←⊂'FindAutomationIndex'
  r,←⊂'ListAutomation'
  r,←⊂'Help'
+ r,←⊂'SetOnWait'
+ r,←⊂'UnsetOnWait'

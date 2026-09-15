@@ -2,6 +2,26 @@
 
 This document covers breaking changes only. For more details on releases call `]Adoc CommTools`
 
+
+## Version 3.1.0
+
+* `SetOnWait` and `UnsetOnWait` added: `SetOnWait` establishes a function that is called whenever a `CommTools` function is about to wait for input from the user, typically for notifying the user
+* Bug fixes
+  * `FindAutomationIndex`, and therefore `AddAutomation`, threw a RANK ERROR when `∆Automation` held 
+    a one-character ID, such as th  `*` of `Pause`, and the ID in question was an alias
+  * `Pause` threw a RANK ERROR when `∆Automation` held a `*` row as well as an alias row
+  * `Pause` ignored a `*` row as soon as there were other `Pause` rows: a message that matched none
+    of them stopped and waited for the user
+  * `YesOrNo` threw a RANK ERROR when `∆Automation` held a one-character ID and the question had an alias
+
+## Version 3.0.1
+
+Bug fix: the new Select-syntax (entering "q" results in ¯1) could not be automated.
+
+## Verssion 3.0.0
+
+Breaking change: `Select` now returns ¯1 if the user enters "q" for quit. ⍬ is now only returned when the user did not enter anything (=did not make a selection).
+
 ## Version 2.0.0
 
 With version 2.0.0 two breaking changes were introduced:
@@ -26,5 +46,6 @@ Now there is just one global variable doing the automation: `∆Automation`. It'
 4. Counter (how many times was this line triggered)
 
 Note that there are now two Helpers available for creating/modifying this variable: `AddAutomation` and `ListAutomation`.
+
 
 

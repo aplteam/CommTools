@@ -1,4 +1,4 @@
- text←{x}(CheckFn AskForText)question;flag;alias;bool;buff;success;firstPart;enforce;default;firstFlag;AskForText_Answers
+ text←{x}(CheckFn AskForText)question;flag;alias;bool;buff;success;firstPart;enforce;default;firstFlag;AskForText_Answers;notifiedFlag
 ⍝ Operator asking a question and allowing the user to enter text.\\
 ⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in it, or a vector of
 ⍝ simple character vectors. `⎕UCS 13` is converted into `⎕UCS 10`.\\
@@ -15,6 +15,7 @@
 ⍝ would not make a difference anyway. The default is shown to the user in square brackets.\\
  x←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'x'
  firstFlag←1
+ notifiedFlag←0
  :If ' '=1↑0⍴x
      default←x
      enforce←0
@@ -54,6 +55,11 @@
          :If (⌊/firstPart⍳' ',LF)>firstPart⍳AliasChar
              question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question
          :EndIf
+     :EndIf
+     :If ~flag
+     :AndIf ~notifiedFlag
+         'AskForText'CallOnWait question
+         notifiedFlag←1
      :EndIf
      :If 0<≢default
      :AndIf firstFlag

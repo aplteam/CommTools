@@ -10,7 +10,7 @@
  :If 0<⎕NC'∆Automation'
  :AndIf 0<≢∆Automation
      :If '@'∊id
-         bool←(∆Automation[;1]≡¨⊂type)∧(({⍵↑⍨⍵⍳'@'}¨∆Automation[;2])≡¨⊂{⍵↑⍨⍵⍳'@'}id)
+         bool←(∆Automation[;1]≡¨⊂type)∧(({⍵↑⍨(,⍵)⍳'@'}¨∆Automation[;2])≡¨⊂{⍵↑⍨⍵⍳'@'}id)
      :Else
          bool←(∆Automation[;1]≡¨⊂type)∧(∆Automation[;2]≡¨⊂id)
      :EndIf

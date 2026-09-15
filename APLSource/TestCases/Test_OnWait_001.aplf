@@ -1,0 +1,19 @@
+ R←Test_OnWait_001(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "SetOnWait" and "UnsetOnWait" and their results
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.UnsetOnWait
+ →T.GoToTidyUp 0≠C.UnsetOnWait
+ →T.GoToTidyUp 0≠∆OnWaitSpy C.SetOnWait 0
+ →T.GoToTidyUp 3≠C.⎕NC'∆OnWait'
+ →T.GoToTidyUp 1≠∆OnWaitSpy C.SetOnWait 0
+ →T.GoToTidyUp 1≠C.UnsetOnWait
+ →T.GoToTidyUp 0≠C.⎕NC'∆OnWait'
+ →T.GoToTidyUp 0≠C.UnsetOnWait
+
+ R←T._OK
+
+∆TidyUp:
+ C.UnsetOnWait
+⍝Done

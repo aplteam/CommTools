@@ -1,0 +1,31 @@
+ R←Test_OnWait_004(stopFlag batchFlag);⎕TRAP;expected
+⍝ Exercise "SetOnWait": the function established is called once per question, with type and question
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     R←T._NoBatchTest ⋄ →0
+ :EndIf
+
+ ∆OnWaitCalls←⍬
+ ∆OnWaitSpy C.SetOnWait 0
+ ∆Info'This test needs you: answer every question exactly as it tells you to'
+ {}C.YesOrNo'TST1@Enter "x" first, then "y" - okay?'
+ {}'TST2@Enter "9" first, then "1"'C.Select'First' 'Second'
+ C.Pause'TST3@Just press <enter>'
+ {}({(,'1')≡,⍵}C.AskForText)'TST4@Enter "x" first, then "1"'
+ {}({1}C.AskForNumber)'TST5@Enter "a" first, then "1"'
+
+ expected←⊂'YesOrNo' 'Enter "x" first, then "y" - okay?'
+ expected,←⊂'Select' 'Enter "9" first, then "1"'
+ expected,←⊂'Pause' 'Just press <enter>'
+ expected,←⊂'AskForText' 'Enter "x" first, then "1"'
+ expected,←⊂'AskForNumber' 'Enter "a" first, then "1"'
+ →T.GoToTidyUp expected≢∆OnWaitCalls
+
+ R←T._OK
+
+∆TidyUp:
+ C.UnsetOnWait
+ ⎕EX'∆OnWaitCalls'
+⍝Done

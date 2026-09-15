@@ -1,0 +1,18 @@
+ R←Test_Pause_004(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "Pause" with automation: a "*" row followed by alias rows must work (used to be a RANK ERROR)
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.AddAutomation'Pause' '*' ''
+ C.AddAutomation'Pause' 'TST1@' ''
+ C.AddAutomation'YesOrNo' 'TST2@' 'y'
+ →T.GoToTidyUp 3≠≢C.∆Automation
+ →T.GoToTidyUp 0≠C.Pause'TST1@Should not stop'
+ →T.GoToTidyUp 1≠C.YesOrNo'TST2@Should not be asked?'
+ →T.GoToTidyUp 1 1≢C.∆Automation[2 3;4]
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

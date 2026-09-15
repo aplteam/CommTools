@@ -1,0 +1,19 @@
+ R←Test_Pause_005(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "Pause" with automation: "*" suppresses every call even when there are other "Pause" rows
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.AddAutomation'Pause' 'TST1@' ''
+ C.AddAutomation'Pause' 'Should not stop -1-' ''
+ C.AddAutomation'Pause' '*' ''
+ →T.GoToTidyUp 0≠C.Pause'TST1@Should not stop -2-'
+ →T.GoToTidyUp 0≠C.Pause'Should not stop -1-'
+ →T.GoToTidyUp 0≠C.Pause'TST2@Matches no row but must not stop either'
+ →T.GoToTidyUp 0≠C.Pause'Matches no row and has no alias'
+ →T.GoToTidyUp 1 1 2≢C.∆Automation[;4]
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+⍝Done

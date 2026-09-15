@@ -1,0 +1,28 @@
+ R←Test_OnWait_003(stopFlag batchFlag);⎕TRAP
+⍝ Exercise "SetOnWait": the function established must not be called when automation answers
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ ∆OnWaitCalls←⍬
+ ∆OnWaitSpy C.SetOnWait 0
+ C.AddAutomation'YesOrNo' 'Sure@' 'y'
+ C.AddAutomation'Select' 'Pick@' 2
+ C.AddAutomation'Pause' 'Wait@' ''
+ C.AddAutomation'AskForText' 'Name@' 'John'
+ C.AddAutomation'AskForNumber' 'Copies@' 3
+
+ →T.GoToTidyUp 1≠C.YesOrNo'Sure@Are you sure?'
+ →T.GoToTidyUp 2≠'Pick@Pick one'C.Select'First' 'Second' 'Third'
+ →T.GoToTidyUp 0≠C.Pause'Wait@Should not stop'
+ →T.GoToTidyUp'John'≢({1}C.AskForText)'Name@Your name'
+ →T.GoToTidyUp 3≠({1}C.AskForNumber)'Copies@Number of copies'
+ →T.GoToTidyUp 5≠+/C.∆Automation[;4]
+ →T.GoToTidyUp 0≠≢∆OnWaitCalls
+
+ R←T._OK
+
+∆TidyUp:
+ C.Cleanup
+ C.UnsetOnWait
+ ⎕EX'∆OnWaitCalls'
+⍝Done

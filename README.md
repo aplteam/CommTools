@@ -27,13 +27,13 @@ in any Dyalog version from 18.0 onwards, on all platforms.
 
 ## The functions
 
-| Call                                        | Asks the user to         | Returns                                |
-|:--------------------------------------------|:-------------------------|:---------------------------------------|
-| `YesOrNo 'Are you sure?'`                   | answer yes or no         | 1 or 0                                 |
-| `'Which file?' Select list`                 | select from a list       | item number(s), `⍬` for none, ¯1 for "quit"  |
-| `(CheckFn AskForText) 'Enter your name'`    | enter a character vector | the text entered, or a default         |
-| `(CheckFn AskForNumber) 'How many copies?'` | enter a number           | the number                             |
-| `Pause 'Make sure you are connected'`       | press `<enter>`          | shy 1, or 0 when automation skipped it |
+| Call                                        | Asks the user to         | Returns                                        |
+|:--------------------------------------------|:-------------------------|:-----------------------------------------------|
+| `YesOrNo 'Are you sure?'`                   | answer yes or no         | 1 or 0                                         |
+| `'Which file?' Select list`                 | select from a list       | item number(s), `⍬` for none, `¯1` for "quit"  |
+| `(CheckFn AskForText) 'Enter your name'`    | enter a character vector | the text entered, or a default                 |
+| `(CheckFn AskForNumber) 'How many copies?'` | enter a number           | the number                                     |
+| `Pause 'Make sure you are connected'`       | press `<enter>`          | shy 1, or 0 when automation skipped it         |
 
 `AskForText` and `AskForNumber` are operators: the left operand is a check function that
 gets what the user entered and returns 1 to accept it or 0 to ask again. Both return an
@@ -55,6 +55,8 @@ added when you did not provide one.
 * **You decide how much you insist.** Force a decision, or offer a default that
   `<enter>` accepts. `Select` takes just one item by default; ask for several, for all, or
   for a particular number of them, say exactly two, by passing `(2 2)`.
+* **It can tell you that it is waiting.** A long-running user command that finally asks a
+  question does not have to sit there unnoticed. [See below](#knowing-when-the-session-waits).
 
 ## Automation in half a minute
 
@@ -84,6 +86,26 @@ with a dynamic part, such as the filename above, automatable at all.
 When no entry matches, the function simply asks the user, so automation never gets in your
 way. `CommTools.Cleanup` removes the variable again.
 
+## Knowing when the session waits
+
+You start a user command that runs for a while, switch to something else, and meanwhile it
+has stopped to ask you a question. To be told, hand `SetOnWait` a function: `CommTools`
+calls it whenever it is about to wait for input.
+
+```apl
+      ∇ r←Notify(type question)
+        r←⍬
+        ⍝ Pop up a toast, play a sound, call notify-send... but don't wait for it
+      ∇
+      #.Notify CommTools.SetOnWait 0
+```
+
+The function gets the type (`YesOrNo`, `Select`, `Pause`, `AskForText` or `AskForNumber`)
+and the question without its alias, and it must return a result, which is ignored. It is
+called once per question, and never when automation answers, so test runs stay quiet.
+
+`CommTools.UnsetOnWait` removes the function again; `Cleanup` leaves it alone.
+
 ## Installation
 
 Load it into the workspace, into `#` or any namespace you like:
@@ -111,9 +133,9 @@ To make it part of a project, install it into the project's dependency folder in
 ```
 
 or call `CommTools.Help`, which does the same. It covers every function in detail, as well
-as automation, aliases and the wildcard syntax. `CommTools.Public` lists the public
-interface, and [ReleaseNotes.md](ReleaseNotes.md) records the breaking changes between
-major versions.
+as automation, aliases, the wildcard syntax and notifications. `CommTools.Public` lists the
+public interface, and [ReleaseNotes.md](ReleaseNotes.md) records the breaking changes
+between major versions.
 
 ## License
 

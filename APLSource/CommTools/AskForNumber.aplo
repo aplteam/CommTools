@@ -1,4 +1,4 @@
- value←{enforce}(CheckFn AskForNumber)question;flag;input;valid;alias;bool;buff;success;firstPart;ind;AskForNumber_Answers
+ value←{enforce}(CheckFn AskForNumber)question;flag;input;valid;alias;bool;buff;success;firstPart;ind;AskForNumber_Answers;notifiedFlag
 ⍝ Operator asking a question and allowing the user to enter a number.\\
 ⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in it, or a vector of
 ⍝ simple character vectors. `⎕UCS 13` is converted into `⎕UCS 10`.\\
@@ -14,6 +14,7 @@
  'Left argument ("enforce numeric input")must be a Boolean'Assert enforce∊0 1
  value←⍬
  success←flag←0
+ notifiedFlag←0
  :If ~(≡question)∊0 1
      question←1↓⊃,/LF,¨question
  :EndIf
@@ -45,6 +46,10 @@
          :EndIf
      :EndIf
      :If ~flag
+         :If ~notifiedFlag
+             'AskForNumber'CallOnWait question
+             notifiedFlag←1
+         :EndIf
          input←⍞,0/⍞←question,((':'≠¯1↑question)/':'),' '
          :If '∘∘∘'≡¯3↑input
              (1+⊃⎕LC)⎕STOP⊃⎕SI

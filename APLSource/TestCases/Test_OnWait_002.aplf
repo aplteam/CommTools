@@ -1,0 +1,20 @@
+ R←Test_OnWait_002(stopFlag batchFlag);⎕TRAP;qdmx
+⍝ Exercise "SetOnWait" with text rather than a function as operand
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C.UnsetOnWait
+ :Trap 11
+     '∆OnWaitSpy'C.SetOnWait 0
+     →T.GoToTidyUp 1
+ :Else
+     qdmx←⎕DMX
+     →T.GoToTidyUp'The operand must be a function'≢qdmx.EM
+ :EndTrap
+ →T.GoToTidyUp 0≠C.⎕NC'∆OnWait'
+
+ R←T._OK
+
+∆TidyUp:
+ C.UnsetOnWait
+⍝Done

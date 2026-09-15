@@ -21,6 +21,33 @@ html{-webkit-text-size-adjust:100%;}body{margin:0;}main{display:block;}h1{margin
 </div>
 <p>This document covers breaking changes only. For more details on releases call <code>]Adoc CommTools</code></p>
 <div class="h_tag">
+<a href="#version-310" id="version-310" class="autoheader_anchor">
+<h2 data-id="Version-310">Version 3.1.0</h2>
+</a>
+</div>
+<ul>
+<li><code>SetOnWait</code> and <code>UnsetOnWait</code> added: <code>SetOnWait</code> establishes a function that is called whenever a <code>CommTools</code> function is about to wait for input from the user, typically for notifying the user</li>
+<li>Bug fixes
+<ul>
+<li><code>FindAutomationIndex</code>, and therefore <code>AddAutomation</code>, threw a RANK ERROR when <code>∆Automation</code> held a one-character ID, such as th  <code>*</code> of <code>Pause</code>, and the ID in question was an alias</li>
+<li><code>Pause</code> threw a RANK ERROR when <code>∆Automation</code> held a <code>*</code> row as well as an alias row</li>
+<li><code>Pause</code> ignored a <code>*</code> row as soon as there were other <code>Pause</code> rows: a message that matched none of them stopped and waited for the user</li>
+<li><code>YesOrNo</code> threw a RANK ERROR when <code>∆Automation</code> held a one-character ID and the question had an alias</li>
+</ul></li>
+</ul>
+<div class="h_tag">
+<a href="#version-301" id="version-301" class="autoheader_anchor">
+<h2 data-id="Version-301">Version 3.0.1</h2>
+</a>
+</div>
+<p>Bug fix: the new Select-syntax (entering “q” results in ¯1) could not be automated.</p>
+<div class="h_tag">
+<a href="#verssion-300" id="verssion-300" class="autoheader_anchor">
+<h2 data-id="Verssion-300">Verssion 3.0.0</h2>
+</a>
+</div>
+<p>Breaking change: <code>Select</code> now returns ¯1 if the user enters “q” for quit. ⍬ is now only returned when the user did not enter anything (=did not make a selection).</p>
+<div class="h_tag">
 <a href="#version-200" id="version-200" class="autoheader_anchor">
 <h2 data-id="Version-200">Version 2.0.0</h2>
 </a>

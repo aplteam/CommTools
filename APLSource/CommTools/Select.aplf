@@ -104,13 +104,14 @@
          question←'Select one ',(allFlag/'or more '),'item',allFlag/'s'
      :EndIf
      question,←' ',((allFlag∨~mustFlag)/'('),((~mustFlag)/'q=quit'),((allFlag∧~mustFlag)/', '),(allFlag/'a=all, a~n=all but n'),((allFlag∨~mustFlag)/')'),' :'
-     :Repeat
-         blankFlag←0≠≢caption
-         :If AliasChar∊caption
-             :If (firstPart⍳' ')>firstPart⍳AliasChar
-                 caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption
-             :EndIf
+     blankFlag←0≠≢caption
+     :If AliasChar∊caption
+         :If (firstPart⍳' ')>firstPart⍳AliasChar
+             caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption
          :EndIf
+     :EndIf
+     'Select'CallOnWait caption
+     :Repeat
          ⍞←({⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-2),⎕UCS 10
          ⍞←⍕↑{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices
          ⍞←2⍴⎕UCS 10

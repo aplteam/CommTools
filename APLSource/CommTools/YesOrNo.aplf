@@ -32,7 +32,7 @@
      :If AliasChar∊firstPart
          ind←firstPart⍳AliasChar
          (alias question)←ind{(⍺↑⍵)(⍺↓⍵)}firstPart
-         flag←0<+/bool←({⍵↑⍨⍵⍳AliasChar}¨Answers[;1])≡¨⊂alias
+         flag←0<+/bool←({⍵↑⍨(,⍵)⍳AliasChar}¨Answers[;1])≡¨⊂alias
      :ElseIf ~flag←0<+/bool←({⍵,(~'?'∊⍵)/'?'}¨Answers[;1])≡¨⊂question
      :AndIf LF∊question
          buff←{⍵↓⍨+/∧\' '=⍵}⊃¯1↑LF(≠⊆⊢)question
@@ -66,10 +66,10 @@
          question←1↓⊃,/LF,¨question
      :EndIf
      :If (⌊/firstPart⍳' ',LF)>firstPart⍳AliasChar
-         question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question,add
-     :Else
-         question,←add
+         question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question
      :EndIf
+     'YesOrNo'CallOnWait question
+     question,←add
      :Repeat
          ⎕←''
          ⍞←question

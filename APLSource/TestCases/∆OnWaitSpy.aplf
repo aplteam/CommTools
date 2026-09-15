@@ -1,0 +1,8 @@
+ r←∆OnWaitSpy(type question)
+⍝ Established with `SetOnWait` by the "OnWait" test cases: records every call in the global `∆OnWaitCalls`.
+ r←⍬
+ :If 0=⎕NC'∆OnWaitCalls'
+     ∆OnWaitCalls←⍬
+ :EndIf
+ ∆OnWaitCalls,←⊂type question
+⍝Done
