@@ -3,9 +3,10 @@
 ## Version 3.1.0
 
 * `SetOnWait` and `UnsetOnWait` added: `SetOnWait` establishes a function that is called whenever a `CommTools` function is about to wait for input from the user, typically for notifying the user
-* `Select` accepts a fourth positional parameter `quitFlag`: it decides whether the user may enter "q"
-    (for quit), independently of `mustFlag`. A selection can therefore be enforced while the user may
-    still quit. `quitFlag` defaults to `~mustFlag`, which is the behaviour so far.
+* `Select` improvements
+  * Accepts a fourth positional parameter `quitFlag`: it decides whether the user may enter "q" (for quit), independently of `mustFlag`. A selection can therefore be enforced while the user may still quit. `quitFlag` defaults to `~mustFlag`, which is the behaviour so far.
+  * Uunderstands ranges now: `2-4` is "1 2 3 4" and `a~2-4` is "all but 2, 3 and 4"
+  * Offers "(Get help with ?)" now because adding all options by default got too noisy.
 * Bug fixes
   * `FindAutomationIndex`, and therefore `AddAutomation`, threw a RANK ERROR when `∆Automation` held 
     a one-character ID, such as th  `*` of `Pause`, and the ID in question was an alias
@@ -46,6 +47,7 @@ Now there is just one global variable doing the automation: `∆Automation`. It'
 4. Counter (how many times was this line triggered)
 
 Note that there are now two Helpers available for creating/modifying this variable: `AddAutomation` and `ListAutomation`.
+
 
 
 

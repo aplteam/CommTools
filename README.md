@@ -42,7 +42,8 @@ an answer, or give `AskForText` a character vector as left argument to define a 
 
 When `Select` allows several items, the user may enter ranges like `3-6` next to single
 numbers, `a` for all items, or `a~` followed by numbers and ranges for all but those, as in
-`a~10-40`.
+`a~10-40`. The prompt keeps none of that: it offers `(Get help with ?)`, and a `?` lists
+what this particular call allows.
 
 Invalid input is rejected and the question repeated, so you never have to check the result
 for garbage. Leading spaces in your prompts are removed, and a question mark or a colon is
