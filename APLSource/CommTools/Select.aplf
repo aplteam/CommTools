@@ -1,4 +1,4 @@
- index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;blankFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag;quitFlag;options
+ index←{x}Select choices;flag;answer;question;value;bool;⎕ML;⎕IO;manyFlag;mustFlag;caption;buff;flag2;alias;spaceFlag;firstPart;Select_Choices;keyword;newIndex;rangeFlag;minSel;maxSel;allFlag;quitFlag;helpFlag
 ⍝ Presents `choices` as a numbered list & allows the user to select exactly one or multiple ones or none.
 ⍝ Selecting exactly one or none is the default.\\
 ⍝ `choices` must be a vector of character vectors; leading spaces in them are removed.\\
@@ -21,9 +21,11 @@
 ⍝    being one or more item numbers. Under `mustFlag` `a~{n}` must not exclude every single item.
 ⍝    With `manyFlag←(min max)` these two keywords are not on offer.\\
 ⍝  * When more than one item may be selected, the user may also enter ranges like `3-6` for `3 4 5 6`,
-⍝    mixed with single numbers as in `1 2 5 10-13 17`; commas are treated like blanks. A range must not
-⍝    contain blanks, and its second number must be greater than the first one. Ranges may also follow
+⍝    mixed with single numbers as in `1 2 5 10-13 17`; commas are treated like spaces. A range must not
+⍝    contain spaces, and its second number must be greater than the first one. Ranges may also follow
 ⍝    `a~`, as in `a~10-40`. In automation a value like `'3-6'` is matched against the choices, though.\\
+⍝  * The prompt does not list any of this syntax; it offers `(Get help with ?)` instead. Entering a `?` puts
+⍝    the choices on display again with the help injected just above the input line, see `SelectHelp`\\
 ⍝  * `mustFlag` and `quitFlag` keep their meaning with `(min max)`\\
 ⍝  * By entering "`∘∘∘`" the user may interrupt `Select` by running onto a stop vector, overcoming
 ⍝    the Dyalog bug that ⍞ cannot be interrupted
@@ -100,6 +102,7 @@
  :EndIf
  :If ~flag
      flag2←0
+     helpFlag←0
      :If rangeFlag
          :If minSel=maxSel
              question←'Select exactly ',(⍕minSel),' item',(1<minSel)/'s'
@@ -109,9 +112,8 @@
      :Else
          question←'Select one ',(allFlag/'or more '),'item',allFlag/'s'
      :EndIf
-     options←(quitFlag/⊂'q=quit'),(allFlag/'a=all' 'a~n=all but n'),(1<maxSel)/⊂'n1-n2=range'
-     question,←' ',({0=≢⍵:'' ⋄ '(',(⊃{⍺,', ',⍵}/⍵),')'}options),' :'
-     blankFlag←0≠≢caption
+     question,←' (Get help with ?) :'
+     spaceFlag←0≠≢caption
      :If AliasChar∊caption
          :If (firstPart⍳' ')>firstPart⍳AliasChar
              caption←DropAlias caption
@@ -119,14 +121,23 @@
      :EndIf
      'Select'CallOnWait caption
      :Repeat
-         ⍞←({⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-2),LF
+         ⍞←({⍵↑'---',(spaceFlag/' '),caption,(spaceFlag/' '),⍵⍴'-'}⎕PW-2),LF
          ⍞←⍕↑{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices
          ⍞←2⍴LF
+         :If helpFlag
+             ⍞←↑SelectHelp mustFlag quitFlag allFlag maxSel
+             ⍞←LF
+             helpFlag←0
+         :EndIf
          :If 0<≢answer←⍞,0/⍞←question
              answer←{⍵↑⍨-¯1+(⌽⍵)⍳':'}answer
              :If '∘∘∘'≡¯3↑answer
                  (1+⊃⎕LC)⎕STOP⊃⎕SI
                  ∘∘∘ ⍝ Deliberate stop caused by user input
+             :EndIf
+             :If (,'?')≡,answer
+                 helpFlag←1
+                 :Continue ⍝ Put the help on display and ask again
              :EndIf
              (keyword newIndex)←choices ParseSelectKeyword ⎕C answer
              :If (,'q')≡keyword

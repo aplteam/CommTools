@@ -1,8 +1,8 @@
  (valid numbers)←max ParseSelectNumbers text;⎕IO;⎕ML;tokens;token;bool;values;lo;hi
 ⍝ Interprets `text` as the item numbers a user entered for `Select`: single numbers and ranges like
-⍝ `3-6` (for `3 4 5 6`), separated by blanks and/or commas, so `1 2,5 10-13` stands for
+⍝ `3-6` (for `3 4 5 6`), separated by spaces and/or commas, so `1 2,5 10-13` stands for
 ⍝ `1 2 5 10 11 12 13`.\\
-⍝ A range must not contain blanks, both of its numbers must be integers of at least 1, and the second
+⍝ A range must not contain spaces, both of its numbers must be integers of at least 1, and the second
 ⍝ one must be greater than the first one: `3 - 6`, `3 -6`, `3- 6` and `5-5` are all invalid.\\
 ⍝ `max` is the number of choices. A range is expanded no further than `max+1`: that is enough for the
 ⍝ caller to recognize a range that reaches beyond the choices, and a huge range cannot exhaust the
