@@ -1,0 +1,16 @@
+ R←Test_Misc_006(stopFlag batchFlag);⎕TRAP;C;path;pkgCfgFilename;cfg;apiFolder;noOf
+⍝ Check the public interface
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ C←##.CiderConfig
+ path←C.HOME,'/',C.CIDER.distributionFolder
+ pkgCfgFilename←C.HOME,'/apl-package.json'
+ cfg←⎕JSON⍠('Dialect' 'JSON5')⊢⊃⎕NGET pkgCfgFilename
+ apiFolder←C.HOME,'/',cfg.source,'/',cfg.api
+ →T.PassesIf ⎕NEXISTS apiFolder
+ noOf←≢⊃⎕NINFO⍠('Wildcard' 1)⊢apiFolder,'/*'
+ →T.PassesIf noOf=≢##.CommTools.Public
+
+ R←T._OK
+⍝Done
