@@ -17,8 +17,8 @@
  :AndIf 0<≢∆Automation
      NoPause←(∆Automation[;1]≡¨⊂'Pause')⌿∆Automation[;2 3]
      :If AliasChar∊msg
-         (alias msg)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}msg
-         :If 0=flag←~∨/({⍵↑⍨(,⍵)⍳'@'}¨NoPause[;1])≡¨⊂alias
+         (alias msg)←SplitAlias msg
+         :If 0=flag←~∨/(TakeAlias¨NoPause[;1])≡¨⊂alias
              'Pause'Log alias
          :EndIf
      :Else

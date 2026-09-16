@@ -1,4 +1,4 @@
- yesOrNo←{default}YesOrNo question;isOkay;answer;add;dtb;answer2;bool;flag;buff;alias;firstPart;ind;Answers
+ yesOrNo←{default}YesOrNo question;isOkay;answer;add;answer2;bool;flag;buff;alias;firstPart;Answers
 ⍝ Asks a simple question and allows just "Y" (or "y") or "N" (or "n") as answers.\\
 ⍝ Returns 1 for "yes" and 0 for "no".\\
 ⍝ The question may be a simple character vector, possibly with `⎕UCS 10` in between,
@@ -18,7 +18,7 @@
      question←1↓⊃,/LF,¨question
  :EndIf
  question←ReplaceCRbyLF question
- question←{⍵↓⍨+/∧\' '=⍵}question
+ question←DropLeadingSpaces question
  question,←(~'?'∊question)/'?'
  :If 0≠≢default
      'Left argument must be a scalar'⎕SIGNAL 11/⍨1≠≢default
@@ -30,12 +30,11 @@
  :If 0<⎕NC'∆Automation'
  :AndIf 0<≢Answers←(∆Automation[;1]≡¨⊂'YesOrNo')⌿∆Automation[;2 3]
      :If AliasChar∊firstPart
-         ind←firstPart⍳AliasChar
-         (alias question)←ind{(⍺↑⍵)(⍺↓⍵)}firstPart
-         flag←0<+/bool←({⍵↑⍨(,⍵)⍳AliasChar}¨Answers[;1])≡¨⊂alias
+         (alias question)←SplitAlias firstPart
+         flag←0<+/bool←(TakeAlias¨Answers[;1])≡¨⊂alias
      :ElseIf ~flag←0<+/bool←({⍵,(~'?'∊⍵)/'?'}¨Answers[;1])≡¨⊂question
      :AndIf LF∊question
-         buff←{⍵↓⍨+/∧\' '=⍵}⊃¯1↑LF(≠⊆⊢)question
+         buff←DropLeadingSpaces⊃¯1↑LF(≠⊆⊢)question
          flag←0<+/bool←Answers[;1]≡¨⊂buff
      :EndIf
      :If flag
@@ -66,7 +65,7 @@
          question←1↓⊃,/LF,¨question
      :EndIf
      :If (⌊/firstPart⍳' ',LF)>firstPart⍳AliasChar
-         question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question
+         question←DropAlias question
      :EndIf
      'YesOrNo'CallOnWait question
      question,←add
@@ -78,9 +77,8 @@
          :OrIf (≢answer)=¯1+≢question ⍝ ... the ...
          :OrIf 0=≢answer                                                          ⍝ ... user ...
          :OrIf question≡(-≢question)↑answer                                       ⍝ ... just ...
-             dtb←{⍵↓⍨-+/∧\' '=⌽⍵}
-             answer2←dtb answer
-         :OrIf answer2≡((-≢answer2)↑LF{~⍺∊⍵:⍵ ⋄ ' ',dtb ⍺{⌽⍵↑⍨1+⍵⍳⍺}⌽⍵}question)  ⍝ ... press ...
+             answer2←DropTrailingSpaces answer
+         :OrIf answer2≡((-≢answer2)↑LF{~⍺∊⍵:⍵ ⋄ ' ',DropTrailingSpaces ⍺{⌽⍵↑⍨1+⍵⍳⍺}⌽⍵}question)  ⍝ ... press ...
          :OrIf answer≡{1↓⊃¯1↑(⍵=LF)⊂⍵}LF,question                                 ⍝ ... <enter>?
          :OrIf answer≡⎕PW↓question
              :If 0≠≢default
@@ -92,7 +90,7 @@
                  (1+⊃⎕LC)⎕STOP⊃⎕SI
                  ∘∘∘ ⍝ Deliberate stop caused by user input
              :EndIf
-             answer←¯1↑{⍵↓⍨-+/∧\' '=⌽⍵}answer
+             answer←¯1↑DropTrailingSpaces answer
              :If answer∊'YyNn'
                  isOkay←1
                  yesOrNo←answer∊'Yy'

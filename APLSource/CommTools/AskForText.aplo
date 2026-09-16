@@ -29,17 +29,17 @@
      question←1↓⊃,/LF,¨question
  :EndIf
  question←ReplaceCRbyLF question
- question←{⍵↓⍨+/∧\' '=⍵}question
+ question←DropLeadingSpaces question
  :Repeat
      firstPart←{⍵↑⍨¯1+⌊/⍵⍳LF,' '}question
      :If 0<⎕NC'∆Automation'
          AskForText_Answers←(∆Automation[;1]≡¨⊂'AskForText')⌿∆Automation[;2 3]
          AskForText_Answers←(0<≢¨' '~⍨¨AskForText_Answers[;1])⌿AskForText_Answers
-         AskForText_Answers[;1]←{⍵↓⍨+/∧\' '=⍵}¨AskForText_Answers[;1]
+         AskForText_Answers[;1]←DropLeadingSpaces¨AskForText_Answers[;1]
      :AndIf 0<≢AskForText_Answers
          :If AliasChar∊firstPart
-             (alias question)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}question
-             :If flag←0<+/bool←({⍵↑⍨⍵⍳AliasChar}¨AskForText_Answers[;1])≡¨⊂alias
+             (alias question)←SplitAlias question
+             :If flag←0<+/bool←(TakeAlias¨AskForText_Answers[;1])≡¨⊂alias
                  'AskForText'Log alias
              :EndIf
          :Else
@@ -53,7 +53,7 @@
          :EndIf
      :Else
          :If (⌊/firstPart⍳' ',LF)>firstPart⍳AliasChar
-             question←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}question
+             question←DropAlias question
          :EndIf
      :EndIf
      :If ~flag

@@ -29,18 +29,18 @@
 ⍝    the Dyalog bug that ⍞ cannot be interrupted
 ⍝  * You can automate `Select`, refer to the documentation with ]ADoc CommTools, catchword "Automation".
 ⍝    Note that automation is restricted by none of `manyFlag`, `(min max)` and `quitFlag`
+ ⎕IO←1 ⋄ ⎕ML←1
  x←{0<⎕NC ⍵:⊆⍎⍵ ⋄ ''}'x'
  (caption manyFlag mustFlag quitFlag)←x,(≢x)↓'' 0 0 ⍬
- quitFlag←{⍬≡⍵:~mustFlag ⋄ ⍵}quitFlag
+ quitFlag←mustFlag{⍬≡⍵:~⍺ ⋄ ⍵}quitFlag
  '"quitFlag" must be a Boolean'Assert(⊂quitFlag)∊0 1
  '"caption" must be a simple character vector'Assert 1=≡caption←,caption
  '"caption" must not contain line feeds (⎕UCS 10)'Assert~LF∊caption
  '"caption" must not contain carriage returns (⎕UCS 13)'Assert~(⎕UCS 13)∊caption
- ⎕IO←1 ⋄ ⎕ML←1
  'Invalid right argument; must be a vector of text vectors.'⎕SIGNAL ErrNo/⍨2≠|≡choices
  'Right argument has more than 999 items'⎕SIGNAL ErrNo/⍨999<≢choices
- :If rangeFlag←1<≢,manyFlag
-     '"min" and "max" must be integers between 1 and the number of choices'Assert∧/(,manyFlag)∊⍳≢choices
+ :If rangeFlag←1<≢manyFlag
+     '"min" and "max" must be integers between 1 and the number of choices'Assert∧/manyFlag∊⍳≢choices
      (minSel maxSel)←manyFlag
      '"min" must not be greater than "max"'Assert minSel≤maxSel
      allFlag←0
@@ -57,11 +57,10 @@
      Select_Choices←(∆Automation[;1]≡¨⊂'Select')⌿∆Automation[;2 3]
  :AndIf 0<≢Select_Choices
      :If AliasChar∊caption
-         (alias caption)←{l←⍵⍳AliasChar ⋄ (l↑⍵)(l↓⍵)}caption
-         flag←0<+/bool←({⍵↑⍨(,⍵)⍳AliasChar}¨Select_Choices[;1])≡¨⊂alias
+         (alias caption)←SplitAlias caption
+         flag←0<+/bool←(TakeAlias¨Select_Choices[;1])≡¨⊂alias
      :Else
-         bool←caption∘≡¨Select_Choices[;1]
-         flag←0<+/bool
+         flag←0<+/bool←caption∘≡¨Select_Choices[;1]
      :EndIf
      :If flag
          'Multiple choices qualify?!'Assert 1=+/bool
@@ -72,10 +71,10 @@
          :ElseIf ' '=1↑0⍴∊index ⍝ Text?!
              (keyword newIndex)←choices ParseSelectKeyword index
              :If '*'=¯1↑index
-                 index←⍸((¯1+≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices)≡¨⊂¯1↓index
+                 index←⍸((¯1+≢index)↑¨DropLeadingSpaces¨choices)≡¨⊂¯1↓index
                  'Invalid selection'Assert(mustFlag{(0<≢⍵)≠⍺}index)∨∨/index∊⍳≢choices
              :ElseIf '*'=⊃index
-                 index←⍸((-¯1+≢index)↑¨{⍵↓⍨-+/∧\' '=⌽⍵}¨choices)≡¨⊂1↓index
+                 index←⍸((-¯1+≢index)↑¨DropTrailingSpaces¨choices)≡¨⊂1↓index
                  'Invalid selection'Assert(mustFlag{(0<≢⍵)≠⍺}index)∨∨/index∊⍳≢choices
              :ElseIf (,'q')≡,index
                  index←¯1
@@ -87,7 +86,7 @@
              :ElseIf 0<≢buff←⍸index∘≡¨choices
                  index←buff
                  'Invalid selection'Assert index∊⍳≢choices
-             :ElseIf 1=≢index←⍸index∘≡¨(≢index)↑¨{⍵↓⍨+/∧\' '=⍵}¨choices
+             :ElseIf 1=≢index←⍸index∘≡¨(≢index)↑¨DropLeadingSpaces¨choices
                  index←⊃index
                  'Invalid selection'Assert index∊⍳≢choices
              :Else
@@ -115,14 +114,14 @@
      blankFlag←0≠≢caption
      :If AliasChar∊caption
          :If (firstPart⍳' ')>firstPart⍳AliasChar
-             caption←{~AliasChar∊⍵:⍵ ⋄ ⍵↓⍨⍵⍳AliasChar}caption
+             caption←DropAlias caption
          :EndIf
      :EndIf
      'Select'CallOnWait caption
      :Repeat
-         ⍞←({⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-2),⎕UCS 10
+         ⍞←({⍵↑'---',(blankFlag/' '),caption,(blankFlag/' '),⍵⍴'-'}⎕PW-2),LF
          ⍞←⍕↑{((⊂'. '),¨⍨(⊂3 0)⍕¨⍳≢⍵),¨⍵}choices
-         ⍞←2⍴⎕UCS 10
+         ⍞←2⍴LF
          :If 0<≢answer←⍞,0/⍞←question
              answer←{⍵↑⍨-¯1+(⌽⍵)⍳':'}answer
              :If '∘∘∘'≡¯3↑answer
