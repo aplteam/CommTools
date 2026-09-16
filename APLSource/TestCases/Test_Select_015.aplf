@@ -6,7 +6,7 @@
  ⎕IO←1 ⋄ ⎕ML←1
  R←T._Failed
 
- ⍝ Single numbers and ranges, separated by blanks and/or commas:
+ ⍝ Single numbers and ranges, separated by spaces and/or commas:
  →T.PassesIf(1(3 4 5 6))≡20 C.ParseSelectNumbers'3-6'
  →T.PassesIf(1(1 2 5 10 11 12 13 17))≡20 C.ParseSelectNumbers'1 2 5 10-13 17'
  →T.PassesIf(1(1 2 5))≡20 C.ParseSelectNumbers'1,2 5'
@@ -19,7 +19,7 @@
  →T.PassesIf(1(8 9 10 11))≡10 C.ParseSelectNumbers'8-5000'
  →T.PassesIf(1(,11))≡10 C.ParseSelectNumbers'5000-6000'
 
- ⍝ Invalid: blanks within a range, n2 not greater than n1, and anything else that is not a number:
+ ⍝ Invalid: spaces within a range, n2 not greater than n1, and anything else that is not a number:
  :For text :In '1 -2' '1- 2' '1 - 2' '5-5' '6-3' '3-6-9' '-3' '3-' '0-3' '1.5-3' 'x-3' '3-x' 'a' '2 x'
      →T.PassesIf(0 ⍬)≡20 C.ParseSelectNumbers text
  :EndFor

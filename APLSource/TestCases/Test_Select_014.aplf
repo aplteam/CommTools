@@ -11,16 +11,16 @@
 
  list←'One' 'Two' 'Three'
 
- ∆Info'Info: this test needs you: next just press <enter> - must be rejected - and then enter "q"'
+ ∆Info'Info: this test needs you: next enter "?", then just press <enter> - must be rejected - and then "q"'
  →T.PassesIf ¯1≡('Select or quit:' 0 1 1)C.Select list
- →T.PassesIf C.YesOrNo'Did the prompt offer "q=quit"?'
+ →T.PassesIf C.YesOrNo'Did the help mention "q" for quitting?'
 
  0 ∆Info'Info: next enter "q" - must be rejected - and then "2"'
  →T.PassesIf 2≡('Select, no quitting:' 1 1 0)C.Select list
 
- 0 ∆Info'Info: next enter "q" - must be rejected - and then just press <enter>'
+ 0 ∆Info'Info: next enter "?", then "q" - must be rejected - and then just press <enter>'
  →T.PassesIf ⍬≡('Select nothing, no quitting:' 0 0 0)C.Select list
- →T.PassesIf~C.YesOrNo'Did the prompt offer "q=quit"?'
+ →T.PassesIf~C.YesOrNo'Did the help mention "q" for quitting?'
 
  R←T._OK
 ⍝Done

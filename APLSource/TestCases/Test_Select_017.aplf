@@ -1,0 +1,38 @@
+ R←Test_Select_017(stopFlag batchFlag);⎕TRAP;⎕IO;⎕ML;r
+⍝ Exercise "SelectHelp", the help `Select` puts on display when the user enters a "?".
+⍝ Needs neither a user nor automation.
+⍝ The help was introduced in 3.1.0
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ ⎕IO←1 ⋄ ⎕ML←1
+ R←T._Failed
+
+ ⍝ Every line is indented by two spaces and introduced by an asterisk:
+ r←C.SelectHelp 0 1 1 5
+ →T.PassesIf∧/'  * '∘≡¨4↑¨r
+
+ ⍝ Multiple items, all keywords on offer, and the user may select nothing:
+ →T.PassesIf 6=≢r
+ →T.PassesIf∨/∊'3-6'∘⍷¨r
+ →T.PassesIf∨/∊'a~3 5'∘⍷¨r
+ →T.PassesIf∨/∊'a~3-5'∘⍷¨r
+ →T.PassesIf∨/∊'quit'∘⍷¨r
+ →T.PassesIf∨/∊'<enter>'∘⍷¨r
+
+ ⍝ A single item, no keywords at all, and a selection is compulsory:
+ r←C.SelectHelp 1 0 0 1
+ →T.PassesIf 1=≢r
+ →T.PassesIf~∨/∊'3-6'∘⍷¨r
+ →T.PassesIf~∨/∊'a~3 5'∘⍷¨r
+ →T.PassesIf~∨/∊'quit'∘⍷¨r
+ →T.PassesIf~∨/∊'<enter>'∘⍷¨r
+
+ ⍝ "q" is mentioned when quitting is allowed, no matter what else is:
+ →T.PassesIf∨/∊'quit'∘⍷¨C.SelectHelp 1 1 0 1
+ →T.PassesIf~∨/∊'quit'∘⍷¨C.SelectHelp 0 0 1 9
+
+ ⍝ Ranges are mentioned as soon as more than one item may be selected:
+ →T.PassesIf∨/∊'3-6'∘⍷¨C.SelectHelp 1 0 0 2
+ →T.PassesIf~∨/∊'3-6'∘⍷¨C.SelectHelp 1 0 0 1
+
+ R←T._OK
+⍝Done
