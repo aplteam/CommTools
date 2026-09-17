@@ -1,4 +1,4 @@
 aplteam-Tester2-5.0.0
 aplteam-CodeCoverage-1.0.0
-aplteam-CommTools-3.0.1
+aplteam-CommTools-3.2.0
 aplteam-MarkAPL-15.0.0
