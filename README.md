@@ -1,6 +1,6 @@
 # CommTools
 
-Ask the user a question in the APL session, and let your test suite answer it for you.
+Interacts with the user in the APL session: asks questions, informs the user, lets her select item(s) from a list. Optionally a test suite may act as a user (automation).
 
 `CommTools` provides the handful of interactions a user command or a utility needs all the
 time: yes/no questions, picking an item from a list, prompting for text or a number, and
@@ -23,7 +23,7 @@ Select one item (q=quit) :2
 ```
 
 There are no dependencies, and nothing but `⍞` is involved, so this works in any session,
-in any Dyalog version from 18.0 onwards, on all platforms.
+in any Dyalog, on all platforms.
 
 ## The functions
 
@@ -45,9 +45,7 @@ numbers, `a` for all items, or `a~` followed by numbers and ranges for all but t
 `a~10-40`. The prompt keeps none of that: it offers `(Get help with ?)`, and a `?` lists
 what this particular call allows.
 
-Invalid input is rejected and the question repeated, so you never have to check the result
-for garbage. Leading spaces in your prompts are removed, and a question mark or a colon is
-added when you did not provide one.
+Invalid input is rejected and the interaction is repeated, so you never have to check the result for garbage. Leading spaces in your prompts are removed, and a question mark or a colon is added when you did not provide one.
 
 ## Why use it
 
@@ -81,13 +79,13 @@ Add an answer to the global `∆Automation` variable, and the function stops ask
 The question was answered without a human, and the counter in `∆Automation` now says 1, so
 a test can prove that the automation really did trigger.
 
-`DeleteLogFile@` is an *alias*: everything up to the `@` identifies the question, and the
+`DeleteLogFile@` is an *alias*: everything up to the `@` identifies the interaction, and the
 alias is removed before the question is shown to a real user. That is what makes prompts
 with a dynamic part, such as the filename above, automatable at all.
 
 > [!TIP]
-> Give a prompt an alias as soon as you write it. A question you cannot identify is a
-> question you cannot automate, and questions tend to grow a dynamic part later on.
+> Give a prompt an alias as soon as you write it. An interaction you cannot identify is an
+> interaction you cannot automate, and interactions tend to grow a dynamic part later on.
 
 When no entry matches, the function simply asks the user, so automation never gets in your
 way. `CommTools.Cleanup` removes the variable again.
@@ -95,41 +93,44 @@ way. `CommTools.Cleanup` removes the variable again.
 ## Knowing when the session waits
 
 You start a user command that runs for a while, switch to something else, and meanwhile it
-has stopped to ask you a question. To be told, hand `SetOnWait` a function: `CommTools`
-calls it whenever it is about to wait for input.
+has stopped to ask you a question. To be told, hand the operator `SetOnWait` a function: 
+`CommTools` calls it whenever it is about to wait for input.
 
-```apl
-      ∇ r←Notify(type question)
-        r←⍬
-        ⍝ Pop up a toast, play a sound, call notify-send... but don't wait for it
-      ∇
-      #.Notify CommTools.SetOnWait 0
+For Windows, the package <https://github,com/aplteam/WindowsToast> can be used for this.
+
+Example:
+
+```
+      ⎕WSID←'My APL Application'
+      ]LoadPackages aplteam-CommTools,aplteam-WindowsToast 
+      WindowsToast.Notify #.CommTools.SetOnWait 0
+      CommTools.YesOrNo 'Are you sure?'
 ```
 
-The function gets the type (`YesOrNo`, `Select`, `Pause`, `AskForText` or `AskForNumber`)
-and the question without its alias, and it must return a result, which is ignored. It is
-called once per question, and never when automation answers, so test runs stay quiet.
+![Windows Toast](WindowsToast.png)
+
+The function is called once per interaction, and never when its automated, so test runs stay quiet.
 
 `CommTools.UnsetOnWait` removes the function again; `Cleanup` leaves it alone.
 
-## Installation
+## Usage
 
 Load it into the workspace, into `#` or any namespace you like:
 
 ```
-      ]Tatin.LoadPackages [tatin]aplteam-CommTools #
+      ]Tatin.LoadPackages aplteam-CommTools 
 ```
 
 User commands typically want it in `⎕SE`:
 
 ```
-      ]Tatin.LoadPackages [tatin]aplteam-CommTools ⎕SE
+      ]Tatin.LoadPackages aplteam-CommTools ⎕SE
 ```
 
 To make it part of a project, install it into the project's dependency folder instead:
 
 ```
-      ]Tatin.InstallPackages [tatin]aplteam-CommTools /path/to/your/project/packages
+      ]Tatin.InstallPackages aplteam-CommTools /path/to/your/project/packages
 ```
 
 ## Documentation
@@ -146,3 +147,5 @@ between major versions.
 ## License
 
 MIT, see [LICENSE](LICENSE).
+
+
